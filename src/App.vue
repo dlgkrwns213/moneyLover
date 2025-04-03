@@ -1,5 +1,10 @@
-<script setup></script>
+<script setup>
+import Navigator from './pages/home/Navigator.vue';
+</script>
 
-<template></template>
+<template>
+  <RouterView/>
+  <Navigator/>
+</template>
 
 <style scoped></style>
