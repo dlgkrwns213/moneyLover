@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '@/pages/home/HomeView.vue'
+import BudgetComparison from '@/pages/home/BudgetComparison.vue'
+import ExpenseRanking from '@/pages/charts/ExpenseRanking.vue'
+import AddSavings from '@/pages/saving/AddSavings.vue'
+import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
+import NotFound from '@/pages/NotFound.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +11,27 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: BudgetComparison,
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: ExpenseRanking,
+    },
+    {
+      path: '/saving',
+      name: 'saving',
+      component: AddSavings,
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ThemeSettings,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound,
     },
   ],
 })
