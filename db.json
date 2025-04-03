@@ -5,7 +5,8 @@
       "username": "Lee",
       "user": "admin",
       "password": "1234",
-      "setAmount": 0
+      "setAmount": 0,
+      "isLogin": false
     }
   ],
   "categories": [
