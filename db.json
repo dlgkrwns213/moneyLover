@@ -1,0 +1,67 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "Lee",
+      "user": "admin",
+      "password": "1234",
+      "setAmount": 0
+    }
+  ],
+  "categories": [
+    {
+      "id": "29xl",
+      "category": "월급"
+    },
+    {
+      "id": "29ds",
+      "category": "이자"
+    },
+    {
+      "id": "232l",
+      "category": "점심"
+    },
+    {
+      "id": "2cil",
+      "category": "TV"
+    }
+  ],
+  "cashflows": [
+    {
+      "id": "d82x2",
+      "cashflowType": true,
+      "userId": 1,
+      "cashflowName": "월급",
+      "cashflowValue": 5000000,
+      "date": "2025-04-08 TUE",
+      "category": ""
+    },
+    {
+      "id": "2xh0",
+      "cashflowType": true,
+      "userId": 1,
+      "cashflowName": "이자",
+      "cashflowValue": 5000,
+      "date": "2025-04-08 TUE",
+      "category": ""
+    },
+    {
+      "id": "d82x2",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "TV",
+      "cashflowValue": 5000000,
+      "date": "2025-04-08 TUE",
+      "category": ""
+    },
+    {
+      "id": "2x3x",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "점심",
+      "cashflowValue": 5000,
+      "date": "2025-04-08 TUE",
+      "category": ""
+    }
+  ]
+}
