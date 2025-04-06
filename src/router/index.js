@@ -4,6 +4,7 @@ import ExpenseRanking from '@/pages/charts/ExpenseRanking.vue'
 import AddSavings from '@/pages/saving/AddSavings.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
 import NotFound from '@/pages/NotFound.vue'
+import AddModal from '@/pages/plus/AddModal.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -17,6 +18,11 @@ const router = createRouter({
       path: '/chart',
       name: 'chart',
       component: ExpenseRanking,
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddModal,
     },
     {
       path: '/saving',
