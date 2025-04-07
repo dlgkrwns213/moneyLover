@@ -7,7 +7,7 @@ import Navigator from './pages/home/Navigator.vue'
   <Navigator />
 </template>
 
-<style scoped>
+<style>
 @font-face {
   font-family: 'MyFontBold';
   src: url('/src/assets/fonts/Cafe24Ssurround-v2.0.ttf') format('truetype');
