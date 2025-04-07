@@ -11,7 +11,7 @@ const props = defineProps({
 })
 
 const budget = ref(200000)
-const remain = ref(100000)
+const remain = ref(150000)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
   '/src/assets/images/clover/clover_25.png',
@@ -96,6 +96,7 @@ const chartOptions = {
   background-color: #f6f6f6;
   border-radius: 16px;
   width: 360px;
+  height: 200px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
 }
 
@@ -149,5 +150,6 @@ const chartOptions = {
   display: flex;
   justify-content: center;
   align-items: center;
+  color: #f6f6f6;
 }
 </style>

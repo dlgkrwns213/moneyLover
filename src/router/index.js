@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BudgetComparison from '@/pages/home/BudgetComparison.vue'
+import BudgetSettings from '@/pages/home/BudgetSettings.vue'
 import ExpenseRanking from '@/pages/charts/ExpenseRanking.vue'
 import AddSavings from '@/pages/saving/AddSavings.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
@@ -12,7 +13,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: BudgetComparison,
+      component: BudgetSettings,
     },
     {
       path: '/chart',
