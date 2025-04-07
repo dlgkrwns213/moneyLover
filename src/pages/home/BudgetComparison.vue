@@ -10,7 +10,7 @@ const props = defineProps({
   remain: Number,
 })
 
-const budget = ref(200000)
+const budget = ref(0)
 const remain = ref(150000)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
@@ -62,7 +62,8 @@ const chartOptions = {
 
 <template>
   <div class="page-wrapper">
-    <div class="donut-row">
+    <!-- v-id 에 true false 로 budget 설정 여부를 분별하여 다른 창을 띄운다. -->
+    <div v-if="budget" class="donut-row">
       <!-- 왼쪽: 도넛 + 이미지 -->
       <div class="donut-container">
         <Doughnut :data="chartData" :options="chartOptions" />
@@ -85,6 +86,22 @@ const chartOptions = {
         </div>
       </div>
     </div>
+
+    <!-- budget 을 설정하지 않은 경우 -->
+    <div v-else class="empty-budget">
+      <div class="other-donut-row">
+        <div class="donut-container">
+          <img class="other-image" src="/src/assets/images/clover/clover_default.png" />
+        </div>
+        <div class="info">
+          <div class="line">
+            <span class="label"
+              >목표 예산을 정해두면 <br />충동적인 소비를 줄일 수 있습니다! :)
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -98,6 +115,28 @@ const chartOptions = {
   width: 360px;
   height: 200px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+.other-donut-row {
+  display: flex;
+  align-items: center;
+  /* padding: 16px; */
+  background-color: rgb(255, 255, 255);
+  border-radius: 16px;
+  width: 360px;
+  height: 200px;
+  box-shadow: 0 0 5px rgba(87, 87, 87, 0.05);
+}
+
+.other-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: contain;
+  z-index: 1;
 }
 
 .donut-container {
