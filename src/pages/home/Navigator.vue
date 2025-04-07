@@ -5,24 +5,28 @@ import { RouterLink } from 'vue-router'
 <template>
   <nav class="bottom-nav">
     <RouterLink to="/" class="nav-item">
-      <img src="#" alt="홈" />
+      <img src="@/assets/images/navigator/footer_home.png" alt="홈" />
       <span>홈</span>
     </RouterLink>
     <RouterLink to="/chart" class="nav-item">
-      <img src="#" alt="보고서" />
+      <img src="@/assets/images/navigator/footer_chart.png" alt="보고서" />
       <span>보고서</span>
     </RouterLink>
 
-    <RouterLink to="/add" class="add-button">
-      <div class="plus-icon">+</div>
+    <RouterLink to="/add" class="nav-item">
+      <img 
+        src="@/assets/images/navigator/footer_plus.png" 
+        alt="더하기" 
+        style="width: 48px; height: 48px;"
+      />
     </RouterLink>
 
     <RouterLink to="/saving" class="nav-item">
-      <img src="#" alt="저축" />
+      <img src="@/assets/images/navigator/footer_bank.png" alt="저축" />
       <span>저축</span>
     </RouterLink>
     <RouterLink to="/settings" class="nav-item">
-      <img src="#" alt="설정" />
+      <img src="@/assets/images/navigator/footer_setting.png" alt="설정" />
       <span>설정</span>
     </RouterLink>
   </nav>
