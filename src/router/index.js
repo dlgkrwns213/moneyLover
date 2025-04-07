@@ -6,6 +6,7 @@ import AddSavings from '@/pages/saving/AddSavings.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
 import NotFound from '@/pages/NotFound.vue'
 import AddModal from '@/pages/plus/AddModal.vue'
+import HomeView from '@/pages/home/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,7 +14,7 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: BudgetSettings,
+      component: HomeView,
     },
     {
       path: '/chart',

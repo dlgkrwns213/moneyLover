@@ -1,8 +1,82 @@
+<!-- 담당 박예빈: BudgetComparison 과 ExpenseList 를 합친 홈화면 작업중. -->
+<!-- 두 페이지를 합친 홈 화면은 월 지출과 월 수입 표시도 보여줍니다.(기본 홈) -->
+
 <script setup>
+import BudgetComparison from './BudgetComparison.vue'
+import ExpenseList from './ExpenseList.vue'
 </script>
 
 <template>
+  <div class="home-container">
+    <div class="section">
+      <BudgetComparison />
+    </div>
+    <div class="income-expense-row">
+      <div class="stat-card expense">
+        <div class="label">월 지출</div>
+        <div class="amount">₩952,200</div>
+      </div>
+      <div class="stat-card income">
+        <div class="label">월 수입</div>
+        <div class="amount">₩5,000,000</div>
+      </div>
+    </div>
+    <div class="section">
+      <ExpenseList />
+    </div>
+  </div>
 </template>
 
 <style scoped>
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 32px 16px;
+  background-color: #f6f6f6;
+  min-height: 100vh;
+}
+
+.section {
+  width: 100%;
+  max-width: 600px;
+}
+
+.income-expense-row {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  width: 100%;
+  max-width: 360px;
+}
+
+.stat-card {
+  flex: 1;
+  background-color: white;
+  border: 2px solid #61905a;
+  border-radius: 12px;
+  padding: 12px;
+  text-align: center;
+  font-family: 'MyFontBold';
+}
+
+.stat-card.expense {
+  border-color: #cc4444;
+  color: rgb(3, 3, 3);
+}
+
+.stat-card.income {
+  border-color: #61905a;
+  color: rgb(0, 0, 0);
+}
+
+.label {
+  font-size: 14px;
+}
+
+.amount {
+  font-size: 18px;
+  font-weight: bold;
+}
 </style>
