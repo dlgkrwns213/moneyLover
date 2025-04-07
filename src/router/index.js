@@ -1,4 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import BudgetComparison from '@/pages/home/BudgetComparison.vue'
+import BudgetSettings from '@/pages/home/BudgetSettings.vue'
+import ExpenseRanking from '@/pages/charts/ExpenseRanking.vue'
+import SavingManagement from '@/pages/saving/SavingManagement.vue'
+import AddSavings from '@/pages/saving/AddSavings.vue'
+import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
+import NotFound from '@/pages/NotFound.vue'
+import AddModal from '@/pages/plus/AddModal.vue'
 import HomeView from '@/pages/home/HomeView.vue'
 
 const router = createRouter({
@@ -8,6 +16,41 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: HomeView,
+    },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: ExpenseRanking,
+    },
+    {
+      path: '/add',
+      name: 'add',
+      component: AddModal,
+    },
+    {
+      path: '/saving',
+      name: 'saving',
+      component: SavingManagement,
+    },
+    {
+      path: '/add-saving',          // ✅ register-button이 이동할 경로
+      name: 'AddSavings',
+      component: AddSavings
+    },
+    {
+      path: '/profile',
+      name: 'profile',
+      component: ThemeSettings,
+    },
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound,
+    },
+    {
+      path: '/budgetSetting',
+      name: 'budgetSettings',
+      component: BudgetSettings,
     },
   ],
 })
