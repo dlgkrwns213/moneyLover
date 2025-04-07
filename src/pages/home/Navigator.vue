@@ -1,5 +1,15 @@
 <script setup>
-import { RouterLink } from 'vue-router'
+import { useRoute, useRouter, RouterLink } from 'vue-router'
+import { setEntryFromPath } from '@/utils/navigation';
+
+const router = useRouter();
+const route = useRoute();
+
+function handlePlusClick() {
+  setEntryFromPath(route.fullPath);
+  router.push('/add/outcome');
+}
+
 </script>
 
 <template>
@@ -13,13 +23,13 @@ import { RouterLink } from 'vue-router'
       <span>보고서</span>
     </RouterLink>
 
-    <RouterLink to="/add" class="nav-item">
+    <div class="nav-item" @click="handlePlusClick">
       <img 
         src="@/assets/images/navigator/footer_plus.png" 
         alt="더하기" 
         style="width: 48px; height: 48px;"
       />
-    </RouterLink>
+    </div>
 
     <RouterLink to="/saving" class="nav-item">
       <img src="@/assets/images/navigator/footer_bank.png" alt="저축" />

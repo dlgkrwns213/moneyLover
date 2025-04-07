@@ -7,6 +7,7 @@ export const TRANSLATIONS = {
   mature: '만기',
   salary: '급여',
   side_job: '부업',
+
   book: '도서',
   car: '자동차',
   clothes: '의류',
@@ -30,3 +31,4 @@ export const TRANSLATIONS = {
   shopping: '쇼핑',
   study: '학습',
 }
+

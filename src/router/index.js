@@ -8,6 +8,9 @@ import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
 import NotFound from '@/pages/NotFound.vue'
 import AddModal from '@/pages/plus/AddModal.vue'
 import HomeView from '@/pages/home/HomeView.vue'
+import AddTab from '@/pages/plus/AddTab.vue'
+import AddTabOutcome from '@/pages/plus/AddTabOutcome.vue'
+import AddTabIncome from '@/pages/plus/AddTabIncome.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -25,7 +28,17 @@ const router = createRouter({
     {
       path: '/add',
       name: 'add',
-      component: AddModal,
+      component: AddTab,
+      children: [
+        {
+          path: 'outcome',
+          component: AddTabOutcome,
+        },
+        {
+          path: 'income',
+          component: AddTabIncome,
+        }
+      ]
     },
     {
       path: '/saving',
