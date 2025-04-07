@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BudgetComparison from '@/pages/home/BudgetComparison.vue'
 import ExpenseRanking from '@/pages/charts/ExpenseRanking.vue'
-import AddSavings from '@/pages/saving/AddSavings.vue'
+import SavingManagement from '@/pages/saving/SavingManagement.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
 import NotFound from '@/pages/NotFound.vue'
 import AddModal from '@/pages/plus/AddModal.vue'
@@ -27,7 +27,7 @@ const router = createRouter({
     {
       path: '/saving',
       name: 'saving',
-      component: AddSavings,
+      component: SavingManagement,
     },
     {
       path: '/profile',
