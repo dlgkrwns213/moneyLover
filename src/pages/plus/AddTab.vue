@@ -67,13 +67,14 @@ const formattedValue = computed(() => {
   let parts = num.split(/([+\-x%])/); // 연산자를 기준으로 숫자와 연산자 분리
 
   parts.forEach((part, index) => {
-    if (index % 2 === 0) {
+    if (index === 1) {
+      // 연산자는 그대로
+      result += part;
+    } else if (index === 0 || part !== "") {
+      
       // 숫자 부분일 때는 포맷 적용
       result += parseInt(part).toLocaleString();
-    } else {
-      // 연산자 부분은 그대로 유지
-      result += part;
-    }
+    } 
   });
 
   return result;
@@ -186,12 +187,11 @@ function calculateButtonClick(content) {
   <div class="footer-calculate">
     <div class="input-container">
       <input v-model="memo" type="text" class="input-memo" placeholder="memo">
-      <div> {{ inputValue}}</div>
       <div class="money">{{ formattedValue }}</div>
     </div>
     <div class="calculate-section">
       <div 
-        class="calculate-setion__buttton"
+        class="calculate-section__buttton"
         v-for="(content, contentIdx) in calculateContent"
         :key="contentIdx"
         :style="getGridSpan(contentIdx)"
@@ -201,6 +201,7 @@ function calculateButtonClick(content) {
         :src="imageMap[contentImage[contentIdx]]" 
         :alt="contentImage[contentIdx]" 
         style="height: 100%; width: 100%;"
+        class="calculate-section__image"
       />
 
     </div>
@@ -284,7 +285,7 @@ function calculateButtonClick(content) {
 }
 .input-container {
   position: relative;
-  width: 280px; /* 컨테이너 너비 */
+  width: 300px; /* 컨테이너 너비 */
 }
 
 .input-memo {
@@ -293,6 +294,7 @@ function calculateButtonClick(content) {
   margin: 10px 0 ; /* 위 아래 margin만 설정 */
   border-radius: 10px;
   text-align: left;
+  padding: 0 15px;
 }
 
 .money {
@@ -324,7 +326,7 @@ function calculateButtonClick(content) {
   border-radius: 4px;
 }
 
-.calculate-section__button:hover {
+.calculate-section__image:hover {
   cursor: pointer;
 }
 
