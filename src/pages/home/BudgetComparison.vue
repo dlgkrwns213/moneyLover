@@ -1,16 +1,60 @@
 <!-- 담당자: 예빈 -->
 <script setup>
 import { reactive, ref, onMounted, computed } from 'vue'
-const remain = ref(100)
-const budget = ref(100)
-const percent = ref(100)
+import { Doughnut } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, ArcElement)
+
+const props = defineProps({
+  budget: Number,
+  remain: Number,
+})
+
+const budget = ref(200000)
+const remain = ref(80000)
+
+// const used = props.budget - props.remain
+// const percent = Math.round((props.remain / props.budget) * 100)
+
+const used = budget.value - remain.value
+const percent = Math.round((remain.value / budget.value) * 100)
+
+const chartData = {
+  labels: ['남은 금액', '사용한 금액'],
+  datasets: [
+    {
+      data: [remain.value, budget.value],
+      backgroundColor: ['#ffffff', '#61905a'],
+      borderWidth: 0,
+    },
+  ],
+}
+
+const chartOptions = {
+  responsive: true,
+  cutout: '70%',
+  plugins: {
+    legend: {
+      display: false,
+    },
+    tooltip: {
+      callbacks: {
+        label: (context) => `${context.label}: ${context.raw}원`,
+      },
+    },
+  },
+}
 </script>
 
 <template>
   <div class="card mb-3 rounded-4" style="max-width: 540px">
     <div class="row g-0 align-items-center">
-      <div class="col-md-4">
-        <img src="" />
+      <!-- 도넛 차트 넣어야함 -->
+      <div class="col-md-4 d-flex justify-content-center align-items-center">
+        <div class="donut-container">
+          <Doughnut :data="chartData" :options="chartOptions" />
+          <img class="donut-image" src="/src/assets/images/income/bonus.png" />
+        </div>
       </div>
 
       <!-- text -->
@@ -38,13 +82,20 @@ const percent = ref(100)
 </template>
 
 <style scoped>
-.budget-card {
-  width: 100%;
-  max-width: 540px;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid #ddd;
-  background-color: #fff;
+.donut-container {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.donut-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .line {
@@ -52,16 +103,14 @@ const percent = ref(100)
   justify-content: space-between;
   margin-bottom: 8px;
 }
-
 .label {
   text-align: left;
   font-weight: bold;
   flex: 1;
 }
-
 .value {
   text-align: right;
   flex: 1;
-  color: #6c757d;
+  color: #90c569;
 }
 </style>
