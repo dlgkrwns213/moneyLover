@@ -21,7 +21,7 @@ import ExpenseList from './ExpenseList.vue'
         <div class="amount">₩5,000,000</div>
       </div>
     </div>
-    <div class="section">
+    <div class="list-section">
       <ExpenseList />
     </div>
   </div>
