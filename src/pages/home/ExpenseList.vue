@@ -52,7 +52,7 @@ const sortedCashflows = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 350px;
+  width: 330px;
   font-family: 'MyFont';
 }
 
