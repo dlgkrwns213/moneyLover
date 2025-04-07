@@ -21,8 +21,10 @@ import ExpenseList from './ExpenseList.vue'
         <div class="amount">₩5,000,000</div>
       </div>
     </div>
-    <div class="list-section">
-      <ExpenseList />
+    <div class="list-section scrollable-list">
+      <div class="list-section">
+        <ExpenseList />
+      </div>
     </div>
   </div>
 </template>
@@ -78,5 +80,17 @@ import ExpenseList from './ExpenseList.vue'
 .amount {
   font-size: 18px;
   font-weight: bold;
+}
+
+.scrollable-list {
+  height: 400px; /* 원하는 높이로 조절 가능 */
+  overflow-y: auto;
+  width: 100%;
+  max-width: 360px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 8px;
+  background-color: #f6f6f6;
+  margin: 0 auto;
 }
 </style>

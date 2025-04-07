@@ -17,7 +17,7 @@ const props = defineProps({
   remain: Number,
 })
 
-const budget = ref(0)
+const budget = ref(200000)
 const remain = ref(150000)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
