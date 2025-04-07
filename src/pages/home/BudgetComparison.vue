@@ -11,7 +11,21 @@ const props = defineProps({
 })
 
 const budget = ref(200000)
-const remain = ref(180000)
+const remain = ref(100000)
+const imageurls = [
+  '/src/assets/images/clover/clover_0.png',
+  '/src/assets/images/clover/clover_25.png',
+  '/src/assets/images/clover/clover_50.png',
+  '/src/assets/images/clover/clover_75.png',
+  '/src/assets/images/clover/clover_default.png',
+]
+const cloverImageUrl = computed(() => {
+  if (percent === 0) return imageurls[0]
+  if (percent <= 25) return imageurls[1]
+  if (percent <= 50) return imageurls[2]
+  if (percent <= 75) return imageurls[3]
+  return imageurls[4]
+})
 
 // const used = props.budget - props.remain
 // const percent = Math.round((props.remain / props.budget) * 100)
@@ -52,7 +66,7 @@ const chartOptions = {
       <!-- 왼쪽: 도넛 + 이미지 -->
       <div class="donut-container">
         <Doughnut :data="chartData" :options="chartOptions" />
-        <img class="donut-image" src="/src/assets/images/clover/clover_default.png" />
+        <img class="donut-image" :src="cloverImageUrl" />
       </div>
 
       <!-- 오른쪽: 텍스트 -->
@@ -96,7 +110,7 @@ const chartOptions = {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-164%, -50%);
+  transform: translate(-170%, -50%);
   width: 50px;
   height: 50px;
   border-radius: 50%;
