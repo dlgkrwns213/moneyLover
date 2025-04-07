@@ -41,6 +41,11 @@ const router = createRouter({
       name: 'NotFound',
       component: NotFound,
     },
+    {
+      path: '/budgetSetting',
+      name: 'budgetSettings',
+      component: BudgetSettings,
+    },
   ],
 })
 

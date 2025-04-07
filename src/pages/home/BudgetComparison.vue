@@ -3,6 +3,13 @@
 import { reactive, ref, onMounted, computed } from 'vue'
 import { Doughnut } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
+
+const goToBudgetSettings = () => {
+  router.push('/budgetSetting')
+}
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
 const props = defineProps({
@@ -88,7 +95,7 @@ const chartOptions = {
     </div>
 
     <!-- budget 을 설정하지 않은 경우 -->
-    <div v-else class="empty-budget">
+    <div v-else class="empty-budget" @click="goToBudgetSettings">
       <div class="other-donut-row">
         <div class="donut-container">
           <img class="other-image" src="/src/assets/images/clover/clover_default.png" />

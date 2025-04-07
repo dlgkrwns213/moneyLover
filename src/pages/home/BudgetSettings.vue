@@ -44,8 +44,9 @@ import '@/assets/main.css'
 
 <style scoped>
 .input-group {
-  width: 125px;
+  width: 145px;
   height: 38px;
+  padding-right: 20px;
 }
 
 .input-group .form-control {
@@ -150,5 +151,6 @@ import '@/assets/main.css'
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 30px;
 }
 </style>
