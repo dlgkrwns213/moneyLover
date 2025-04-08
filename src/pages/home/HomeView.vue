@@ -6,17 +6,28 @@ import BudgetComparison from './BudgetComparison.vue'
 import ExpenseList from './ExpenseList.vue'
 import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const cashflows = ref([])
 
 onMounted(async () => {
+  if (!userStore.userId) {
+    console.warn('userId가 없습니다. cashflow를 불러오지 않습니다.')
+    return
+  }
   try {
-    const response = await axios.get('http://localhost:3000/cashflows')
+    const response = await axios.get('http://localhost:3000/cashflows', {
+      params: {
+        userId: userStore.userId,
+      },
+    })
     cashflows.value = response.data
   } catch (error) {
-    console.error('cashflow 불러오기 실패'.error)
+    console.error('cashflow 불러오기 실패:', error)
   }
 })
+
 const totalIncome = computed(() =>
   cashflows.value
     .filter((item) => item.cashflowType === true)
