@@ -98,6 +98,7 @@
       "cashflowName": "감기약",
       "cashflowValue": 55555,
       "date": "2025-04-08 TUE",
+<<<<<<< HEAD
       "category": "medical"
     },
     {
@@ -135,6 +136,9 @@
       "cashflowValue": 33000,
       "date": "2025-04-01 TUE",
       "category": "음료"
+=======
+      "category": "의료"
+>>>>>>> 09a1b006a15d3b62d7667d990c23cdbdfb4174e3
     }
   ],
   "saving": [
@@ -210,6 +214,7 @@
       ],
       "saved": 80000,
       "percent": 80
+<<<<<<< HEAD
     },
     {
       "id": "b8cf",
@@ -246,6 +251,8 @@
       "cashflowValue": 2555921,
       "date": "2025-04-08 TUE",
       "category": "생필품"
+=======
+>>>>>>> 09a1b006a15d3b62d7667d990c23cdbdfb4174e3
     }
   ]
 }
