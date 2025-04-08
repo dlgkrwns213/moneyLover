@@ -24,7 +24,7 @@ import button_check from '@/assets/images/keyboard/button_check.png';
 import button_equal from '@/assets/images/keyboard/button_equal.png';
 import { useRouter } from 'vue-router';
 import { getEntryFromPath } from '@/utils/navigation';
-import axios from "axios";
+import axios from 'axios';
 
 const router = useRouter();
 
@@ -50,11 +50,11 @@ const imageMap = {
   equal: button_equal,
 };
 
-const calculateContent = [1, 2, 3, "<", 4, 5, 6, "+", "x", 7, 8, 9, "-", "%", ".", 0, "cdr", "="]
+const calculateContent = [1, 2, 3, '<', 4, 5, 6, '+', 'x', 7, 8, 9, '-', '%', '.', 0, 'cdr', '=']
 const contentImage = computed(() => {
-  const base = [1, 2, 3, "back", 4, 5, 6, "pl", "mu", 7, 8, 9, "mi", "di", "dot", 0, "cdr"];
+  const base = [1, 2, 3, 'back', 4, 5, 6, 'pl', 'mu', 7, 8, 9, 'mi', 'di', 'dot', 0, 'cdr'];
   
-  base.push(calculateCompleted.value ? "check" : "equal");
+  base.push(calculateCompleted.value ? 'check' : 'equal');
   return base;
 });
 
@@ -77,7 +77,7 @@ const formattedValue = computed(() => {
 
   // 숫자만 있을 경우
   if (!/[+\-x%]/.test(num)) {
-    return parseInt(num).toLocaleString(); // 숫자만 있는 경우 , 추가
+    return parseInt(num).toLocaleString() + ' ₩'; // 숫자만 있는 경우 , 추가
   }
 
   // 연산자와 숫자가 있는 경우
@@ -88,7 +88,7 @@ const formattedValue = computed(() => {
     if (index == 1) {
       // 연산자 부분은 그대로 유지
       result += part;
-    } else if (part !== "") {
+    } else if (part !== '') {
       // 숫자 부분일 때는 포맷 적용
       result += parseInt(part).toLocaleString();
     } 
@@ -143,7 +143,7 @@ function calculateButtonClick(content) {
     }
   }
 
-  const signs = ["+", "-", "x", "%"];
+  const signs = ['+', '-', 'x', '%'];
   if (signs.includes(content)) {  // 사칙연산이면
     if (signs.includes(inputValue.value[inputValue.value.length-1])) {  // 사칙연산 교체
       inputValue.value = inputValue.value.slice(0, -1) + content;
@@ -152,41 +152,43 @@ function calculateButtonClick(content) {
       inputValue.value += content;
     }
     calculateCompleted.value = false;
-  } else if (content == "=") {   // 최종
+  } else if (content == '=') {   // 최종
     if (calculateCompleted.value) {  // db에 저장
+      // {
+      //   'id': 'd82x2',
+      //   'cashflowType': true,
+      //   'userId': 1,
+      //   'cashflowName': '월급',
+      //   'cashflowValue': 5000000,
+      //   'date': '2025-04-08 TUE',
+      //   'category': ''
+      // },
+      const date = new Date();
+
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, '0'); // 2자리 월
+      const day = String(date.getDate()).padStart(2, '0');        // 2자리 일
+      const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][date.getDay()];
+
+      // console.log(money);
+      // console.log(selectedType.value);
+      // console.log(selectedCategory.value);
+
+      // const dbCashflowType = selectedType.value === 'outcome' ? false : true;
+      // const userId = 1;  // 재조정
+      // const dbCashflowName = cashflowName.value;
+      // const dbCashflowValue = money;
+      // const dbFormatteddate = `${year}-${month}-${day} ${dayOfWeek}`
+      // const dbCategory = selectedCategory.value;
+      
       const money = Number(inputValue.value);
-      if (money === 0) {
+      if (selectedCategory.value === '') 
+        alert('카테고리를 정하세요');
+      else if (cashflowName.value === '')
+        alert('분류를 입력하세요');
+      else if (money === 0)
         alert('금액은 0일 수 없습니다')
-      } else {
-        // {
-        //   "id": "d82x2",
-        //   "cashflowType": true,
-        //   "userId": 1,
-        //   "cashflowName": "월급",
-        //   "cashflowValue": 5000000,
-        //   "date": "2025-04-08 TUE",
-        //   "category": ""
-        // },
-        const date = new Date();
-
-        const year = date.getFullYear();
-        const month = String(date.getMonth() + 1).padStart(2, '0'); // 2자리 월
-        const day = String(date.getDate()).padStart(2, '0');        // 2자리 일
-        const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][date.getDay()];
-
-        // console.log(money);
-        // console.log(selectedType.value);
-        // console.log(selectedCategory.value);
-
-        // const dbCashflowType = selectedType.value === 'outcome' ? false : true;
-        // const userId = 1;  // 재조정
-        // const dbCashflowName = cashflowName.value;
-        // const dbCashflowValue = money;
-        // const dbFormatteddate = `${year}-${month}-${day} ${dayOfWeek}`
-        // const dbCategory = selectedCategory.value;
-        
-        if (cashflowName.value === "저장할 이름을 입력하세요")
-          alert();
+      else {
         const newCashflow = {
           cashflowType: selectedType.value === 'outcome' ? false : true,
           userId: 1,  // 추후 조정
@@ -213,7 +215,7 @@ function calculateButtonClick(content) {
       }
       calculateCompleted.value = true;
     }
-  } else if (content == "<") {  // 한개 삭제
+  } else if (content == '<') {  // 한개 삭제
     if (inputValue.value === '0') {  // 0 하나면 0 그대로
       inputValue.value = '0';
     } else { 
@@ -238,52 +240,53 @@ function calculateButtonClick(content) {
 </script>
 
 <template>
-  <div class="add-page-wrapper">  <!-- 배경색 지정 -->
-  <div class="header">
-    <button class="back-button" @click="goBack">
-      <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
+  <div class='add-page-wrapper'>  <!-- 배경색 지정 -->
+  <div class='header'>
+    <button class='back-button' @click='goBack'>
+      <font-awesome-icon :icon='["fas", "xmark"]' class='xmark-icon' />
     </button>
+    <br>
 
-    <div class="tab-wrapper">
+    <div class='tab-wrapper'>
       <router-link
-        to="/add/outcome"
-        class="tab"
-        :class="{ active: $route.path === '/add/outcome' }"
+        to='/add/outcome'
+        class='tab'
+        :class='{ active: $route.path === "/add/outcome" }'
       >
         지출
       </router-link>
       <router-link
-        to="/add/income"
-        class="tab"
-        :class="{ active: $route.path === '/add/income' }"
+        to='/add/income'
+        class='tab'
+        :class='{ active: $route.path === "/add/income" }'
       >
         수입
       </router-link>
     </div>
   </div>
 
-  <div class="scroll-area">
-    <router-view @update-category="handleCategoryUpdate" />
+  <div class='scroll-area'>
+    <router-view @update-category='handleCategoryUpdate' />
   </div>
 
-  <div class="footer-calculate">
-    <div class="input-container">
-      <input v-model="cashflowName" type="text" class="input-cashflow-name" placeholder="저장할 이름을 입력하세요.">
-      <div class="money">{{ formattedValue }}</div>
+  <div class='footer-calculate'>
+    <div class='input-container'>
+      <input v-model='cashflowName' type='text' class='input-cashflow-name' placeholder='분류를 입력하세요.'>
+      <div class='money'>{{ formattedValue }}</div>
     </div>
-    <div class="calculate-section">
+    <div class='calculate-section'>
       <div 
-        class="calculate-section__buttton"
-        v-for="(content, contentIdx) in calculateContent"
-        :key="contentIdx"
-        :style="getGridSpan(contentIdx)"
-        @click="calculateButtonClick(content)"
+        class='calculate-section__buttton'
+        v-for='(content, contentIdx) in calculateContent'
+        :key='contentIdx'
+        :style='getGridSpan(contentIdx)'
+        @click='calculateButtonClick(content)'
       >
       <img 
-        :src="imageMap[contentImage[contentIdx]]" 
-        :alt="contentImage[contentIdx]" 
-        style="height: 100%; width: 100%;"
-        class="calculate-section__image"
+        :src='imageMap[contentImage[contentIdx]]' 
+        :alt='contentImage[contentIdx]' 
+        style='height: 100%; width: 100%;'
+        class='calculate-section__image'
       />
 
       </div>
