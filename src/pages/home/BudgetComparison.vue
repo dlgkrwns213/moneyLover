@@ -14,6 +14,10 @@ const router = useRouter()
 const goToBudgetSettings = () => {
   router.push('/budgetSetting')
 }
+const goToSearch = () => {
+  router.push('/SearchFilter')
+}
+
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
 const props = defineProps({
@@ -97,7 +101,7 @@ const chartOptions = {
       <i class="bi bi-x"></i>
     </span>
     <span class="menu-budgetsetting">예산설정</span>
-    <span class="icon" @click="goBack">
+    <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
   </div>
