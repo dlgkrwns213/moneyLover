@@ -70,7 +70,7 @@ const sortedCashflows = computed(() => {
   /* justify-content: space-between; */
   align-items: left;
   font-size: 12px;
-  color: #black;
+  color: black;
   padding: 4px 6px;
   margin-bottom: 4px;
 }
