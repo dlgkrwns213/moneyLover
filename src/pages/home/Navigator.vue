@@ -9,37 +9,49 @@ function handlePlusClick() {
   setEntryFromPath(route.fullPath)
   router.push('/add/outcome')
 }
+
+const isActive = (path) => route.path === path
+
+const getIconSrc = (path, baseName) => {
+  const basePath = '/src/assets/images/navigator/'
+  return new URL(
+    isActive(path)
+      ? `${basePath}footer_color_${baseName}.png`
+      : `${basePath}footer_${baseName}.png`,
+    import.meta.url
+  ).href
+}
 </script>
 
 <template>
   <div style="background-color: white;">
-  <nav class="bottom-nav">
-    <RouterLink to="/" class="nav-item">
-      <img src="@/assets/images/navigator/footer_home.png" alt="홈" />
-      <span>홈</span>
-    </RouterLink>
-    <RouterLink to="/chart" class="nav-item">
-      <img src="@/assets/images/navigator/footer_chart.png" alt="보고서" />
-      <span>보고서</span>
-    </RouterLink>
+    <nav class="bottom-nav">
+      <RouterLink to="/" class="nav-item">
+        <img :src="getIconSrc('/', 'home')" alt="홈" />
+        <span>홈</span>
+      </RouterLink>
+      <RouterLink to="/chart" class="nav-item">
+        <img :src="getIconSrc('/chart', 'chart')" alt="보고서" />
+        <span>보고서</span>
+      </RouterLink>
 
-    <div class="nav-item" @click="handlePlusClick">
-      <img
-        src="@/assets/images/navigator/footer_plus.png"
-        alt="더하기"
-        style="width: 48px; height: 48px"
-      />
-    </div>
+      <div class="nav-item" @click="handlePlusClick">
+        <img
+          src="@/assets/images/navigator/footer_plus.png"
+          alt="더하기"
+          style="width: 48px; height: 48px"
+        />
+      </div>
 
-    <RouterLink to="/saving" class="nav-item">
-      <img src="@/assets/images/navigator/footer_bank.png" alt="저축" />
-      <span>저축</span>
-    </RouterLink>
-    <RouterLink to="/settings" class="nav-item">
-      <img src="@/assets/images/navigator/footer_setting.png" alt="설정" />
-      <span>설정</span>
-    </RouterLink>
-  </nav>
+      <RouterLink to="/saving" class="nav-item">
+        <img :src="getIconSrc('/saving', 'saving')" alt="저축" />
+        <span>저축</span>
+      </RouterLink>
+      <RouterLink to="/settings" class="nav-item">
+        <img :src="getIconSrc('/settings', 'setting')" alt="설정" />
+        <span>설정</span>
+      </RouterLink>
+    </nav>
   </div>
 </template>
 
@@ -55,7 +67,6 @@ function handlePlusClick() {
   background-color: #fff;
   box-shadow: 0 -1px 6px rgba(0, 0, 0, 0.1);
   z-index: 10;
-
   max-width: 1280px;
   left: 0;
   right: 0;
@@ -69,16 +80,16 @@ function handlePlusClick() {
   font-size: 12px;
   color: #444;
   text-decoration: none;
-
   background-color: transparent;
   transition: background-color 0.3s ease, opacity 0.3s ease;
   opacity: 1;
 }
 
-.nav-item:hover {
-  background-color: rgba(76, 175, 80, 0.7); /* 약간 투명한 녹색 */
-  opacity: 0.8; /* 전체 요소 투명도도 살짝 줄임 */
+.nav-item:hover img {
+  transform: scale(1.1);
+  transition: transform 0.2s ease;
 }
+
 .nav-item img {
   width: 24px;
   height: 24px;
@@ -96,7 +107,7 @@ function handlePlusClick() {
 .plus-icon {
   width: 50px;
   height: 50px;
-  background-color: #4caf50;
+  background-color: #79AC61;
   border-radius: 50%;
   color: white;
   font-size: 30px;
