@@ -190,12 +190,12 @@ const getIconPath = (koreanCategory) => {
 @media (max-width: 360px) {
   .container {
     padding: 1rem;
-    font-family: 'MyFontBold';
+    /* font-family: 'MyFontBold'; */
   }
 }
 
 .container {
-  font-family: 'MyFontBold';
+  font-family: 'MyFont';
 }
 
 .fs-4 {

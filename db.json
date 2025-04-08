@@ -110,15 +110,6 @@
       "category": "의료"
     },
     {
-      "id": "d9db",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "",
-      "cashflowValue": 23658,
-      "date": "2025-04-08 TUE",
-      "category": "present"
-    },
-    {
       "id": "8bde",
       "cashflowType": false,
       "userId": 1,

@@ -89,7 +89,7 @@ function goBack() {
   background-color: #f6f6f6;
   border-bottom: 1px solid #f6f6f6;
   margin: 0 auto;
-  font-family: 'MyFontBold'; /* 폰트 커스텀 가능 */
+  font-family: 'MyFontBold';
 }
 
 .icon {

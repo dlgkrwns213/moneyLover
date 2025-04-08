@@ -1,37 +1,37 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
-import axios from 'axios';
-import AddCalendarModal from './AddCalendarModal.vue';
-import { getEntryFromPath } from '@/utils/navigation';
+import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import AddCalendarModal from './AddCalendarModal.vue'
+import { getEntryFromPath } from '@/utils/navigation'
 
-import button_1 from '@/assets/images/keyboard/button_1.png';
-import button_2 from '@/assets/images/keyboard/button_2.png';
-import button_3 from '@/assets/images/keyboard/button_3.png';
-import button_back from '@/assets/images/keyboard/button_back.png';
-import button_4 from '@/assets/images/keyboard/button_4.png';
-import button_5 from '@/assets/images/keyboard/button_5.png';
-import button_6 from '@/assets/images/keyboard/button_6.png';
-import button_pl from '@/assets/images/keyboard/button_pl.png';
-import button_mu from '@/assets/images/keyboard/button_mu.png';
-import button_7 from '@/assets/images/keyboard/button_7.png';
-import button_8 from '@/assets/images/keyboard/button_8.png';
-import button_9 from '@/assets/images/keyboard/button_9.png';
-import button_mi from '@/assets/images/keyboard/button_mi.png';
-import button_di from '@/assets/images/keyboard/button_di.png';
-import button_dot from '@/assets/images/keyboard/button_dot.png';
-import button_0 from '@/assets/images/keyboard/button_0.png';
-import button_cdr from '@/assets/images/keyboard/button_cdr.png';
-import button_check from '@/assets/images/keyboard/button_check.png';
-import button_equal from '@/assets/images/keyboard/button_equal.png';
+import button_1 from '@/assets/images/keyboard/button_1.png'
+import button_2 from '@/assets/images/keyboard/button_2.png'
+import button_3 from '@/assets/images/keyboard/button_3.png'
+import button_back from '@/assets/images/keyboard/button_back.png'
+import button_4 from '@/assets/images/keyboard/button_4.png'
+import button_5 from '@/assets/images/keyboard/button_5.png'
+import button_6 from '@/assets/images/keyboard/button_6.png'
+import button_pl from '@/assets/images/keyboard/button_pl.png'
+import button_mu from '@/assets/images/keyboard/button_mu.png'
+import button_7 from '@/assets/images/keyboard/button_7.png'
+import button_8 from '@/assets/images/keyboard/button_8.png'
+import button_9 from '@/assets/images/keyboard/button_9.png'
+import button_mi from '@/assets/images/keyboard/button_mi.png'
+import button_di from '@/assets/images/keyboard/button_di.png'
+import button_dot from '@/assets/images/keyboard/button_dot.png'
+import button_0 from '@/assets/images/keyboard/button_0.png'
+import button_cdr from '@/assets/images/keyboard/button_cdr.png'
+import button_check from '@/assets/images/keyboard/button_check.png'
+import button_equal from '@/assets/images/keyboard/button_equal.png'
 
-const router = useRouter();
-const showCalendarModal = ref(false);
+const router = useRouter()
+const showCalendarModal = ref(false)
 
-const selectedDate = ref(new Date());
+const selectedDate = ref(new Date())
 
 function selectDate(dateString) {
-  selectedDate.value = dateString;
+  selectedDate.value = dateString
 }
 
 function formatDateWithWeekday(date) {
@@ -62,102 +62,108 @@ const imageMap = {
   cdr: button_cdr,
   check: button_check,
   equal: button_equal,
-};
+}
 
-const calculateContent = [1, 2, 3, '<', 4, 5, 6, '+', 'x', 7, 8, 9, '-', '%', '.', 0, 'cdr', '='];
+const calculateContent = [1, 2, 3, '<', 4, 5, 6, '+', 'x', 7, 8, 9, '-', '%', '.', 0, 'cdr', '=']
 
-const inputValue = ref('0');
-const cashflowName = ref('');
-const calculateCompleted = ref(true);
-const selectedCategory = ref('');
-const selectedType = ref('');
+const inputValue = ref('0')
+const cashflowName = ref('')
+const calculateCompleted = ref(true)
+const selectedCategory = ref('')
+const selectedType = ref('')
 
 const contentImage = computed(() => {
-  const base = [1, 2, 3, 'back', 4, 5, 6, 'pl', 'mu', 7, 8, 9, 'mi', 'di', 'dot', 0, 'cdr'];
-  base.push(calculateCompleted.value ? 'check' : 'equal');
-  return base;
-});
+  const base = [1, 2, 3, 'back', 4, 5, 6, 'pl', 'mu', 7, 8, 9, 'mi', 'di', 'dot', 0, 'cdr']
+  base.push(calculateCompleted.value ? 'check' : 'equal')
+  return base
+})
 
 function handleCategoryUpdate({ type, category }) {
-  selectedType.value = type;
-  selectedCategory.value = category;
+  selectedType.value = type
+  selectedCategory.value = category
 }
 
 const formattedValue = computed(() => {
-  let num = inputValue.value.replace(/,/g, '');
-  if (num === '') return '';
+  let num = inputValue.value.replace(/,/g, '')
+  if (num === '') return ''
 
   if (!/[+\-x%]/.test(num)) {
-    return parseInt(num).toLocaleString() + ' ₩';
+    return parseInt(num).toLocaleString() + ' ₩'
   }
 
-  let result = '';
-  let parts = num.split(/([+\-x%])/);
+  let result = ''
+  let parts = num.split(/([+\-x%])/)
 
   parts.forEach((part, index) => {
     if (index % 2 === 1) {
-      result += part;
+      result += part
     } else if (part !== '') {
-      result += parseInt(part).toLocaleString();
+      result += parseInt(part).toLocaleString()
     }
-  });
+  })
 
-  return result;
-});
+  return result
+})
 
 function goBack() {
-  const previous = getEntryFromPath();
+  const previous = getEntryFromPath()
   if (previous) {
-    router.replace(previous);
+    router.replace(previous)
   } else {
-    router.replace('/');
+    router.replace('/')
   }
 }
 
 function getGridSpan(index) {
-  const oneColumnIndexes = [7, 8, 12, 13];
+  const oneColumnIndexes = [7, 8, 12, 13]
   return {
-    gridColumn: `span ${oneColumnIndexes.includes(index) ? 1 : 2}`
-  };
+    gridColumn: `span ${oneColumnIndexes.includes(index) ? 1 : 2}`,
+  }
 }
 
 function calculateButtonClick(content) {
   const calculate = (expression) => {
     const formatResult = (num) => {
-      const fixed = num.toFixed(2);
-      return fixed.endsWith('.00') ? String(parseInt(fixed)) : String(parseFloat(fixed));
-    };
-    const sign = expression.match(/[+\-x%]/);
-    if (!sign) return expression;
-    const [a, b] = expression.split(sign);
-    const numA = Number(a), numB = Number(b);
+      const fixed = num.toFixed(2)
+      return fixed.endsWith('.00') ? String(parseInt(fixed)) : String(parseFloat(fixed))
+    }
+    const sign = expression.match(/[+\-x%]/)
+    if (!sign) return expression
+    const [a, b] = expression.split(sign)
+    const numA = Number(a),
+      numB = Number(b)
 
     switch (sign[0]) {
-      case '+': return formatResult(numA + numB);
-      case '-': return formatResult(numA - numB);
-      case 'x': return formatResult(numA * numB);
-      case '%': return numB !== 0 ? formatResult(numA / numB) : '0';
-      default: return '오류';
+      case '+':
+        return formatResult(numA + numB)
+      case '-':
+        return formatResult(numA - numB)
+      case 'x':
+        return formatResult(numA * numB)
+      case '%':
+        return numB !== 0 ? formatResult(numA / numB) : '0'
+      default:
+        return '오류'
     }
-  };
+  }
 
-  const signs = ['+', '-', 'x', '%'];
+  const signs = ['+', '-', 'x', '%']
   if (signs.includes(content)) {
-    const last = inputValue.value.slice(-1);
+    const last = inputValue.value.slice(-1)
     if (signs.includes(last)) {
-      inputValue.value = inputValue.value.slice(0, -1) + content;
+      inputValue.value = inputValue.value.slice(0, -1) + content
     } else {
-      inputValue.value = calculate(inputValue.value) + content;
+      inputValue.value = calculate(inputValue.value) + content
     }
-    calculateCompleted.value = false;
+    calculateCompleted.value = false
   } else if (content === '=') {
     if (calculateCompleted.value) {
-      const money = Number(inputValue.value);
-      const formattedDate = formatDateWithWeekday(selectedDate.value);
-      console.log(formattedDate);
-      if (!selectedCategory.value) return alert('카테고리를 정하세요');
-      if (!cashflowName.value) return alert('분류를 입력하세요');
-      if (money === 0) return alert('금액은 0일 수 없습니다');
+      const money = Number(inputValue.value)
+      const formattedDate = formatDateWithWeekday(selectedDate.value)
+      console.log(formattedDate)
+      if (!selectedCategory.value) return alert('카테고리를 정하세요')
+      if (!cashflowName.value) return alert('분류를 입력하세요')
+      if (money === 0) return alert('금액은 0일 수 없습니다')
 
       const newCashflow = {
         cashflowType: selectedType.value === 'outcome' ? false : true,
@@ -166,34 +172,35 @@ function calculateButtonClick(content) {
         cashflowValue: money,
         date: formattedDate,
         category: selectedCategory.value,
-      };
-
-      axios.post('http://localhost:3000/cashflows', newCashflow)
-        .then(res => {
-          console.log('저장 성공:', res.data);
-          goBack();
-        })
-        .catch(err => console.error('저장 실패:', err));
-    } else {
-      const last = inputValue.value.slice(-1);
-      if (signs.includes(last)) {
-        inputValue.value = inputValue.value.slice(0, -1);
-      } else {
-        inputValue.value = calculate(inputValue.value);
       }
-      calculateCompleted.value = true;
+
+      axios
+        .post('http://localhost:3000/cashflows', newCashflow)
+        .then((res) => {
+          console.log('저장 성공:', res.data)
+          goBack()
+        })
+        .catch((err) => console.error('저장 실패:', err))
+    } else {
+      const last = inputValue.value.slice(-1)
+      if (signs.includes(last)) {
+        inputValue.value = inputValue.value.slice(0, -1)
+      } else {
+        inputValue.value = calculate(inputValue.value)
+      }
+      calculateCompleted.value = true
     }
   } else if (content === '<') {
     if (inputValue.value.length <= 1) {
-      inputValue.value = '0';
+      inputValue.value = '0'
     } else {
-      inputValue.value = inputValue.value.slice(0, -1);
+      inputValue.value = inputValue.value.slice(0, -1)
     }
   } else if (content === 'cdr') {
-    showCalendarModal.value = true;
+    showCalendarModal.value = true
   } else {
-    if (inputValue.value === '0') inputValue.value = '';
-    inputValue.value += content;
+    if (inputValue.value === '0') inputValue.value = ''
+    inputValue.value += content
   }
 }
 </script>
@@ -204,11 +211,18 @@ function calculateButtonClick(content) {
       <button class="back-button" @click="goBack">
         <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
       </button>
-      <br>
+      <br />
 
       <div class="tab-wrapper">
-        <router-link to="/add/outcome" class="tab" :class="{ active: $route.path === '/add/outcome' }">지출</router-link>
-        <router-link to="/add/income" class="tab" :class="{ active: $route.path === '/add/income' }">수입</router-link>
+        <router-link
+          to="/add/outcome"
+          class="tab"
+          :class="{ active: $route.path === '/add/outcome' }"
+          >지출</router-link
+        >
+        <router-link to="/add/income" class="tab" :class="{ active: $route.path === '/add/income' }"
+          >수입</router-link
+        >
       </div>
     </div>
 
@@ -216,7 +230,7 @@ function calculateButtonClick(content) {
       <router-view @update-category="handleCategoryUpdate" />
     </div>
 
-    <AddCalendarModal 
+    <AddCalendarModal
       v-if="showCalendarModal"
       @close="showCalendarModal = false"
       @date-selected="selectDate"
@@ -225,11 +239,16 @@ function calculateButtonClick(content) {
 
     <div class="footer-calculate">
       <div class="input-container">
-        <input v-model="cashflowName" type="text" class="input-cashflow-name" placeholder="분류를 입력하세요.">
+        <input
+          v-model="cashflowName"
+          type="text"
+          class="input-cashflow-name"
+          placeholder="분류를 입력하세요."
+        />
         <div class="money">{{ formattedValue }}</div>
       </div>
       <div class="calculate-section">
-        <div 
+        <div
           v-for="(content, idx) in calculateContent"
           :key="idx"
           class="calculate-section__buttton"
@@ -239,7 +258,7 @@ function calculateButtonClick(content) {
           <img
             :src="imageMap[contentImage[idx]]"
             :alt="contentImage[idx]"
-            style="height: 100%; width: 100%;"
+            style="height: 100%; width: 100%"
             class="calculate-section__image"
           />
         </div>
@@ -249,18 +268,10 @@ function calculateButtonClick(content) {
 </template>
 
 <style scoped>
-@font-face {
-  font-family: 'MyFont';
-  src: url('@/assets/fonts/Cafe24Ssurround-v2.0.ttf');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .add-page-wrapper {
   background-color: white;
   min-height: 100vh; /* ⬅️ 뷰포트 전체 높이만큼 차지하게 하기 */
-
-  font-family: 'MyFont';
+  font-family: 'MyFontBold';
 }
 
 .header {
@@ -289,7 +300,6 @@ function calculateButtonClick(content) {
   font-size: 24px;
 }
 
-
 .tab-wrapper {
   display: flex;
   justify-content: center;
@@ -302,7 +312,6 @@ function calculateButtonClick(content) {
   height: 48px;
   padding-bottom: 8px;
 }
-
 
 .tab {
   font-size: 16px;
@@ -317,7 +326,7 @@ function calculateButtonClick(content) {
 }
 
 .tab.active {
-  color: #61905A; /* 초록색 */
+  color: #61905a; /* 초록색 */
   border-bottom: 5px solid #497552;
 }
 .footer-calculate {
@@ -325,7 +334,7 @@ function calculateButtonClick(content) {
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   z-index: 100;
 
   display: flex;
@@ -343,7 +352,7 @@ function calculateButtonClick(content) {
 .input-cashflow-name {
   width: 100%;
   height: 30px;
-  margin: 10px 0 ; /* 위 아래 margin만 설정 */
+  margin: 10px 0; /* 위 아래 margin만 설정 */
   border-radius: 10px;
   text-align: left;
   padding: 0 15px;
