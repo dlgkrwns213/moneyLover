@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Lee",
       "user": "admin",
       "password": "1234",
@@ -56,11 +56,11 @@
       "category": ""
     },
     {
-      "id": "2x3x",
+      "id": "d82x3",
       "cashflowType": false,
       "userId": 1,
       "cashflowName": "점심",
-      "cashflowValue": 5000,
+      "cashflowValue": 8000,
       "date": "2025-04-08 TUE",
       "category": ""
     }

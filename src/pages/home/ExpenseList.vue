@@ -15,6 +15,15 @@ onMounted(async () => {
 const sortedCashflows = computed(() => {
   return [...cashflows.value].sort((a, b) => new Date(b.date) - new Date(a.date))
 })
+
+const deleteCashflow = async (id) => {
+  try {
+    await axios.delete(`http://localhost:3000/cashflows/${id}`)
+    cashflows.value = cashflows.value.filter((item) => item.id !== id)
+  } catch (error) {
+    console.error('삭제 중 오류발생:', error)
+  }
+}
 </script>
 
 <template>
@@ -22,7 +31,7 @@ const sortedCashflows = computed(() => {
     <div v-for="(item, index) in sortedCashflows" :key="item.id">
       <div class="expense-header">
         <span class="date">{{ item.date }}</span>
-        <span class="delete">삭제🗑</span>
+        <span class="delete" @click="deleteCashflow(item.id)">삭제🗑</span>
         <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
           {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
         </span>
@@ -115,6 +124,7 @@ const sortedCashflows = computed(() => {
 .delete {
   margin-left: 10px;
   color: #e35050;
+  cursor: pointer;
 }
 .amount {
   margin-left: auto;
