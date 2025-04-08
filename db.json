@@ -83,15 +83,6 @@
       "category": "의료"
     },
     {
-      "id": "dc91",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "다이소 테이프",
-      "cashflowValue": 25563652,
-      "date": "2025-04-08 TUE",
-      "category": "생필품"
-    },
-    {
       "id": "696c",
       "cashflowType": false,
       "userId": 1,
