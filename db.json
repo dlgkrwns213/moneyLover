@@ -162,6 +162,15 @@
       "cashflowValue": 10000000,
       "date": "2025-03-05 WED",
       "category": "기타 지출"
+    },
+    {
+      "id": "fd07",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "로션",
+      "cashflowValue": 2555921,
+      "date": "2025-04-08 TUE",
+      "category": "생필품"
     }
   ]
 }

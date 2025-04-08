@@ -79,8 +79,10 @@ function onDayClick(day) {
         </div>
       </div>
 
-      <button @click="emitSelectedDateAndClose">확인</button>
-      <button @click="emitClose">닫기</button>
+      <div class="button-group">
+        <button class="close-btn" @click="emitClose">닫기</button>
+        <button class="confirm-btn" @click="emitSelectedDateAndClose">확인</button>
+      </div>
     </div>
   </div>
 </template>
@@ -140,5 +142,44 @@ function onDayClick(day) {
 .day-content.disabled {
   pointer-events: none;
   opacity: 0.3;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+.button-group button {
+  width: 28%;
+  padding: 0.75rem 1rem;
+  margin: 0 2%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* 확인 버튼 */
+.confirm-btn {
+  border: 2px solid #4caf50 !important; /* 초록색 border */
+  color: #4caf50;
+}
+.confirm-btn:hover {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+/* 닫기 버튼 */
+.close-btn {
+  border: 2px solid #f44336 !important; /* 빨간색 border */
+  color: #f44336;
+}
+.close-btn:hover {
+  background-color: #ffebee;
+  color: #c62828;
 }
 </style>
