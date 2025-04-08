@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <ExpenseSignleAmountItem
+    <IncomeSignleAmountItem
       v-for="(item, index) in top10List"
       :key="index"
       :category="item.category"
@@ -13,17 +13,17 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import ExpenseSignleAmountItem from './ExpenseSignleAmountItem.vue'
+import IncomeSignleAmountItem from './IncomeSingleAmountItem.vue'
 
 const top10List = ref([])
 
 onMounted(async () => {
-  const url = 'http://localhost:3000/cashflows?cashflowType=false'
+  const url = 'http://localhost:3000/cashflows?cashflowType=true'
   const res = await axios.get(url)
   const cashflows = res.data
 
   const singleList = cashflows
-    .filter((item) => item.cashflowType === false)
+    .filter((item) => item.cashflowType === true)
     .map((item) => ({
       category: item.category || item.cashflowName || '기타',
       value: item.cashflowValue,

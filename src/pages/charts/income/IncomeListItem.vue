@@ -11,7 +11,7 @@
         <div class="content">
           <div class="dataDetail">
             <span class="item-category">{{ index + 1 }} {{ category }}</span>
-            <span class="money">-₩{{ formatMoney(value) }}</span>
+            <span class="money">+₩{{ formatMoney(value) }}</span>
           </div>
           <div class="category-meta">
             <span class="item-percent">{{ percent }}%</span>
@@ -83,7 +83,7 @@ function getCategoryKeyFromLabel(label) {
     return acc
   }, {})
 
-  return reversed[label] || 'etc' // 못 찾으면 'etc'로 처리
+  return reversed[label] || 'etc'
 }
 </script>
 <style scoped>
