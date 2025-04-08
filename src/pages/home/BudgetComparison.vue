@@ -82,6 +82,9 @@ const chartOptions = {
         label: (context) => `${context.label}: ${context.raw}원`,
       },
     },
+    datalabels: {
+      display: false,
+    },
   },
 }
 </script>
