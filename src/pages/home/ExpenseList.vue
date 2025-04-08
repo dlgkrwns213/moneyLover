@@ -71,7 +71,7 @@ const deleteCashflow = async (id) => {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 330px;
+  width: 320px;
   font-family: 'MyFontBold';
 }
 

@@ -76,7 +76,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
   gap: 16px;
   justify-content: center;
   width: 100%;
-  max-width: 360px;
+  max-width: 340px;
 }
 
 .stat-card {
@@ -85,6 +85,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
   border: 2px solid #61905a;
   border-radius: 12px;
   padding: 12px;
+  max-width: 340px;
   text-align: center;
   font-family: 'MyFont';
 }
@@ -112,11 +113,16 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
   height: 400px;
   overflow-y: auto;
   width: 100%;
-  max-width: 360px;
+  max-width: 350px;
   background-color: white;
   border-radius: 12px;
   padding: 8px;
   background-color: #f6f6f6;
   margin: 0 auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.scrollable-list::-webkit-scrollbar {
+  display: none;
 }
 </style>
