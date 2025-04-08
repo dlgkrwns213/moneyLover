@@ -171,7 +171,7 @@ function calculateButtonClick(content) {
 
       const newCashflow = {
         cashflowType: selectedType.value === 'outcome' ? false : true,
-        userId: userStore.userId,
+        userId: userStore.userId || 'unKnown',  // 수정 예정
         cashflowName: cashflowName.value,
         cashflowValue: money,
         date: formattedDate,
