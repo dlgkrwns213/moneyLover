@@ -5,6 +5,7 @@ import { Doughnut } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { useRouter } from 'vue-router'
 import { useBudgetStore } from '@/stores/budget'
+import axios from 'axios'
 
 const budgetStore = useBudgetStore()
 const budget = computed(() => budgetStore.budget)
@@ -20,7 +21,21 @@ const props = defineProps({
   remain: Number,
 })
 
-const remain = ref(150000)
+const cashflows = ref([])
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/cashflows')
+    cashflows.value = response.data
+  } catch (error) {
+    console.error('데이터 불러오기 실패', error)
+  }
+})
+const totalOutcome = computed(() => {
+  return cashflows.value
+    .filter((item) => item.cashflowType === false)
+    .reduce((sum, item) => sum + item.cashflowValue, 0)
+})
+const remain = computed(() => budget.value - totalOutcome.value)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
   '/src/assets/images/clover/clover_25.png',
@@ -29,29 +44,26 @@ const imageurls = [
   '/src/assets/images/clover/clover_default.png',
 ]
 const cloverImageUrl = computed(() => {
-  if (percent === 0) return imageurls[0]
-  if (percent <= 25) return imageurls[1]
-  if (percent <= 50) return imageurls[2]
-  if (percent <= 75) return imageurls[3]
+  if (percent.value === 0) return imageurls[0]
+  if (percent.value <= 25) return imageurls[1]
+  if (percent.value <= 50) return imageurls[2]
+  if (percent.value <= 75) return imageurls[3]
   return imageurls[4]
 })
 
-// const used = props.budget - props.remain
-// const percent = Math.round((props.remain / props.budget) * 100)
+const used = computed(() => budget.value - remain.value)
+const percent = computed(() => Math.round((remain.value / budget.value) * 100))
 
-const used = budget.value - remain.value
-const percent = Math.round((remain.value / budget.value) * 100)
-
-const chartData = {
+const chartData = computed(() => ({
   labels: ['사용한 금액', '남은 금액'],
   datasets: [
     {
-      data: [used, remain.value],
+      data: [used.value, remain.value],
       backgroundColor: ['#ffffff', '#61905a'],
       borderWidth: 0,
     },
   ],
-}
+}))
 
 const chartOptions = {
   responsive: true,
@@ -169,17 +181,32 @@ const chartOptions = {
 
 .donut-container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 214px;
   height: 100px;
   flex-shrink: 0;
   cursor: pointer;
 }
 
-.donut-image {
+/* .donut-image {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-170%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+  z-index: 1;
+} */
+
+.donut-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 50px;
   height: 50px;
   border-radius: 50%;

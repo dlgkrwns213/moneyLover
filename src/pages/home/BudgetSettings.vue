@@ -2,6 +2,7 @@
 import { reactive, ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBudgetStore } from '@/stores/budget'
+import axios from 'axios'
 import '@/assets/main.css'
 
 const router = useRouter()
@@ -55,7 +56,7 @@ function goBack() {
             </div>
             <div class="submit">
               <div class="input-group">
-                <input type="number" class="form-control" />
+                <input type="number" v-model="inputValue" class="form-control" />
                 <span class="input-group-text">
                   <i class="bi bi-pencil" @click="saveBudget"></i
                 ></span>
