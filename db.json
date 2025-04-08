@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Lee",
       "user": "admin",
       "password": "1234",
@@ -63,6 +63,81 @@
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
       "category": ""
+    }
+  ],
+  "saving": [
+    {
+      "id": "536e",
+      "name": "저축 샘플1",
+      "targetAmount": 200000,
+      "startDate": "2025-04-08",
+      "endDate": "2025-04-11",
+      "frequency": "매일",
+      "repeatCount": 4,
+      "perAmount": 50000,
+      "schedule": [
+        {
+          "date": "2025-04-08",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-09",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-10",
+          "amount": 50000,
+          "done": false
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 50000,
+          "done": false
+        }
+      ],
+      "saved": 100000,
+      "percent": 50
+    },
+    {
+      "id": "7cc1",
+      "name": "저축 샘플2",
+      "targetAmount": 100000,
+      "startDate": "2025-04-08",
+      "endDate": "2025-08-08",
+      "frequency": "매달",
+      "repeatCount": 5,
+      "perAmount": 20000,
+      "schedule": [
+        {
+          "date": "2025-04-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-05-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-06-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-07-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-08-08",
+          "amount": 20000,
+          "done": false
+        }
+      ],
+      "saved": 80000,
+      "percent": 80
     }
   ]
 }
