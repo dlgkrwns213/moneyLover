@@ -1,19 +1,20 @@
 <template>
   <div class="expense-wrap">
+    <span></span>
     <template v-if="hasData">
       <div class="expense-ranking">
         <span class="top-text">분류 순위</span>
         <div class="chart-container">
-          <ExpenseChart />
+          <IncomeChart />
         </div>
-        <ExpenseList />
+        <IncomeList />
       </div>
       <div class="expense-single-amount">
         <div class="top-text">
           <span>단일 금액 순위</span>
           <span>Top 10</span>
         </div>
-        <ExpenseSingleAmount />
+        <IncomeSingleAmount />
       </div>
     </template>
 
@@ -28,15 +29,15 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import ExpenseChart from '@/pages/charts/expense/ExpenseChart.vue'
-import ExpenseList from '@/pages/charts/expense/ExpenseList.vue'
-import ExpenseSingleAmount from '@/pages/charts/expense/ExpenseSingleAmount.vue'
+import IncomeChart from '@/pages/charts/income/IncomeChart.vue'
+import IncomeList from '@/pages/charts/income/IncomeList.vue'
+import IncomeSingleAmount from '@/pages/charts/income/IncomeSingleAmount.vue'
 
 const hasData = ref(false)
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:3000/cashflows?cashflowType=false')
+    const res = await axios.get('http://localhost:3000/cashflows?cashflowType=true')
     hasData.value = res.data.length > 0
   } catch (error) {
     hasData.value = false

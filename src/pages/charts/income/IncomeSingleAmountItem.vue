@@ -14,7 +14,7 @@
             <div class="bottom" v-if="memo">{{ memo }}</div>
           </div>
           <div class="right">
-            <div class="top">-₩{{ formatMoney(value) }}</div>
+            <div class="top">+₩{{ formatMoney(value) }}</div>
             <div class="bottom">{{ date }}</div>
           </div>
         </div>
@@ -44,7 +44,7 @@ function getCategoryKeyFromLabel(label) {
     return acc
   }, {})
 
-  return reversed[label] || 'etc' // 못 찾으면 'etc'로 처리
+  return reversed[label] || 'etc'
 }
 </script>
 <style scoped>
@@ -56,7 +56,7 @@ function getCategoryKeyFromLabel(label) {
   justify-content: space-between;
   align-items: center;
   padding: 8px 12px;
-  flex: 1; /* ✅ 너비 꽉 차게 */
+  flex: 1;
   min-width: 0;
 }
 .left {
@@ -68,10 +68,10 @@ function getCategoryKeyFromLabel(label) {
   flex-direction: column;
   justify-content: center;
   align-items: flex-end;
-  margin-left: auto; /* ✅ 오른쪽으로 강제 밀기 */
+  margin-left: auto;
 }
 .left.has-memo {
-  justify-content: flex-start; /* 메모가 있으면 위로 정렬 */
+  justify-content: flex-start;
 }
 
 .top {
@@ -82,10 +82,10 @@ function getCategoryKeyFromLabel(label) {
 
 .bottom {
   font-size: 10px;
+  font-family: 'MyFont';
   color: gray;
   margin-top: 2px;
   white-space: nowrap;
-  font-family: 'MyFont';
 }
 .icon {
   width: 40px;

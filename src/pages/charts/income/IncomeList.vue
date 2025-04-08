@@ -1,6 +1,6 @@
 <template>
   <ul>
-    <ExpenseListItem
+    <IncomeListItem
       v-for="(item, index) in categorySummary"
       :key="index"
       :index="index"
@@ -14,16 +14,16 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
-import ExpenseListItem from './ExpenseListItem.vue'
+import IncomeListItem from './IncomeListItem.vue'
 
 const categorySummary = ref([])
 
 onMounted(async () => {
-  const url = 'http://localhost:3000/cashflows?cashflowType=false'
+  const url = 'http://localhost:3000/cashflows?cashflowType=true'
   const res = await axios.get(url)
   const expenses = res.data
 
-  // 총 지출 구하기
+  // 총 수입 구하기
   const total = expenses.reduce((sum, item) => sum + item.cashflowValue, 0)
 
   // 카테고리별 합계/횟수 구하기

@@ -7,32 +7,30 @@ import axios from 'axios'
 Chart.register(PieController, ArcElement, Legend, ChartDataLabels)
 
 const bgc = [
-  '#1F77B4', // 파랑
-  '#FF7F0E', // 주황
-  '#2CA02C', // 초록
-  '#D62728', // 빨강
-  '#9467BD', // 보라
-  '#8C564B', // 갈색
-  '#E377C2', // 핑크
-  '#7F7F7F', // 회색
-  '#BCBD22', // 연두
-  '#17BECF', // 청록
-
-  '#AEC7E8', // 연파랑
-  '#FFBB78', // 연주황
-  '#98DF8A', // 연초록
-  '#FF9896', // 연분홍
-  '#C5B0D5', // 연보라
-  '#C49C94', // 살색
-  '#F7B6D2', // 연핑크
-  '#C7C7C7', // 연회색
-  '#DBDB8D', // 베이지/연노랑
-  '#9EDAE5', // 하늘청록
-
-  '#393B79', // 짙은 남색
-  '#637939', // 짙은 올리브
-  '#8C6D31', // 짙은 황토
-  '#843C39', // 진한 적갈색
+  '#1F77B4',
+  '#FF7F0E',
+  '#2CA02C',
+  '#D62728',
+  '#9467BD',
+  '#8C564B',
+  '#E377C2',
+  '#7F7F7F',
+  '#BCBD22',
+  '#17BECF',
+  '#AEC7E8',
+  '#FFBB78',
+  '#98DF8A',
+  '#FF9896',
+  '#C5B0D5',
+  '#C49C94',
+  '#F7B6D2',
+  '#C7C7C7',
+  '#DBDB8D',
+  '#9EDAE5',
+  '#393B79',
+  '#637939',
+  '#8C6D31',
+  '#843C39',
 ]
 
 onMounted(async () => {
@@ -40,7 +38,7 @@ onMounted(async () => {
   const res = await axios.get(url)
   const cashflows = res.data
 
-  const expenses = cashflows.filter((itme) => itme.cashflowType === false)
+  const expenses = cashflows.filter((item) => item.cashflowType === true)
 
   const grouped = {}
   for (const item of expenses) {
@@ -51,11 +49,18 @@ onMounted(async () => {
   const labels = Object.keys(grouped)
   const data = Object.values(grouped)
 
-  const ctx = document.querySelector('#chartCanvas')?.getContext('2d')
-  if (!ctx) {
-    console.error('Canvas not found')
-    return
-  }
+  const canvas = document.getElementById('chartCanvas')
+  if (!canvas) return
+
+  const dpr = window.devicePixelRatio || 1
+
+  const width = canvas.clientWidth
+  const height = canvas.clientHeight
+  canvas.width = width * dpr
+  canvas.height = height * dpr
+
+  const ctx = canvas.getContext('2d')
+  ctx.scale(dpr, dpr)
 
   new Chart(ctx, {
     type: 'pie',
@@ -71,21 +76,17 @@ onMounted(async () => {
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
-      resizeDelay: 0,
+      maintainAspectRatio: false,
+      devicePixelRatio: dpr,
       layout: {
-        padding: {
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 0,
-        },
+        padding: 40,
       },
       plugins: {
         tooltip: {
-          enabled: false, // ✅ 마우스 호버 이벤트 제거
+          enabled: false,
         },
         datalabels: {
+          clip: false,
           color: 'black',
           anchor: 'end',
           align: 'end',
@@ -93,12 +94,12 @@ onMounted(async () => {
           font: {
             weight: 'bold',
             size: 10,
+            family: 'MyFontBold',
           },
           formatter: (value, context) => {
             const dataset = context.chart.data.datasets[0].data
             const total = dataset.reduce((acc, cur) => acc + cur, 0)
-            const percent = ((value / total) * 100).toFixed(1)
-            return `${percent}%`
+            return `${((value / total) * 100).toFixed(1)}%`
           },
         },
         legend: {
@@ -112,15 +113,14 @@ onMounted(async () => {
 
 <template>
   <div class="chart-wrapper">
-    <canvas id="chartCanvas"></canvas>
+    <canvas id="chartCanvas" width="400" height="400"></canvas>
   </div>
 </template>
 
 <style scoped>
 .chart-wrapper {
   width: 100%;
-  max-width: 275px;
-  max-height: 225px;
+  max-width: 250px;
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
   display: flex;

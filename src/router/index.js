@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BudgetComparison from '@/pages/home/BudgetComparison.vue'
 import BudgetSettings from '@/pages/home/BudgetSettings.vue'
-import Expense from '@/pages/charts/expense/Expense.vue'
+import Chart from '@/pages/charts/Chart.vue'
 import SavingManagement from '@/pages/saving/SavingManagement.vue'
 import AddSavings from '@/pages/saving/AddSavings.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
@@ -23,7 +23,7 @@ const router = createRouter({
     {
       path: '/chart',
       name: 'chart',
-      component: Expense,
+      component: Chart,
     },
     {
       path: '/add',
