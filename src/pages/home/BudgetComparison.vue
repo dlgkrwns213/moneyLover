@@ -44,7 +44,7 @@ const imageurls = [
   '/src/assets/images/clover/clover_default.png',
 ]
 const cloverImageUrl = computed(() => {
-  if (percent.value === 0) return imageurls[0]
+  if (percent.value <= 0) return imageurls[0]
   if (percent.value <= 25) return imageurls[1]
   if (percent.value <= 50) return imageurls[2]
   if (percent.value <= 75) return imageurls[3]
@@ -58,7 +58,7 @@ const chartData = computed(() => ({
   labels: ['사용한 금액', '남은 금액'],
   datasets: [
     {
-      data: [used.value, remain.value],
+      data: [used.value, remain.value < 0 ? 0 : remain.value],
       backgroundColor: ['#ffffff', '#61905a'],
       borderWidth: 0,
     },
@@ -101,11 +101,11 @@ const chartOptions = {
       <i class="bi bi-search"></i>
     </span>
   </div>
-  <div class="page-wrapper">
+  <div class="page-wrapper" @click="goToBudgetSettings">
     <!-- v-id 에 true false 로 budget 설정 여부를 분별하여 다른 창을 띄운다. -->
     <div v-if="budget" class="donut-row">
       <!-- 왼쪽: 도넛 + 이미지 -->
-      <div class="donut-container" @click="goToBudgetSettings">
+      <div class="donut-container">
         <Doughnut :data="chartData" :options="chartOptions" />
         <img class="donut-image" :src="cloverImageUrl" />
       </div>
@@ -118,11 +118,11 @@ const chartOptions = {
         </div>
         <div class="line">
           <span class="label">남음</span>
-          <span class="value">{{ remain.toLocaleString() }}</span>
+          <span class="value">{{ remain < 0 ? '예산초과!' : remain.toLocaleString() }}</span>
         </div>
         <div class="line">
           <span class="label">%</span>
-          <span class="value">{{ percent }}%</span>
+          <span class="value">{{ percent < 0 ? '예산초과!' : percent.toLocaleString() }}%</span>
         </div>
       </div>
     </div>
@@ -184,7 +184,7 @@ const chartOptions = {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 214px;
+  width: 150px;
   height: 100px;
   flex-shrink: 0;
   cursor: pointer;
@@ -217,9 +217,10 @@ const chartOptions = {
 .info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  margin-left: 0;
+  justify-content: left;
+  margin-right: 0;
   font-family: 'MyFont';
+  flex: 1;
 }
 
 .line {
@@ -229,7 +230,7 @@ const chartOptions = {
 
 .label {
   padding: 10px;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: bold;
   color: #444;
   flex: 1;
@@ -250,6 +251,7 @@ const chartOptions = {
   justify-content: center;
   align-items: center;
   color: #f6f6f6;
+  cursor: pointer;
 }
 
 .header {

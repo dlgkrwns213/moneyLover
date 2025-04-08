@@ -109,7 +109,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
 }
 
 .scrollable-list {
-  height: 400px; /* 원하는 높이로 조절 가능 */
+  height: 500px;
   overflow-y: auto;
   width: 100%;
   max-width: 360px;

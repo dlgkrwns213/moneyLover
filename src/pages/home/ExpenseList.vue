@@ -123,9 +123,9 @@ const deleteCashflow = async (id) => {
   border-radius: 50%;
   font-size: 20px;
   margin-right: 10px;
-  background-color: #f0f0f0; /* 회색 배경 원 */
-  margin-right: 14px; /* 글자와의 간격 */
-  margin-left: 6px; /* 왼쪽에서 조금 떨어뜨림 */
+  background-color: #f0f0f0;
+  margin-right: 14px;
+  margin-left: 6px;
 }
 
 .info {
