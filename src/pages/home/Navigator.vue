@@ -13,7 +13,6 @@ function handlePlusClick() {
 </script>
 
 <template>
-  <div style="background-color: white;">
   <nav class="bottom-nav">
     <RouterLink to="/" class="nav-item">
       <img src="@/assets/images/navigator/footer_home.png" alt="홈" />
@@ -41,7 +40,6 @@ function handlePlusClick() {
       <span>설정</span>
     </RouterLink>
   </nav>
-  </div>
 </template>
 
 <style scoped>

@@ -135,6 +135,33 @@
       "cashflowValue": 36665,
       "date": "2025-04-08 TUE",
       "category": "necessities"
+    },
+    {
+      "id": "b8cf",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "22",
+      "cashflowValue": 222,
+      "date": "2025-04-08 TUE",
+      "category": "음료"
+    },
+    {
+      "id": "d8b7",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "1212",
+      "cashflowValue": 2,
+      "date": "2025-04-08 TUE",
+      "category": "대출"
+    },
+    {
+      "id": "22cd",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "test",
+      "cashflowValue": 10000000,
+      "date": "2025-03-05 WED",
+      "category": "기타 지출"
     }
   ]
 }
