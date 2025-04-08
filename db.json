@@ -107,6 +107,15 @@
       "cashflowValue": 33000,
       "date": "2025-04-01 TUE",
       "category": "음료"
+    },
+    {
+      "id": "7a66",
+      "cashflowType": false,
+      "userId": "unKnown",
+      "cashflowName": "skt",
+      "cashflowValue": 33333,
+      "date": "2025-04-08 TUE",
+      "category": "통신비"
     }
   ],
   "saving": [
