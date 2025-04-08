@@ -22,7 +22,7 @@ const selectCard = (key) => {
   selectedKey.value = key;
   emit('update-category', {
     type: 'outcome',
-    category: key,
+    category: TRANSLATIONS[key],
   })
 }
 </script>

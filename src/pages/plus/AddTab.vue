@@ -1,8 +1,12 @@
 <script setup>
-import { ref } from 'vue';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import axios from 'axios';
 import AddTabIncome from './AddTabIncome.vue';
 import AddTabOutcome from './AddTabOutcome.vue';
+import AddCalendarModal from './AddCalendarModal.vue';
+import { getEntryFromPath } from '@/utils/navigation';
+
 import button_1 from '@/assets/images/keyboard/button_1.png';
 import button_2 from '@/assets/images/keyboard/button_2.png';
 import button_3 from '@/assets/images/keyboard/button_3.png';
@@ -22,11 +26,23 @@ import button_0 from '@/assets/images/keyboard/button_0.png';
 import button_cdr from '@/assets/images/keyboard/button_cdr.png';
 import button_check from '@/assets/images/keyboard/button_check.png';
 import button_equal from '@/assets/images/keyboard/button_equal.png';
-import { useRouter } from 'vue-router';
-import { getEntryFromPath } from '@/utils/navigation';
-import axios from 'axios';
 
 const router = useRouter();
+const showCalendarModal = ref(false);
+
+const selectedDate = ref(new Date());
+
+function selectDate(dateString) {
+  selectedDate.value = dateString;
+}
+
+function formatDateWithWeekday(date) {
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  const weekday = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase()
+  return `${y}-${m}-${d} ${weekday}`
+}
 
 const imageMap = {
   1: button_1,
@@ -50,255 +66,202 @@ const imageMap = {
   equal: button_equal,
 };
 
-const calculateContent = [1, 2, 3, '<', 4, 5, 6, '+', 'x', 7, 8, 9, '-', '%', '.', 0, 'cdr', '=']
+const calculateContent = [1, 2, 3, '<', 4, 5, 6, '+', 'x', 7, 8, 9, '-', '%', '.', 0, 'cdr', '='];
+
+const inputValue = ref('0');
+const cashflowName = ref('');
+const calculateCompleted = ref(true);
+const selectedCategory = ref('');
+const selectedType = ref('');
+
 const contentImage = computed(() => {
   const base = [1, 2, 3, 'back', 4, 5, 6, 'pl', 'mu', 7, 8, 9, 'mi', 'di', 'dot', 0, 'cdr'];
-  
   base.push(calculateCompleted.value ? 'check' : 'equal');
   return base;
 });
 
-const inputValue = ref('0');  // 계산기 버튼 입력값
-const cashflowName = ref('');
-const calculateCompleted = ref(true);
-
-// emit 으로 받을 카테고리와 input, output type
-const selectedCategory = ref('');
-const selectedType = ref('');
-
-function handleCategoryUpdate({ type, category}) {
+function handleCategoryUpdate({ type, category }) {
   selectedType.value = type;
-  selectedCategory.value = category
+  selectedCategory.value = category;
 }
 
 const formattedValue = computed(() => {
-  let num = inputValue.value.replace(/,/g, ''); // 기존의 , 제거
-  if (num === '') return ''; // 빈 값인 경우 빈 문자열 반환
+  let num = inputValue.value.replace(/,/g, '');
+  if (num === '') return '';
 
-  // 숫자만 있을 경우
   if (!/[+\-x%]/.test(num)) {
-    return parseInt(num).toLocaleString() + ' ₩'; // 숫자만 있는 경우 , 추가
+    return parseInt(num).toLocaleString() + ' ₩';
   }
 
-  // 연산자와 숫자가 있는 경우
   let result = '';
-  let parts = num.split(/([+\-x%])/); // 연산자를 기준으로 숫자와 연산자 분리
+  let parts = num.split(/([+\-x%])/);
 
   parts.forEach((part, index) => {
-    if (index == 1) {
-      // 연산자 부분은 그대로 유지
+    if (index % 2 === 1) {
       result += part;
     } else if (part !== '') {
-      // 숫자 부분일 때는 포맷 적용
       result += parseInt(part).toLocaleString();
-    } 
+    }
   });
 
   return result;
 });
 
-
 function goBack() {
   const previous = getEntryFromPath();
   if (previous) {
-    router.replace(previous); // 히스토리 덮어쓰기 → 뒤로가기 시 +경로 안 남음
+    router.replace(previous);
   } else {
-    router.replace('/'); // fallback
+    router.replace('/');
   }
 }
 
 function getGridSpan(index) {
   const oneColumnIndexes = [7, 8, 12, 13];
-  const span = oneColumnIndexes.includes(index) ? 1 : 2;
   return {
-    gridColumn: `span ${span}`
+    gridColumn: `span ${oneColumnIndexes.includes(index) ? 1 : 2}`
   };
 }
 
 function calculateButtonClick(content) {
-  function calculate(expression) {
+  const calculate = (expression) => {
     const formatResult = (num) => {
-      const fixed = num.toFixed(2); // 소수 둘째자리까지 고정
+      const fixed = num.toFixed(2);
       return fixed.endsWith('.00') ? String(parseInt(fixed)) : String(parseFloat(fixed));
     };
     const sign = expression.match(/[+\-x%]/);
-    if (sign === null)  // 부호가 없으면 그대로
-      return expression;
-
-    const numbers = expression.split(sign);
-    const a = Number(numbers[0]);
-    const b = Number(numbers[1]);
+    if (!sign) return expression;
+    const [a, b] = expression.split(sign);
+    const numA = Number(a), numB = Number(b);
 
     switch (sign[0]) {
-      case '+':
-        return formatResult(a + b);
-      case '-':
-        return formatResult(a - b);
-      case 'x':
-        return formatResult(a * b);
-      case '%':
-        return b !== 0 ? formatResult(a / b) : '0';
-      default:
-        return '지원하지 않는 연산자입니다.';
+      case '+': return formatResult(numA + numB);
+      case '-': return formatResult(numA - numB);
+      case 'x': return formatResult(numA * numB);
+      case '%': return numB !== 0 ? formatResult(numA / numB) : '0';
+      default: return '오류';
     }
-  }
+  };
 
   const signs = ['+', '-', 'x', '%'];
-  if (signs.includes(content)) {  // 사칙연산이면
-    if (signs.includes(inputValue.value[inputValue.value.length-1])) {  // 사칙연산 교체
+  if (signs.includes(content)) {
+    const last = inputValue.value.slice(-1);
+    if (signs.includes(last)) {
       inputValue.value = inputValue.value.slice(0, -1) + content;
     } else {
-      inputValue.value = calculate(inputValue.value);
-      inputValue.value += content;
+      inputValue.value = calculate(inputValue.value) + content;
     }
     calculateCompleted.value = false;
-  } else if (content == '=') {   // 최종
-    if (calculateCompleted.value) {  // db에 저장
-      // {
-      //   'id': 'd82x2',
-      //   'cashflowType': true,
-      //   'userId': 1,
-      //   'cashflowName': '월급',
-      //   'cashflowValue': 5000000,
-      //   'date': '2025-04-08 TUE',
-      //   'category': ''
-      // },
-      const date = new Date();
-
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, '0'); // 2자리 월
-      const day = String(date.getDate()).padStart(2, '0');        // 2자리 일
-      const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][date.getDay()];
-
-      // console.log(money);
-      // console.log(selectedType.value);
-      // console.log(selectedCategory.value);
-
-      // const dbCashflowType = selectedType.value === 'outcome' ? false : true;
-      // const userId = 1;  // 재조정
-      // const dbCashflowName = cashflowName.value;
-      // const dbCashflowValue = money;
-      // const dbFormatteddate = `${year}-${month}-${day} ${dayOfWeek}`
-      // const dbCategory = selectedCategory.value;
-      
+  } else if (content === '=') {
+    if (calculateCompleted.value) {
       const money = Number(inputValue.value);
-      if (selectedCategory.value === '') 
-        alert('카테고리를 정하세요');
-      else if (cashflowName.value === '')
-        alert('분류를 입력하세요');
-      else if (money === 0)
-        alert('금액은 0일 수 없습니다')
-      else {
-        const newCashflow = {
-          cashflowType: selectedType.value === 'outcome' ? false : true,
-          userId: 1,  // 추후 조정
-          cashflowName: cashflowName.value,
-          cashflowValue: money,
-          date: `${year}-${month}-${day} ${dayOfWeek}`,
-          category: selectedCategory.value,
-        }
+      const formattedDate = formatDateWithWeekday(selectedDate.value);
+      console.log(formattedDate);
+      if (!selectedCategory.value) return alert('카테고리를 정하세요');
+      if (!cashflowName.value) return alert('분류를 입력하세요');
+      if (money === 0) return alert('금액은 0일 수 없습니다');
 
-        axios.post('http://localhost:3000/cashflows', newCashflow)
-        .then(response => {
-          console.log('저장 성공:', response.data);
+      const newCashflow = {
+        cashflowType: selectedType.value === 'outcome' ? false : true,
+        userId: 1,
+        cashflowName: cashflowName.value,
+        cashflowValue: money,
+        date: formattedDate,
+        category: selectedCategory.value,
+      };
+
+      axios.post('http://localhost:3000/cashflows', newCashflow)
+        .then(res => {
+          console.log('저장 성공:', res.data);
           goBack();
         })
-        .catch(error => {
-          console.error('저장 실패:', error);
-        });
-      }
+        .catch(err => console.error('저장 실패:', err));
     } else {
-      if (signs.includes(inputValue.value[inputValue.value.length-1])) {
+      const last = inputValue.value.slice(-1);
+      if (signs.includes(last)) {
         inputValue.value = inputValue.value.slice(0, -1);
       } else {
         inputValue.value = calculate(inputValue.value);
       }
       calculateCompleted.value = true;
     }
-  } else if (content == '<') {  // 한개 삭제
-    if (inputValue.value === '0') {  // 0 하나면 0 그대로
+  } else if (content === '<') {
+    if (inputValue.value.length <= 1) {
       inputValue.value = '0';
-    } else { 
-      if (signs.includes(inputValue.value[inputValue.value.length-1])) {
-        calculateCompleted.value = true;
-      }
+    } else {
       inputValue.value = inputValue.value.slice(0, -1);
     }
-  } else if (content == 'cdr') {
-    
+  } else if (content === 'cdr') {
+    showCalendarModal.value = true;
   } else {
-    if (inputValue.value === '0')  // 0만 있는 경우
-      inputValue.value = ''
-    else if (inputValue.value.length >= 2 && 
-      inputValue.value[inputValue.value.length-1] === '0' && 
-      signs.includes(inputValue.value[inputValue.value.length-2]))  // 부호 뒤에 0이 나온 경우
-      inputValue.value = inputValue.value.slice(0, -1);
+    if (inputValue.value === '0') inputValue.value = '';
     inputValue.value += content;
   }
 }
-
 </script>
 
 <template>
-  <div class='add-page-wrapper'>  <!-- 배경색 지정 -->
-  <div class='header'>
-    <button class='back-button' @click='goBack'>
-      <font-awesome-icon :icon='["fas", "xmark"]' class='xmark-icon' />
-    </button>
-    <br>
+  <div class="add-page-wrapper">
+    <div class="header">
+      <button class="back-button" @click="goBack">
+        <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
+      </button>
 
-    <div class='tab-wrapper'>
-      <router-link
-        to='/add/outcome'
-        class='tab'
-        :class='{ active: $route.path === "/add/outcome" }'
-      >
-        지출
-      </router-link>
-      <router-link
-        to='/add/income'
-        class='tab'
-        :class='{ active: $route.path === "/add/income" }'
-      >
-        수입
-      </router-link>
-    </div>
-  </div>
-
-  <div class='scroll-area'>
-    <router-view @update-category='handleCategoryUpdate' />
-  </div>
-
-  <div class='footer-calculate'>
-    <div class='input-container'>
-      <input v-model='cashflowName' type='text' class='input-cashflow-name' placeholder='분류를 입력하세요.'>
-      <div class='money'>{{ formattedValue }}</div>
-    </div>
-    <div class='calculate-section'>
-      <div 
-        class='calculate-section__buttton'
-        v-for='(content, contentIdx) in calculateContent'
-        :key='contentIdx'
-        :style='getGridSpan(contentIdx)'
-        @click='calculateButtonClick(content)'
-      >
-      <img 
-        :src='imageMap[contentImage[contentIdx]]' 
-        :alt='contentImage[contentIdx]' 
-        style='height: 100%; width: 100%;'
-        class='calculate-section__image'
-      />
-
+      <div class="tab-wrapper">
+        <router-link to="/add/outcome" class="tab" :class="{ active: $route.path === '/add/outcome' }">지출</router-link>
+        <router-link to="/add/income" class="tab" :class="{ active: $route.path === '/add/income' }">수입</router-link>
       </div>
     </div>
-  </div>
+
+    <div class="scroll-area">
+      <router-view @update-category="handleCategoryUpdate" />
+    </div>
+
+    <AddCalendarModal 
+      v-if="showCalendarModal"
+      @close="showCalendarModal = false"
+      @date-selected="selectDate"
+      :selected-date="selectedDate"
+    />
+
+    <div class="footer-calculate">
+      <div class="input-container">
+        <input v-model="cashflowName" type="text" class="input-cashflow-name" placeholder="분류를 입력하세요.">
+        <div class="money">{{ formattedValue }}</div>
+      </div>
+      <div class="calculate-section">
+        <div 
+          v-for="(content, idx) in calculateContent"
+          :key="idx"
+          class="calculate-section__buttton"
+          :style="getGridSpan(idx)"
+          @click="calculateButtonClick(content)"
+        >
+          <img
+            :src="imageMap[contentImage[idx]]"
+            :alt="contentImage[idx]"
+            style="height: 100%; width: 100%;"
+            class="calculate-section__image"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
+@font-face {
+  font-family: 'MyFont';
+  src: url('@/assets/fonts/Cafe24Ssurround-v2.0.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .add-page-wrapper {
   background-color: white;
   min-height: 100vh; /* ⬅️ 뷰포트 전체 높이만큼 차지하게 하기 */
+
+  font-family: 'MyFont';
 }
 
 .header {

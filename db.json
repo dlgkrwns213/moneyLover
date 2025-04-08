@@ -98,7 +98,6 @@
       "cashflowName": "감기약",
       "cashflowValue": 55555,
       "date": "2025-04-08 TUE",
-<<<<<<< HEAD
       "category": "medical"
     },
     {
@@ -126,8 +125,6 @@
       "cashflowName": "1231",
       "cashflowValue": 36665,
       "date": "2025-04-08 TUE",
-      "category": "necessities"
-=======
       "category": "의료"
     }
   ],
@@ -204,7 +201,42 @@
       ],
       "saved": 80000,
       "percent": 80
->>>>>>> 891071af7f22cd02e96c21f02eb4dca96d88c968
+    },
+    {
+      "id": "b8cf",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "22",
+      "cashflowValue": 222,
+      "date": "2025-04-08 TUE",
+      "category": "음료"
+    },
+    {
+      "id": "d8b7",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "1212",
+      "cashflowValue": 2,
+      "date": "2025-04-08 TUE",
+      "category": "대출"
+    },
+    {
+      "id": "22cd",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "test",
+      "cashflowValue": 10000000,
+      "date": "2025-03-05 WED",
+      "category": "기타 지출"
+    },
+    {
+      "id": "fd07",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "로션",
+      "cashflowValue": 2555921,
+      "date": "2025-04-08 TUE",
+      "category": "생필품"
     }
   ]
 }

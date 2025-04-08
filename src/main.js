@@ -9,6 +9,10 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
 
+// v-calendar 관련
+import VCalendar from 'v-calendar'
+import 'v-calendar/style.css'
+
 // Font Awesome 관련
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -17,6 +21,8 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 library.add(faXmark)
 
 const app = createApp(App)
+
+app.use(VCalendar, {})
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 const pinia = createPinia()
