@@ -23,7 +23,6 @@ library.add(faXmark)
 const app = createApp(App)
 
 app.use(VCalendar, {})
-
 app.component('font-awesome-icon', FontAwesomeIcon)
 const pinia = createPinia()
 app.use(createPinia())
