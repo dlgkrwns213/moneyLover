@@ -86,7 +86,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
   border-radius: 12px;
   padding: 12px;
   text-align: center;
-  font-family: 'MyFontBold';
+  font-family: 'MyFont';
 }
 
 .stat-card.expense {
