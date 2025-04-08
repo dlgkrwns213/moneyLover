@@ -296,9 +296,18 @@ function calculateButtonClick(content) {
 </template>
 
 <style scoped>
+@font-face {
+  font-family: 'MyFont';
+  src: url('@/assets/fonts/Cafe24Ssurround-v2.0.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .add-page-wrapper {
   background-color: white;
   min-height: 100vh; /* ⬅️ 뷰포트 전체 높이만큼 차지하게 하기 */
+
+  font-family: 'MyFont';
 }
 
 .header {
