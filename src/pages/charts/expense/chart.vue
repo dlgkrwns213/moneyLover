@@ -1,10 +1,10 @@
 <script setup>
-import { onMounted } from 'vue';
-import { Chart, ArcElement, Legend, PieController } from 'chart.js';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import axios from 'axios';
+import { onMounted } from 'vue'
+import { Chart, ArcElement, Legend, PieController } from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+import axios from 'axios'
 
-Chart.register(PieController, ArcElement, Legend, ChartDataLabels);
+Chart.register(PieController, ArcElement, Legend, ChartDataLabels)
 
 const bgc = [
   '#1F77B4', // 파랑
@@ -33,28 +33,28 @@ const bgc = [
   '#637939', // 짙은 올리브
   '#8C6D31', // 짙은 황토
   '#843C39', // 진한 적갈색
-];
+]
 
 onMounted(async () => {
-  const url = 'http://localhost:3000/cashflows';
-  const res = await axios.get(url);
-  const cashflows = res.data;
+  const url = 'http://localhost:3000/cashflows'
+  const res = await axios.get(url)
+  const cashflows = res.data
 
-  const expenses = cashflows.filter((itme) => itme.cashflowType === false);
+  const expenses = cashflows.filter((itme) => itme.cashflowType === false)
 
-  const grouped = {};
+  const grouped = {}
   for (const item of expenses) {
-    const name = item.cashflowName || '기타';
-    grouped[name] = (grouped[name] || 0) + item.cashflowValue;
+    const name = item.cashflowName || '기타'
+    grouped[name] = (grouped[name] || 0) + item.cashflowValue
   }
 
-  const labels = Object.keys(grouped);
-  const data = Object.values(grouped);
+  const labels = Object.keys(grouped)
+  const data = Object.values(grouped)
 
-  const ctx = document.querySelector('#chartCanvas')?.getContext('2d');
+  const ctx = document.querySelector('#chartCanvas')?.getContext('2d')
   if (!ctx) {
-    console.error('Canvas not found');
-    return;
+    console.error('Canvas not found')
+    return
   }
 
   new Chart(ctx, {
@@ -95,10 +95,10 @@ onMounted(async () => {
             size: 10,
           },
           formatter: (value, context) => {
-            const dataset = context.chart.data.datasets[0].data;
-            const total = dataset.reduce((acc, cur) => acc + cur, 0);
-            const percent = ((value / total) * 100).toFixed(1);
-            return `${percent}%`;
+            const dataset = context.chart.data.datasets[0].data
+            const total = dataset.reduce((acc, cur) => acc + cur, 0)
+            const percent = ((value / total) * 100).toFixed(1)
+            return `${percent}%`
           },
         },
         legend: {
@@ -106,8 +106,8 @@ onMounted(async () => {
         },
       },
     },
-  });
-});
+  })
+})
 </script>
 
 <template>

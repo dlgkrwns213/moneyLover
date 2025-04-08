@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import BudgetComparison from '@/pages/home/BudgetComparison.vue'
 import BudgetSettings from '@/pages/home/BudgetSettings.vue'
-// import ExpenseRanking from '@/pages/charts/expense/chart.vue'
+import Expense from '@/pages/charts/expense/Expense.vue'
 import SavingManagement from '@/pages/saving/SavingManagement.vue'
 import AddSavings from '@/pages/saving/AddSavings.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
@@ -20,11 +20,11 @@ const router = createRouter({
       name: 'home',
       component: HomeView,
     },
-    // {
-    //   path: '/chart',
-    //   name: 'chart',
-    //   component: ExpenseRanking,
-    // },
+    {
+      path: '/chart',
+      name: 'chart',
+      component: Expense,
+    },
     {
       path: '/add',
       name: 'add',
@@ -37,8 +37,8 @@ const router = createRouter({
         {
           path: 'income',
           component: AddTabIncome,
-        }
-      ]
+        },
+      ],
     },
     {
       path: '/saving',
