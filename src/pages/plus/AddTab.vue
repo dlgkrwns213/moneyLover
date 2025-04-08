@@ -21,6 +21,7 @@ import button_dot from '@/assets/images/keyboard/button_dot.png';
 import button_0 from '@/assets/images/keyboard/button_0.png';
 import button_cdr from '@/assets/images/keyboard/button_cdr.png';
 import button_check from '@/assets/images/keyboard/button_check.png';
+import button_equal from '@/assets/images/keyboard/button_equal.png';
 import { useRouter } from 'vue-router';
 import { getEntryFromPath } from '@/utils/navigation';
 
@@ -45,13 +46,21 @@ const imageMap = {
   0: button_0,
   cdr: button_cdr,
   check: button_check,
+  equal: button_equal,
 };
 
-const tabIdx = ref(0);
 const calculateContent = [1, 2, 3, "<", 4, 5, 6, "+", "x", 7, 8, 9, "-", "%", ".", 0, "cdr", "="]
-const contentImage = [1, 2, 3, "back", 4, 5, 6, "pl", "mu", 7, 8, 9, "mi", "di", "dot", 0, "cdr", "check"]
+const contentImage = computed(() => {
+  const signs = ["+", "-", "x", "%"];
+  const base = [1, 2, 3, "back", 4, 5, 6, "pl", "mu", 7, 8, 9, "mi", "di", "dot", 0, "cdr"];
+  
+  base.push(calculateCompleted.value ? "check" : "equal");
+  return base;
+});
+
 const inputValue = ref('0');  // 계산기 버튼 입력값
 const memo = ref('');
+const calculateCompleted = ref(true);
 
 const formattedValue = computed(() => {
   let num = inputValue.value.replace(/,/g, ''); // 기존의 , 제거
@@ -133,13 +142,27 @@ function calculateButtonClick(content) {
       inputValue.value = calculate(inputValue.value);
       inputValue.value += content;
     }
+    calculateCompleted.value = false;
   } else if (content == "=") {   // 최종
-    if (signs.includes(inputValue.value[inputValue.value.length-1])) 
-      inputValue.value = inputValue.value.slice(0, -1);
-    else
-      inputValue.value = calculate(inputValue.value);
+    if (calculateCompleted.value) {
+      
+    } else {
+      if (signs.includes(inputValue.value[inputValue.value.length-1])) {
+        inputValue.value = inputValue.value.slice(0, -1);
+      } else {
+        inputValue.value = calculate(inputValue.value);
+      }
+      calculateCompleted.value = true;
+    }
   } else if (content == "<") {  // 한개 삭제
-    inputValue.value = inputValue.value !== '0' ? inputValue.value.slice(0, -1) : '0';
+    if (inputValue.value === '0') {  // 0 하나면 0 그대로
+      inputValue.value = '0';
+    } else { 
+      if (signs.includes(inputValue.value[inputValue.value.length-1])) {
+        calculateCompleted.value = true;
+      }
+      inputValue.value = inputValue.value.slice(0, -1);
+    }
   } else if (content == 'cdr') {
     
   } else {
