@@ -63,6 +63,51 @@
       "cashflowValue": 8000,
       "date": "2025-04-08 TUE",
       "category": "식사"
+    },
+    {
+      "id": "4842",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 2222,
+      "date": "2025-4-8 2",
+      "category": "주거"
+    },
+    {
+      "id": "2568",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 2556,
+      "date": "2025-04-08 TUE",
+      "category": "의료"
+    },
+    {
+      "id": "dc91",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 25563652,
+      "date": "2025-04-08 TUE",
+      "category": "생필품"
+    },
+    {
+      "id": "696c",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 5689,
+      "date": "2025-04-08 TUE",
+      "category": "의료"
+    },
+    {
+      "id": "eee8",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 55555,
+      "date": "2025-04-08 TUE",
+      "category": "의료"
     }
   ]
 }

@@ -55,10 +55,11 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  
 }
 
 .card-picture {
-  background-color: #f1f1f1;
+  background-color: #F0F0F0;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -67,7 +68,7 @@ onMounted(async () => {
 }
 
 .card-picture.selected {
-  border: 2px solid #4caf50;
+  border: 3px solid #4caf50;
 }
 
 .card-text {

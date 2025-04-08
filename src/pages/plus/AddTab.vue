@@ -21,8 +21,10 @@ import button_dot from '@/assets/images/keyboard/button_dot.png';
 import button_0 from '@/assets/images/keyboard/button_0.png';
 import button_cdr from '@/assets/images/keyboard/button_cdr.png';
 import button_check from '@/assets/images/keyboard/button_check.png';
+import button_equal from '@/assets/images/keyboard/button_equal.png';
 import { useRouter } from 'vue-router';
 import { getEntryFromPath } from '@/utils/navigation';
+import axios from "axios";
 
 const router = useRouter();
 
@@ -45,13 +47,29 @@ const imageMap = {
   0: button_0,
   cdr: button_cdr,
   check: button_check,
+  equal: button_equal,
 };
 
-const tabIdx = ref(0);
 const calculateContent = [1, 2, 3, "<", 4, 5, 6, "+", "x", 7, 8, 9, "-", "%", ".", 0, "cdr", "="]
-const contentImage = [1, 2, 3, "back", 4, 5, 6, "pl", "mu", 7, 8, 9, "mi", "di", "dot", 0, "cdr", "check"]
+const contentImage = computed(() => {
+  const base = [1, 2, 3, "back", 4, 5, 6, "pl", "mu", 7, 8, 9, "mi", "di", "dot", 0, "cdr"];
+  
+  base.push(calculateCompleted.value ? "check" : "equal");
+  return base;
+});
+
 const inputValue = ref('0');  // 계산기 버튼 입력값
-const memo = ref('');
+const cashflowName = ref('');
+const calculateCompleted = ref(true);
+
+// emit 으로 받을 카테고리와 input, output type
+const selectedCategory = ref('');
+const selectedType = ref('');
+
+function handleCategoryUpdate({ type, category}) {
+  selectedType.value = type;
+  selectedCategory.value = category
+}
 
 const formattedValue = computed(() => {
   let num = inputValue.value.replace(/,/g, ''); // 기존의 , 제거
@@ -67,13 +85,13 @@ const formattedValue = computed(() => {
   let parts = num.split(/([+\-x%])/); // 연산자를 기준으로 숫자와 연산자 분리
 
   parts.forEach((part, index) => {
-    if (index % 2 === 0) {
-      // 숫자 부분일 때는 포맷 적용
-      result += parseInt(part).toLocaleString();
-    } else {
+    if (index == 1) {
       // 연산자 부분은 그대로 유지
       result += part;
-    }
+    } else if (part !== "") {
+      // 숫자 부분일 때는 포맷 적용
+      result += parseInt(part).toLocaleString();
+    } 
   });
 
   return result;
@@ -133,13 +151,77 @@ function calculateButtonClick(content) {
       inputValue.value = calculate(inputValue.value);
       inputValue.value += content;
     }
+    calculateCompleted.value = false;
   } else if (content == "=") {   // 최종
-    if (signs.includes(inputValue.value[inputValue.value.length-1])) 
-      inputValue.value = inputValue.value.slice(0, -1);
-    else
-      inputValue.value = calculate(inputValue.value);
+    if (calculateCompleted.value) {  // db에 저장
+      const money = Number(inputValue.value);
+      if (money === 0) {
+        alert('금액은 0일 수 없습니다')
+      } else {
+        // {
+        //   "id": "d82x2",
+        //   "cashflowType": true,
+        //   "userId": 1,
+        //   "cashflowName": "월급",
+        //   "cashflowValue": 5000000,
+        //   "date": "2025-04-08 TUE",
+        //   "category": ""
+        // },
+        const date = new Date();
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 2자리 월
+        const day = String(date.getDate()).padStart(2, '0');        // 2자리 일
+        const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][date.getDay()];
+
+        // console.log(money);
+        // console.log(selectedType.value);
+        // console.log(selectedCategory.value);
+
+        // const dbCashflowType = selectedType.value === 'outcome' ? false : true;
+        // const userId = 1;  // 재조정
+        // const dbCashflowName = cashflowName.value;
+        // const dbCashflowValue = money;
+        // const dbFormatteddate = `${year}-${month}-${day} ${dayOfWeek}`
+        // const dbCategory = selectedCategory.value;
+        
+        if (cashflowName.value === "저장할 이름을 입력하세요")
+          alert();
+        const newCashflow = {
+          cashflowType: selectedType.value === 'outcome' ? false : true,
+          userId: 1,  // 추후 조정
+          cashflowName: cashflowName.value,
+          cashflowValue: money,
+          date: `${year}-${month}-${day} ${dayOfWeek}`,
+          category: selectedCategory.value,
+        }
+
+        axios.post('http://localhost:3000/cashflows', newCashflow)
+        .then(response => {
+          console.log('저장 성공:', response.data);
+          goBack();
+        })
+        .catch(error => {
+          console.error('저장 실패:', error);
+        });
+      }
+    } else {
+      if (signs.includes(inputValue.value[inputValue.value.length-1])) {
+        inputValue.value = inputValue.value.slice(0, -1);
+      } else {
+        inputValue.value = calculate(inputValue.value);
+      }
+      calculateCompleted.value = true;
+    }
   } else if (content == "<") {  // 한개 삭제
-    inputValue.value = inputValue.value !== '0' ? inputValue.value.slice(0, -1) : '0';
+    if (inputValue.value === '0') {  // 0 하나면 0 그대로
+      inputValue.value = '0';
+    } else { 
+      if (signs.includes(inputValue.value[inputValue.value.length-1])) {
+        calculateCompleted.value = true;
+      }
+      inputValue.value = inputValue.value.slice(0, -1);
+    }
   } else if (content == 'cdr') {
     
   } else {
@@ -156,6 +238,7 @@ function calculateButtonClick(content) {
 </script>
 
 <template>
+  <div class="add-page-wrapper">  <!-- 배경색 지정 -->
   <div class="header">
     <button class="back-button" @click="goBack">
       <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
@@ -180,18 +263,17 @@ function calculateButtonClick(content) {
   </div>
 
   <div class="scroll-area">
-    <router-view />
+    <router-view @update-category="handleCategoryUpdate" />
   </div>
 
   <div class="footer-calculate">
     <div class="input-container">
-      <input v-model="memo" type="text" class="input-memo" placeholder="memo">
-      <div> {{ inputValue}}</div>
+      <input v-model="cashflowName" type="text" class="input-cashflow-name" placeholder="저장할 이름을 입력하세요.">
       <div class="money">{{ formattedValue }}</div>
     </div>
     <div class="calculate-section">
       <div 
-        class="calculate-setion__buttton"
+        class="calculate-section__buttton"
         v-for="(content, contentIdx) in calculateContent"
         :key="contentIdx"
         :style="getGridSpan(contentIdx)"
@@ -201,15 +283,21 @@ function calculateButtonClick(content) {
         :src="imageMap[contentImage[contentIdx]]" 
         :alt="contentImage[contentIdx]" 
         style="height: 100%; width: 100%;"
+        class="calculate-section__image"
       />
 
-    </div>
+      </div>
     </div>
   </div>
-
+  </div>
 </template>
 
 <style scoped>
+.add-page-wrapper {
+  background-color: white;
+  min-height: 100vh; /* ⬅️ 뷰포트 전체 높이만큼 차지하게 하기 */
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -254,7 +342,7 @@ function calculateButtonClick(content) {
 .tab {
   font-size: 16px;
   font-weight: 600;
-  color: #555;
+  color: black;
   text-decoration: none;
   padding: 6px 12px;
 }
@@ -264,15 +352,15 @@ function calculateButtonClick(content) {
 }
 
 .tab.active {
-  color: #2e7d32; /* 초록색 */
-  border-bottom: 3px solid #2e7d32;
+  color: #61905A; /* 초록색 */
+  border-bottom: 5px solid #497552;
 }
 .footer-calculate {
   position: fixed;
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: gray;
+  background-color: #F0F0F0;
   z-index: 100;
 
   display: flex;
@@ -284,15 +372,16 @@ function calculateButtonClick(content) {
 }
 .input-container {
   position: relative;
-  width: 280px; /* 컨테이너 너비 */
+  width: 296px; /* 컨테이너 너비 */
 }
 
-.input-memo {
+.input-cashflow-name {
   width: 100%;
   height: 30px;
   margin: 10px 0 ; /* 위 아래 margin만 설정 */
   border-radius: 10px;
   text-align: left;
+  padding: 0 15px;
 }
 
 .money {
@@ -324,7 +413,7 @@ function calculateButtonClick(content) {
   border-radius: 4px;
 }
 
-.calculate-section__button:hover {
+.calculate-section__image:hover {
   cursor: pointer;
 }
 
