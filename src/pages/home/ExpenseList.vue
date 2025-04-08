@@ -97,6 +97,7 @@ const deleteCashflow = async (id) => {
   width: 24px;
   height: 24px;
   object-fit: contain;
+  /* padding-right: 50px; */
 }
 
 .amount.income {
@@ -114,8 +115,17 @@ const deleteCashflow = async (id) => {
 }
 
 .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
   font-size: 20px;
   margin-right: 10px;
+  background-color: #f0f0f0; /* 회색 배경 원 */
+  margin-right: 14px; /* 글자와의 간격 */
+  margin-left: 6px; /* 왼쪽에서 조금 떨어뜨림 */
 }
 
 .info {
