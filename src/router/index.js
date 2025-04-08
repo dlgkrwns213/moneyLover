@@ -4,6 +4,7 @@ import BudgetSettings from '@/pages/home/BudgetSettings.vue'
 // import ExpenseRanking from '@/pages/charts/expense/chart.vue'
 import SavingManagement from '@/pages/saving/SavingManagement.vue'
 import AddSavings from '@/pages/saving/AddSavings.vue'
+import SavingDetail from '@/pages/saving/SavingDetail.vue'
 import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
 import NotFound from '@/pages/NotFound.vue'
 import AddModal from '@/pages/plus/AddModal.vue'
@@ -46,9 +47,14 @@ const router = createRouter({
       component: SavingManagement,
     },
     {
-      path: '/add-saving', // ✅ register-button이 이동할 경로
+      path: '/add-saving',
       name: 'AddSavings',
       component: AddSavings,
+    },
+    {
+      path: '/saving/:id',
+      name: 'SavingDetail',
+      component: SavingDetail,
     },
     {
       path: '/profile',
