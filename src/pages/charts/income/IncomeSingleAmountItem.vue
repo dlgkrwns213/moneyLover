@@ -4,7 +4,7 @@
       <div class="item-row">
         <div class="icon">
           <img
-            :src="`/src/assets/images/outcome/${getCategoryKeyFromLabel(category)}.png`"
+            :src="`/src/assets/images/income/${getCategoryKeyFromLabel(category)}.png`"
             style="width: 100%"
           />
         </div>
@@ -14,7 +14,7 @@
             <div class="bottom" v-if="memo">{{ memo }}</div>
           </div>
           <div class="right">
-            <div class="top">-₩{{ formatMoney(value) }}</div>
+            <div class="top">+₩{{ formatMoney(value) }}</div>
             <div class="bottom">{{ date }}</div>
           </div>
         </div>
@@ -44,7 +44,7 @@ function getCategoryKeyFromLabel(label) {
     return acc
   }, {})
 
-  return reversed[label] || 'etc' // 못 찾으면 'etc'로 처리
+  return reversed[label] || 'etc'
 }
 </script>
 <style scoped>
@@ -82,10 +82,10 @@ function getCategoryKeyFromLabel(label) {
 
 .bottom {
   font-size: 10px;
+  font-family: 'MyFont';
   color: gray;
   margin-top: 2px;
   white-space: nowrap;
-  font-family: 'MyFont';
 }
 .icon {
   width: 40px;

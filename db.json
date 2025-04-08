@@ -35,7 +35,7 @@
       "cashflowName": "월급",
       "cashflowValue": 5000000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "급여"
     },
     {
       "id": "2xh0",
@@ -44,69 +44,61 @@
       "cashflowName": "이자",
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "이자"
     },
     {
       "id": "d82x2",
       "cashflowType": false,
       "userId": 1,
       "cashflowName": "TV",
-      "cashflowValue": 5000000,
+      "cashflowValue": 500000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "쇼핑"
     },
     {
-      "id": "2x3x",
+      "id": "d82x3",
       "cashflowType": false,
       "userId": 1,
       "cashflowName": "점심",
-      "cashflowValue": 5000,
+      "cashflowValue": 8000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "식사"
     },
     {
       "id": "4842",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "",
+      "cashflowName": "전기세",
       "cashflowValue": 2222,
-      "date": "2025-4-8 2",
-      "category": "house"
+      "date": "2025-4-8 TUE",
+      "category": "주거"
     },
     {
       "id": "2568",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "",
+      "cashflowName": "식염수",
       "cashflowValue": 2556,
       "date": "2025-04-08 TUE",
-      "category": "medical"
-    },
-    {
-      "id": "dc91",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "",
-      "cashflowValue": 25563652,
-      "date": "2025-04-08 TUE",
-      "category": "necessities"
+      "category": "의료"
     },
     {
       "id": "696c",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "",
+      "cashflowName": "위장약",
       "cashflowValue": 5689,
       "date": "2025-04-08 TUE",
-      "category": "medical"
+      "category": "의료"
     },
     {
       "id": "eee8",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "",
+      "cashflowName": "감기약",
       "cashflowValue": 55555,
       "date": "2025-04-08 TUE",
+<<<<<<< HEAD
       "category": "medical"
     },
     {
@@ -135,6 +127,84 @@
       "cashflowValue": 36665,
       "date": "2025-04-08 TUE",
       "category": "necessities"
+=======
+      "category": "의료"
+    }
+  ],
+  "saving": [
+    {
+      "id": "536e",
+      "name": "저축 샘플1",
+      "targetAmount": 200000,
+      "startDate": "2025-04-08",
+      "endDate": "2025-04-11",
+      "frequency": "매일",
+      "repeatCount": 4,
+      "perAmount": 50000,
+      "schedule": [
+        {
+          "date": "2025-04-08",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-09",
+          "amount": 50000,
+          "done": false
+        },
+        {
+          "date": "2025-04-10",
+          "amount": 50000,
+          "done": false
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 50000,
+          "done": false
+        }
+      ],
+      "saved": 50000,
+      "percent": 25
+    },
+    {
+      "id": "7cc1",
+      "name": "저축 샘플2",
+      "targetAmount": 100000,
+      "startDate": "2025-04-08",
+      "endDate": "2025-08-08",
+      "frequency": "매달",
+      "repeatCount": 5,
+      "perAmount": 20000,
+      "schedule": [
+        {
+          "date": "2025-04-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-05-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-06-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-07-08",
+          "amount": 20000,
+          "done": true
+        },
+        {
+          "date": "2025-08-08",
+          "amount": 20000,
+          "done": false
+        }
+      ],
+      "saved": 80000,
+      "percent": 80
+>>>>>>> 891071af7f22cd02e96c21f02eb4dca96d88c968
     }
   ]
 }

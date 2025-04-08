@@ -40,22 +40,32 @@ onMounted(async () => {
   const res = await axios.get(url)
   const cashflows = res.data
 
-  const expenses = cashflows.filter((itme) => itme.cashflowType === false)
+  const expenses = cashflows.filter((item) => item.cashflowType === false)
 
   const grouped = {}
   for (const item of expenses) {
-    const name = item.cashflowName || '기타'
+    const name = item.category || '기타'
     grouped[name] = (grouped[name] || 0) + item.cashflowValue
   }
 
-  const labels = Object.keys(grouped)
-  const data = Object.values(grouped)
+  const sorted = Object.entries(grouped).sort((a, b) => b[1] - a[1])
 
-  const ctx = document.querySelector('#chartCanvas')?.getContext('2d')
-  if (!ctx) {
-    console.error('Canvas not found')
-    return
-  }
+  const labels = sorted.map(([key]) => key)
+  const data = sorted.map(([, value]) => value)
+  const backgroundColor = bgc.slice(0, data.length)
+
+  const canvas = document.getElementById('chartCanvas')
+  if (!canvas) return
+
+  const dpr = window.devicePixelRatio || 1
+
+  const width = canvas.clientWidth
+  const height = canvas.clientHeight
+  canvas.width = width * dpr
+  canvas.height = height * dpr
+
+  const ctx = canvas.getContext('2d')
+  ctx.scale(dpr, dpr)
 
   new Chart(ctx, {
     type: 'pie',
@@ -64,28 +74,24 @@ onMounted(async () => {
       datasets: [
         {
           data,
-          backgroundColor: bgc,
+          backgroundColor: backgroundColor,
           hoverOffset: 4,
         },
       ],
     },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
-      resizeDelay: 0,
+      maintainAspectRatio: false,
+      devicePixelRatio: dpr,
       layout: {
-        padding: {
-          left: 50,
-          right: 50,
-          top: 0,
-          bottom: 0,
-        },
+        padding: 40,
       },
       plugins: {
         tooltip: {
-          enabled: false, // ✅ 마우스 호버 이벤트 제거
+          enabled: false,
         },
         datalabels: {
+          clip: false,
           color: 'black',
           anchor: 'end',
           align: 'end',
@@ -93,12 +99,16 @@ onMounted(async () => {
           font: {
             weight: 'bold',
             size: 10,
+            family: 'MyFontBold',
           },
           formatter: (value, context) => {
             const dataset = context.chart.data.datasets[0].data
             const total = dataset.reduce((acc, cur) => acc + cur, 0)
-            const percent = ((value / total) * 100).toFixed(1)
-            return `${percent}%`
+            const percent = (value / total) * 100
+
+            if (percent < 1) return ''
+
+            return `${percent.toFixed(1)}%`
           },
         },
         legend: {
@@ -112,15 +122,14 @@ onMounted(async () => {
 
 <template>
   <div class="chart-wrapper">
-    <canvas id="chartCanvas"></canvas>
+    <canvas id="chartCanvas" width="400" height="400"></canvas>
   </div>
 </template>
 
 <style scoped>
 .chart-wrapper {
   width: 100%;
-  max-width: 275px;
-  max-height: 225px;
+  max-width: 225px;
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
   display: flex;
