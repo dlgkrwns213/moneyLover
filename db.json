@@ -35,7 +35,7 @@
       "cashflowName": "월급",
       "cashflowValue": 5000000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "급여"
     },
     {
       "id": "2xh0",
@@ -44,7 +44,7 @@
       "cashflowName": "이자",
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "이자"
     },
     {
       "id": "d82x2",
@@ -53,7 +53,7 @@
       "cashflowName": "TV",
       "cashflowValue": 5000000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "쇼핑"
     },
     {
       "id": "d82x3",
@@ -62,7 +62,7 @@
       "cashflowName": "점심",
       "cashflowValue": 8000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "식사"
     }
   ]
 }

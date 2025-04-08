@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
+import { TRANSLATIONS } from '@/constants/translate'
 
 const cashflows = ref([])
 onMounted(async () => {
@@ -15,6 +16,16 @@ onMounted(async () => {
 const sortedCashflows = computed(() => {
   return [...cashflows.value].sort((a, b) => new Date(b.date) - new Date(a.date))
 })
+
+const getCategorykey = (koreanCategory) => {
+  const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
+  return entry ? entry[0] : null
+}
+
+const getIconPath = (koreanCategory) => {
+  const key = getCategorykey(koreanCategory)
+  return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+}
 
 const deleteCashflow = async (id) => {
   try {
@@ -40,8 +51,7 @@ const deleteCashflow = async (id) => {
       <div class="expense-item">
         <div class="expense-content">
           <div class="icon">
-            <!-- 여기에 나중에 카테고리별 아이콘 매핑 -->
-            📦
+            <img :src="getIconPath(item.category)" alt="카테고리 아이콘" class="category-icon" />
           </div>
           <div class="info">
             <div class="title">{{ item.cashflowName }}</div>
@@ -82,6 +92,11 @@ const deleteCashflow = async (id) => {
   color: black;
   padding: 4px 6px;
   margin-bottom: 4px;
+}
+.category-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
 }
 
 .amount.income {
