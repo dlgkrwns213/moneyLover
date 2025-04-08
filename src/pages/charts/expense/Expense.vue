@@ -48,9 +48,10 @@ onMounted(async () => {
   width: 100%;
   background-color: #f6f6f6;
   padding: 25px;
+  margin-bottom: 50px;
 }
 .expense-ranking {
-  border: 1px solid #61905a;
+  border: 1px solid white;
   border-radius: 12px;
   letter-spacing: -5%;
   padding: 5px;
@@ -61,7 +62,7 @@ onMounted(async () => {
   justify-content: center;
 }
 .expense-single-amount {
-  border: 1px solid #61905a;
+  border: 1px solid white;
   margin-top: 30px;
   border-radius: 12px;
   letter-spacing: -5%;

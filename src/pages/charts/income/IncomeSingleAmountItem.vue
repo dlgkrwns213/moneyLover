@@ -76,7 +76,7 @@ function getCategoryKeyFromLabel(label) {
 
 .top {
   font-weight: bold;
-  font-size: 13px;
+  font-size: 14px;
   font-family: 'MyFontBold';
 }
 
