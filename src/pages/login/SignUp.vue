@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="sign-up-wrap">
-      <!-- <img src="" alt=""> -->
+      <img src="/src/assets/images/all/logo.png" alt="로고" />
       <form class="input-sign-up-group">
         <div class="input-row">
           <label for="input-id">이름</label>
@@ -37,6 +37,11 @@
   align-items: center;
   margin: auto;
 }
+img {
+  width: 277px;
+  height: 55px;
+  margin-bottom: 25px;
+}
 .input-sign-up-group {
   display: flex;
   flex-direction: column;
@@ -60,7 +65,7 @@
   position: absolute;
   width: 43px;
   height: 27px;
-  top: 5px; /* ⬅️ input 위로 올리기 */
+  top: 5px;
   right: 0;
   font-size: 12px;
   border: 1px solid #61905a;

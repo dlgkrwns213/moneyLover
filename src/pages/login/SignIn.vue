@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="sign-in-wrap">
-      <!-- <img src="" alt="" /> -->
+      <img src="/src/assets/images/all/logo.png" alt="로고" />
       <form class="input-sign-in-group">
         <div class="input-row">
           <label for="input-id">아이디:</label>
@@ -29,6 +29,11 @@ import { RouterLink } from 'vue-router'
   justify-content: center;
   align-items: center;
   margin: auto;
+}
+img {
+  width: 277px;
+  height: 55px;
+  margin-bottom: 25px;
 }
 .sign-in-wrap {
   padding: 0px;

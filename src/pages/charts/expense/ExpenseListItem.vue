@@ -116,7 +116,7 @@ li:last-child {
   justify-content: space-between;
   font-weight: bold;
   font-family: 'MyFontBold';
-  font-size: 13px;
+  font-size: 14px;
 }
 .category-meta {
   display: flex;
