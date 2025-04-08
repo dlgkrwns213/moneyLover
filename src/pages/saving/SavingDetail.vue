@@ -76,7 +76,7 @@ const deleteSaving = async () => {
   />
 
   <!-- 가운데 제목 -->
-  <h4 class="text-dark fw-bold m-0 text-center flex-grow-1">저축</h4>
+  <h4 class="custom-bold text-dark fw-bold m-0 text-center flex-grow-1">저축</h4>
 
   <!-- 삭제 버튼 -->
   <img
@@ -92,7 +92,7 @@ const deleteSaving = async () => {
     <div class="box shadow-sm mb-3 p-3 d-flex flex-column gap-2">
       <div class="d-flex align-items-center mb-2">
             <img src="@/assets/images/saving/piggy.png" alt="저금통" class="me-2" style="width: 36px;" />
-            <span class="fw-bold" style="font-size: 1.1rem">{{ saving?.name }}</span>
+            <span class="custom-bold fw-bold" style="font-size: 1.1rem">{{ saving?.name }}</span>
           </div>
 
        <!-- 게이지바 -->
@@ -100,7 +100,7 @@ const deleteSaving = async () => {
         <div class="progress-bar bg-green" :style="{ width: percent + '%' }"></div>
       </div>
 
-      <div class="d-flex justify-content-between"style="font-size: 0.9rem">
+      <div class="custom-light d-flex justify-content-between"style="font-size: 0.8rem">
         <div class="">₩{{ saving?.saved?.toLocaleString() }}<br /><small class="opacity-75">적립</small></div>
         <div class="">{{ percent }}%<br /><small class="opacity-75">진행</small></div>
         <div class="">₩{{ saving?.targetAmount?.toLocaleString() }}<br /><small class="opacity-75">목표</small></div>
@@ -116,8 +116,8 @@ const deleteSaving = async () => {
         class="d-flex justify-content-between align-items-center box border border-green px-3 py-2"
       >
         <div>
-          <div class="small">{{ item.date }}</div>
-          <div :class="[item.done ? 'text-green' : 'text-gray', 'fw-bold']">
+          <div class="custom-light small">{{ item.date }}</div>
+          <div :class="[item.done ? 'text-green' : 'text-gray', 'fw-bold', 'custom-bold', 'small']">
             +₩{{ item.amount.toLocaleString() }}
           </div>
         </div>
@@ -158,6 +158,12 @@ const deleteSaving = async () => {
 .icon-back {
   width: 20px;
   cursor: pointer;
+}
+.custom-bold{
+font-family: "MYfontBold";
+}
+.custom-light{
+  font-family: "Myfont"
 }
 .bg-green {
   background-color: #61905A !important;

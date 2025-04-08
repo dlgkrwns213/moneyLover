@@ -102,7 +102,7 @@ const saveData = async () => {
     @click="router.push('/saving')"  />
 
   <!-- 제목 (가운데 정렬을 위해 절대 위치 사용) -->
-  <h4 class="text-dark fw-bold m-0 position-absolute start-50 top-50 translate-middle">저축</h4>
+  <h4 class="custom-bold text-dark fw-bold m-0 position-absolute start-50 top-50 translate-middle">저축</h4>
 
   <!-- 저장 버튼 (우측) -->
   <img
@@ -120,7 +120,7 @@ const saveData = async () => {
           v-model="name"
           maxlength="10"
           placeholder="이름을 추가하세요."
-          class="form-control form-control-sm name-input"
+          class="custom-light form-control form-control-sm name-input"
         />
         <img
           src="@/assets/images/saving/edit.png"
@@ -130,30 +130,30 @@ const saveData = async () => {
         />
       </div>
 
-      <div class="row gy-3">
-        <div class="col-12 d-flex justify-content-between align-items-center row-item">
+      <div class="custom-bold row gy-3">
+        <div class="custom-bold col-12 d-flex justify-content-between align-items-center row-item">
           <span class="label-text">목표 금액</span>
           <input
             v-model="targetAmount"
             type="number"
             placeholder="금액을 입력하십시오."
-            class="form-control form-control-sm input-amount text-end"
+            class="custom-light form-control form-control-sm input-amount text-end"
           />
         </div>
 
         <div class="col-12 d-flex justify-content-between align-items-center row-item">
           <span class="label-text">시작 날짜</span>
-          <span class="text-green">{{ startDate }}</span>
+          <span class="custom-light text-green">{{ startDate }}</span>
         </div>
 
         <div class="col-12 d-flex justify-content-between align-items-center row-item">
           <span class="label-text">종료 날짜</span>
-          <span class="text-green">{{ endDate }}</span>
+          <span class="custom-light text-green">{{ endDate }}</span>
         </div>
 
         <div class="col-12 d-flex justify-content-between align-items-center row-item">
           <span class="label-text">주기</span>
-          <select v-model="frequency" class="form-select form-select-sm w-auto text-green border-0">
+          <select v-model="frequency" class="custom-light form-select form-select-sm w-auto text-green border-0">
             <option value="매일">매일</option>
             <option value="매주">매주</option>
             <option value="매달">매달</option>
@@ -162,7 +162,7 @@ const saveData = async () => {
 
         <div class="col-12 d-flex justify-content-between align-items-center row-item">
           <span class="label-text">반복 횟수</span>
-          <select v-model="repeatCount" class="form-select form-select-sm w-auto text-green border-0">
+          <select v-model="repeatCount" class="custom-light form-select form-select-sm w-auto text-green border-0">
             <option v-for="n in repeatOptions" :key="n" :value="n">
               {{ n }}번
             </option>
@@ -230,6 +230,12 @@ const saveData = async () => {
 .icon-close {
   width: 20px;
   cursor: pointer;
+}
+.custom-bold{
+font-family: "MYfontBold";
+}
+.custom-light{
+  font-family: "Myfont"
 }
 .row-item {
   padding: 4px 0;
