@@ -53,7 +53,9 @@
             class="me-3 d-flex align-items-center justify-content-center rounded-circle"
             style="width: 50px; height: 50px; background-color: #f3f3f3"
           >
-            <span class="fs-4">{{ item.icon }}</span>
+            <span class="fs-4"
+              ><img :src="getIconPath(item.category)" alt="카테고리 아이콘" class="category-icon"
+            /></span>
           </div>
 
           <!-- 텍스트 -->
@@ -83,12 +85,13 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, reactive } from 'vue'
 import DropdownFilter from './DropdwonFilter.vue'
 import AmoutDropdownFilter from './AmoutDropdownFilter.vue'
 import DateRangeFilter from './DateRangeFilter.vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import { TRANSLATIONS } from '@/constants/translate'
 
 const router = useRouter()
 const goHome = () => router.push('/')
@@ -96,12 +99,18 @@ const items = ref([])
 
 const searchText = ref('')
 
-const filters = ref({
+const filters = reactive({
   type: '',
   category: '',
-  amount: '',
-  date: '',
+  amount: { min: null, max: null },
+  date: { start: null, end: null },
 })
+// const filters = ref({
+//   type: '',
+//   category: '',
+//   amount: '',
+//   date: '',
+// })
 
 const fetchItems = async () => {
   try {
@@ -125,16 +134,19 @@ onMounted(() => {
 
 const filteredItems = computed(() => {
   return items.value.filter((item) => {
-    const matchesText = searchText.value === '' || item.memo.includes(searchText.value)
-    const matchesType = !filters.value.type || item.type === filters.value.type
-    const matchesCategory = !filters.value.category || item.category === filters.value.category
-    const matchesAmount =
-      !filters.value.amount || evalAmountFilter(item.amount, filters.value.amount)
-    const matchesDate =
-      !filters.value.date ||
-      ((filters.value.date.start ? item.date.split(' ')[0] >= filters.value.date.start : true) &&
-        (filters.value.date.end ? item.date.split(' ')[0] <= filters.value.date.end : true))
-    return matchesText && matchesType && matchesCategory && matchesAmount && matchesDate
+    const matchText = !searchText.value || item.memo.includes(searchText.value)
+    const matchType = !filters.type || item.type === filters.type
+    const matchCategory = !filters.category || item.category === filters.category
+    const matchAmount =
+      (!filters.amount.min || item.amount >= filters.amount.min) &&
+      (!filters.amount.max || item.amount <= filters.amount.max)
+    const matchDate =
+      (!filters.date.start || item.date >= filters.date.start) &&
+      (!filters.date.end || item.date <= filters.date.end)
+
+    const passed = matchText && matchType && matchCategory && matchAmount && matchDate
+
+    return passed
   })
 })
 
@@ -161,6 +173,17 @@ const typeOptions = ['지출', '수입']
 const categoryOptions = ['식비', '교통', '쇼핑', '급여', '기타']
 const amountOptions = ['10만원 이상', '10만원 미만']
 const dateOptions = ['2025-04', '2025-03', '2025-02']
+
+// 아이콘 연동용
+const getCategorykey = (koreanCategory) => {
+  const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
+  return entry ? entry[0] : null
+}
+
+const getIconPath = (koreanCategory) => {
+  const key = getCategorykey(koreanCategory)
+  return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+}
 </script>
 
 <style scoped>
@@ -168,5 +191,26 @@ const dateOptions = ['2025-04', '2025-03', '2025-02']
   .container {
     padding: 1rem;
   }
+}
+
+.fs-4 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  font-size: 20px;
+  margin-right: 10px;
+  background-color: #f0f0f0;
+  margin-right: 6px;
+  margin-left: 6px;
+}
+
+.category-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  /* padding-right: 50px; */
 }
 </style>

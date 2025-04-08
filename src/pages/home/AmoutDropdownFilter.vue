@@ -5,7 +5,7 @@
       type="button"
       data-bs-toggle="dropdown"
     >
-      {{ modelValueLabel || label }}
+      {{ label }}
     </button>
 
     <div class="dropdown-menu p-3" style="min-width: 300px">
@@ -46,11 +46,19 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { reactive, ref, computed, onMounted, watch } from 'vue'
+
+const filters = reactive({
+  type: ' ',
+  category: '',
+  amount: { min: null, max: null },
+  date: { start: null, end: null },
+  keyword: '',
+})
 
 const props = defineProps({
+  modelValue: Object,
   label: String,
-  modelValue: [String, Object],
 })
 const emit = defineEmits(['update:modelValue'])
 
@@ -66,6 +74,14 @@ const predefinedRanges = ref([
 const minInput = ref(null)
 const maxInput = ref(null)
 
+watch(
+  () => props.modelValue,
+  (newVal) => {
+    minInput.value = newVal?.min ?? null
+    maxInput.value = newVal?.max ?? null
+  },
+  { immediate: true },
+)
 const modelValueLabel = computed(() => {
   if (props.modelValue && typeof props.modelValue === 'object') {
     const { min, max } = props.modelValue
@@ -78,12 +94,7 @@ const modelValueLabel = computed(() => {
 })
 
 const isSelected = (option) => {
-  return (
-    props.modelValue &&
-    typeof props.modelValue === 'object' &&
-    props.modelValue.min === option.min &&
-    props.modelValue.max === option.max
-  )
+  return props.modelValue?.min === option.min && props.modelValue?.max === option.max
 }
 
 const selectRange = (option) => {
@@ -94,7 +105,6 @@ const selectRange = (option) => {
 
 const applyRange = () => {
   emit('update:modelValue', {
-    type: 'range',
     min: minInput.value,
     max: maxInput.value,
   })
@@ -103,7 +113,7 @@ const applyRange = () => {
 const clearFilter = () => {
   minInput.value = null
   maxInput.value = null
-  emit('update:modelValue', '')
+  emit('update:modelValue', { min: null, max: null })
 }
 </script>
 
