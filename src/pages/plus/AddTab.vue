@@ -24,6 +24,7 @@ import button_check from '@/assets/images/keyboard/button_check.png';
 import button_equal from '@/assets/images/keyboard/button_equal.png';
 import { useRouter } from 'vue-router';
 import { getEntryFromPath } from '@/utils/navigation';
+import axios from "axios";
 
 const router = useRouter();
 
@@ -51,7 +52,6 @@ const imageMap = {
 
 const calculateContent = [1, 2, 3, "<", 4, 5, 6, "+", "x", 7, 8, 9, "-", "%", ".", 0, "cdr", "="]
 const contentImage = computed(() => {
-  const signs = ["+", "-", "x", "%"];
   const base = [1, 2, 3, "back", 4, 5, 6, "pl", "mu", 7, 8, 9, "mi", "di", "dot", 0, "cdr"];
   
   base.push(calculateCompleted.value ? "check" : "equal");
@@ -59,8 +59,17 @@ const contentImage = computed(() => {
 });
 
 const inputValue = ref('0');  // 계산기 버튼 입력값
-const memo = ref('');
+const cashflowName = ref('');
 const calculateCompleted = ref(true);
+
+// emit 으로 받을 카테고리와 input, output type
+const selectedCategory = ref('');
+const selectedType = ref('');
+
+function handleCategoryUpdate({ type, category}) {
+  selectedType.value = type;
+  selectedCategory.value = category
+}
 
 const formattedValue = computed(() => {
   let num = inputValue.value.replace(/,/g, ''); // 기존의 , 제거
@@ -144,8 +153,58 @@ function calculateButtonClick(content) {
     }
     calculateCompleted.value = false;
   } else if (content == "=") {   // 최종
-    if (calculateCompleted.value) {
-      
+    if (calculateCompleted.value) {  // db에 저장
+      const money = Number(inputValue.value);
+      if (money === 0) {
+        alert('금액은 0일 수 없습니다')
+      } else {
+        // {
+        //   "id": "d82x2",
+        //   "cashflowType": true,
+        //   "userId": 1,
+        //   "cashflowName": "월급",
+        //   "cashflowValue": 5000000,
+        //   "date": "2025-04-08 TUE",
+        //   "category": ""
+        // },
+        const date = new Date();
+
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // 2자리 월
+        const day = String(date.getDate()).padStart(2, '0');        // 2자리 일
+        const dayOfWeek = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'][date.getDay()];
+
+        // console.log(money);
+        // console.log(selectedType.value);
+        // console.log(selectedCategory.value);
+
+        // const dbCashflowType = selectedType.value === 'outcome' ? false : true;
+        // const userId = 1;  // 재조정
+        // const dbCashflowName = cashflowName.value;
+        // const dbCashflowValue = money;
+        // const dbFormatteddate = `${year}-${month}-${day} ${dayOfWeek}`
+        // const dbCategory = selectedCategory.value;
+        
+        if (cashflowName.value === "저장할 이름을 입력하세요")
+          alert();
+        const newCashflow = {
+          cashflowType: selectedType.value === 'outcome' ? false : true,
+          userId: 1,  // 추후 조정
+          cashflowName: cashflowName.value,
+          cashflowValue: money,
+          date: `${year}-${month}-${day} ${dayOfWeek}`,
+          category: selectedCategory.value,
+        }
+
+        axios.post('http://localhost:3000/cashflows', newCashflow)
+        .then(response => {
+          console.log('저장 성공:', response.data);
+          goBack();
+        })
+        .catch(error => {
+          console.error('저장 실패:', error);
+        });
+      }
     } else {
       if (signs.includes(inputValue.value[inputValue.value.length-1])) {
         inputValue.value = inputValue.value.slice(0, -1);
@@ -203,17 +262,17 @@ function calculateButtonClick(content) {
   </div>
 
   <div class="scroll-area">
-    <router-view />
+    <router-view @update-category="handleCategoryUpdate" />
   </div>
 
   <div class="footer-calculate">
     <div class="input-container">
-      <input v-model="memo" type="text" class="input-memo" placeholder="memo">
+      <input v-model="cashflowName" type="text" class="input-cashflow-name" placeholder="저장할 이름을 입력하세요.">
       <div class="money">{{ formattedValue }}</div>
     </div>
     <div class="calculate-section">
       <div 
-        class="calculate-setion__buttton"
+        class="calculate-section__buttton"
         v-for="(content, contentIdx) in calculateContent"
         :key="contentIdx"
         :style="getGridSpan(contentIdx)"
@@ -223,6 +282,7 @@ function calculateButtonClick(content) {
         :src="imageMap[contentImage[contentIdx]]" 
         :alt="contentImage[contentIdx]" 
         style="height: 100%; width: 100%;"
+        class="calculate-section__image"
       />
 
     </div>
@@ -309,7 +369,7 @@ function calculateButtonClick(content) {
   width: 296px; /* 컨테이너 너비 */
 }
 
-.input-memo {
+.input-cashflow-name {
   width: 100%;
   height: 30px;
   margin: 10px 0 ; /* 위 아래 margin만 설정 */
@@ -347,7 +407,7 @@ function calculateButtonClick(content) {
   border-radius: 4px;
 }
 
-.calculate-section__button:hover {
+.calculate-section__image:hover {
   cursor: pointer;
 }
 

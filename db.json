@@ -1,7 +1,7 @@
 {
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "username": "Lee",
       "user": "admin",
       "password": "1234",
@@ -63,6 +63,51 @@
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
       "category": ""
+    },
+    {
+      "id": "4842",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 2222,
+      "date": "2025-4-8 2",
+      "category": "house"
+    },
+    {
+      "id": "2568",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 2556,
+      "date": "2025-04-08 TUE",
+      "category": "medical"
+    },
+    {
+      "id": "dc91",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 25563652,
+      "date": "2025-04-08 TUE",
+      "category": "necessities"
+    },
+    {
+      "id": "696c",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 5689,
+      "date": "2025-04-08 TUE",
+      "category": "medical"
+    },
+    {
+      "id": "eee8",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "",
+      "cashflowValue": 55555,
+      "date": "2025-04-08 TUE",
+      "category": "medical"
     }
   ]
 }

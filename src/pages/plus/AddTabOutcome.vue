@@ -1,7 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, defineEmits } from 'vue'
 import AddButton from './AddButton.vue'
 import { TRANSLATIONS } from '@/constants/translate.js'
+
+const emit = defineEmits(['update-category'])
 
 const outcomeKeys = [
   'book', 'car', 'clothes', 'cosmetics', 'delivery', 'drink', 'drinking',
@@ -17,7 +19,11 @@ const outcomeItems = computed(() =>
 const selectedKey = ref(null)
 
 const selectCard = (key) => {
-  selectedKey.value = key
+  selectedKey.value = key;
+  emit('update-category', {
+    type: 'outcome',
+    category: key,
+  })
 }
 </script>
 
