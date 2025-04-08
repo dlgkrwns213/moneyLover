@@ -4,6 +4,32 @@
 <script setup>
 import BudgetComparison from './BudgetComparison.vue'
 import ExpenseList from './ExpenseList.vue'
+import { ref, onMounted, computed } from 'vue'
+import axios from 'axios'
+
+const cashflows = ref([])
+
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/cashflows')
+    cashflows.value = response.data
+  } catch (error) {
+    console.error('cashflow 불러오기 실패'.error)
+  }
+})
+const totalIncome = computed(() =>
+  cashflows.value
+    .filter((item) => item.cashflowType === true)
+    .reduce((sum, item) => sum + item.cashflowValue, 0),
+)
+
+const totalExpense = computed(() =>
+  cashflows.value
+    .filter((item) => item.cashflowType === false)
+    .reduce((sum, item) => sum + item.cashflowValue, 0),
+)
+
+const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
 </script>
 
 <template>
@@ -14,11 +40,11 @@ import ExpenseList from './ExpenseList.vue'
     <div class="income-expense-row">
       <div class="stat-card expense">
         <div class="label">월 지출</div>
-        <div class="amount">₩952,200</div>
+        <div class="amount">{{ formatCurrency(totalExpense) }}</div>
       </div>
       <div class="stat-card income">
         <div class="label">월 수입</div>
-        <div class="amount">₩5,000,000</div>
+        <div class="amount">{{ formatCurrency(totalIncome) }}</div>
       </div>
     </div>
     <div class="list-section scrollable-list">

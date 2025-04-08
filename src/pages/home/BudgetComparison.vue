@@ -229,7 +229,7 @@ const chartOptions = {
 
 .label {
   padding: 10px;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: bold;
   color: #444;
   flex: 1;
