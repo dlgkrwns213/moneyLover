@@ -68,8 +68,16 @@ function handlePlusClick() {
   font-size: 12px;
   color: #444;
   text-decoration: none;
+
+  background-color: transparent;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  opacity: 1;
 }
 
+.nav-item:hover {
+  background-color: rgba(76, 175, 80, 0.7); /* 약간 투명한 녹색 */
+  opacity: 0.8; /* 전체 요소 투명도도 살짝 줄임 */
+}
 .nav-item img {
   width: 24px;
   height: 24px;
