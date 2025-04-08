@@ -1,6 +1,10 @@
 <script setup>
 import { reactive, ref, onMounted, computed } from 'vue'
 import '@/assets/main.css'
+
+function goBack() {
+  window.history.back()
+}
 </script>
 
 <template>
@@ -14,6 +18,15 @@ import '@/assets/main.css'
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     rel="stylesheet"
   />
+  <div class="header">
+    <span class="icon" @click="goBack">
+      <i class="bi bi-x"></i>
+    </span>
+    <span class="menu-budgetsetting">예산설정</span>
+    <span class="icon" @click="goBack">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
 
   <div class="page-wrapper">
     <div class="donut-row">
@@ -47,6 +60,42 @@ import '@/assets/main.css'
   width: 145px;
   height: 38px;
   padding-right: 20px;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 360px;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #f6f6f6;
+  margin: 0 auto;
+  font-family: 'MyFontBold'; /* 폰트 커스텀 가능 */
+}
+
+.icon {
+  width: 24px;
+  text-align: center;
+}
+
+.bi-x {
+  font-size: 40px;
+  cursor: pointer;
+  color: #444;
+}
+
+.menu-budgetsetting {
+  text-align: center;
+  font-family: 'MyFontBold';
+  font-size: 20px;
+  color: #444;
+}
+
+.bi-search {
+  font-family: 'MyFontBold';
+  font-size: 20px;
+  color: #444;
 }
 
 .input-group .form-control {
@@ -151,6 +200,6 @@ import '@/assets/main.css'
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 10px;
 }
 </style>

@@ -35,7 +35,7 @@ import ExpenseList from './ExpenseList.vue'
   flex-direction: column;
   align-items: center;
   gap: 24px;
-  padding: 32px 16px;
+  padding: 5px 16px;
   background-color: #f6f6f6;
   min-height: 100vh;
 }

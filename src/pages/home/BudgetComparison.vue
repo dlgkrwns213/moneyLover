@@ -17,7 +17,7 @@ const props = defineProps({
   remain: Number,
 })
 
-const budget = ref(0)
+const budget = ref(222220)
 const remain = ref(150000)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
@@ -68,6 +68,24 @@ const chartOptions = {
 </script>
 
 <template>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+  <div class="header">
+    <span class="icon" @click="goBack">
+      <i class="bi bi-x"></i>
+    </span>
+    <span class="menu-budgetsetting">예산설정</span>
+    <span class="icon" @click="goBack">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
   <div class="page-wrapper">
     <!-- v-id 에 true false 로 budget 설정 여부를 분별하여 다른 창을 띄운다. -->
     <div v-if="budget" class="donut-row">
@@ -192,11 +210,52 @@ const chartOptions = {
   flex: 1;
   color: #61905a;
 }
+.empty-budget {
+  cursor: pointer;
+}
 
 .page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f6f6f6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 360px;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #f6f6f6;
+  margin: 0 auto;
+  font-family: 'MyFontBold'; /* 폰트 커스텀 가능 */
+}
+
+.icon {
+  width: 24px;
+  text-align: center;
+}
+
+.bi-x {
+  font-size: 40px;
+  visibility: hidden;
+  color: #444;
+}
+
+.menu-budgetsetting {
+  text-align: center;
+  font-family: 'MyFontBold';
+  font-size: 20px;
+  color: #444;
+}
+
+.bi-search {
+  font-family: 'MyFontBold';
+  font-size: 20px;
+  color: #444;
+  cursor: pointer;
 }
 </style>
