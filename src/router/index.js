@@ -14,6 +14,8 @@ import AddTabIncome from '@/pages/plus/AddTabIncome.vue'
 import SignIn from '@/pages/login/SignIn.vue'
 import SignUp from '@/pages/login/SignUp.vue'
 import SettingsMain from '@/pages/settings/SettingsMain.vue'
+import SearchFilter from '@/pages/home/SearchFilter.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -82,6 +84,11 @@ const router = createRouter({
       path: '/settings',
       name: 'SettingsMain',
       component: SettingsMain,
+      },
+    {
+      path: '/searchFilter',
+      name: 'searchFilter',
+      component: SearchFilter,
     },
   ],
 })

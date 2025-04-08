@@ -14,6 +14,10 @@ const router = useRouter()
 const goToBudgetSettings = () => {
   router.push('/budgetSetting')
 }
+const goToSearch = () => {
+  router.push('/SearchFilter')
+}
+
 ChartJS.register(Title, Tooltip, Legend, ArcElement)
 
 const props = defineProps({
@@ -78,6 +82,9 @@ const chartOptions = {
         label: (context) => `${context.label}: ${context.raw}원`,
       },
     },
+    datalabels: {
+      display: false,
+    },
   },
 }
 </script>
@@ -97,7 +104,7 @@ const chartOptions = {
       <i class="bi bi-x"></i>
     </span>
     <span class="menu-budgetsetting">예산설정</span>
-    <span class="icon" @click="goBack">
+    <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
   </div>
@@ -136,7 +143,7 @@ const chartOptions = {
         <div class="info">
           <div class="line">
             <span class="label"
-              >목표 예산을 정해두면 <br />충동적인 소비를 줄일 수 있습니다! :)
+              >목표 예산을 정해두면 <br />충동적인 소비를 줄일 수 <br />있습니다! :)
             </span>
           </div>
         </div>

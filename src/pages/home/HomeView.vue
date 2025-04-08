@@ -68,7 +68,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
 
 .section {
   width: 100%;
-  max-width: 600px;
+  max-width: 400px;
 }
 
 .income-expense-row {
@@ -109,7 +109,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
 }
 
 .scrollable-list {
-  height: 500px;
+  height: 400px;
   overflow-y: auto;
   width: 100%;
   max-width: 360px;
