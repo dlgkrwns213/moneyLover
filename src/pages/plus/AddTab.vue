@@ -25,6 +25,8 @@ import button_cdr from '@/assets/images/keyboard/button_cdr.png'
 import button_check from '@/assets/images/keyboard/button_check.png'
 import button_equal from '@/assets/images/keyboard/button_equal.png'
 
+import { useUserStore } from '@/stores/user'
+
 const router = useRouter()
 const showCalendarModal = ref(false)
 
@@ -41,6 +43,8 @@ function formatDateWithWeekday(date) {
   const weekday = date.toLocaleDateString('en-US', { weekday: 'short' }).toUpperCase()
   return `${y}-${m}-${d} ${weekday}`
 }
+
+const userStore = useUserStore()
 
 const imageMap = {
   1: button_1,
@@ -167,7 +171,7 @@ function calculateButtonClick(content) {
 
       const newCashflow = {
         cashflowType: selectedType.value === 'outcome' ? false : true,
-        userId: 1,
+        userId: userStore.userId,
         cashflowName: cashflowName.value,
         cashflowValue: money,
         date: formattedDate,
