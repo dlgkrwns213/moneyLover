@@ -67,13 +67,13 @@ const formattedValue = computed(() => {
   let parts = num.split(/([+\-x%])/); // 연산자를 기준으로 숫자와 연산자 분리
 
   parts.forEach((part, index) => {
-    if (index % 2 === 0) {
-      // 숫자 부분일 때는 포맷 적용
-      result += parseInt(part).toLocaleString();
-    } else {
+    if (index == 1) {
       // 연산자 부분은 그대로 유지
       result += part;
-    }
+    } else if (part !== "") {
+      // 숫자 부분일 때는 포맷 적용
+      result += parseInt(part).toLocaleString();
+    } 
   });
 
   return result;
@@ -186,7 +186,6 @@ function calculateButtonClick(content) {
   <div class="footer-calculate">
     <div class="input-container">
       <input v-model="memo" type="text" class="input-memo" placeholder="memo">
-      <div> {{ inputValue}}</div>
       <div class="money">{{ formattedValue }}</div>
     </div>
     <div class="calculate-section">
