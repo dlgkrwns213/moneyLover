@@ -4,7 +4,7 @@
       <div class="item-row">
         <div class="icon">
           <img
-            :src="`/src/assets/images/${getCategoryKeyFromLabel(category)}.png`"
+            :src="`/src/assets/images/outcome/${getCategoryKeyFromLabel(category)}.png`"
             style="width: 100%"
           />
         </div>
@@ -105,7 +105,8 @@ li:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 10px;
+  margin-left: 5px;
+  padding-right: 5px;
 }
 .content {
   width: 100%;
