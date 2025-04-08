@@ -25,7 +25,7 @@ const router = createRouter({
     {
       path: '/chart',
       name: 'chart',
-      component: SignIn,
+      component: Chart,
     },
     {
       path: '/add',

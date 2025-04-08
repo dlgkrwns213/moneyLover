@@ -99,7 +99,11 @@ onMounted(async () => {
           formatter: (value, context) => {
             const dataset = context.chart.data.datasets[0].data
             const total = dataset.reduce((acc, cur) => acc + cur, 0)
-            return `${((value / total) * 100).toFixed(1)}%`
+            const percent = (value / total) * 100
+
+            if (percent < 1) return ''
+
+            return `${percent.toFixed(1)}%`
           },
         },
         legend: {
