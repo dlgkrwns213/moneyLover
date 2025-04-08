@@ -5,7 +5,6 @@ import Chart from '@/pages/charts/Chart.vue'
 import SavingManagement from '@/pages/saving/SavingManagement.vue'
 import AddSavings from '@/pages/saving/AddSavings.vue'
 import SavingDetail from '@/pages/saving/SavingDetail.vue'
-import ThemeSettings from '@/pages/profile/ThemeSettings.vue'
 import NotFound from '@/pages/NotFound.vue'
 import AddModal from '@/pages/plus/AddModal.vue'
 import HomeView from '@/pages/home/HomeView.vue'
@@ -14,6 +13,7 @@ import AddTabOutcome from '@/pages/plus/AddTabOutcome.vue'
 import AddTabIncome from '@/pages/plus/AddTabIncome.vue'
 import SignIn from '@/pages/login/SignIn.vue'
 import SignUp from '@/pages/login/SignUp.vue'
+import SettingsMain from '@/pages/settings/SettingsMain.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -59,11 +59,6 @@ const router = createRouter({
       component: SavingDetail,
     },
     {
-      path: '/profile',
-      name: 'profile',
-      component: ThemeSettings,
-    },
-    {
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: NotFound,
@@ -82,6 +77,11 @@ const router = createRouter({
       path: '/signup',
       name: 'SignUp',
       component: SignUp,
+    },
+    {
+      path: '/settings',
+      name: 'SettingsMain',
+      component: SettingsMain,
     },
   ],
 })
