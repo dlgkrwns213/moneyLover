@@ -36,11 +36,10 @@ import { RouterLink } from 'vue-router'
 .input-sign-in-group {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 10px;
   width: 100%;
   padding: 10px;
 }
-
 .input-row {
   display: flex;
   align-items: center;
@@ -49,13 +48,11 @@ import { RouterLink } from 'vue-router'
   font-size: 16px;
   font-family: 'MyFontBold';
 }
-
 label {
-  width: 90px;
+  width: 80px;
   font-weight: bold;
   text-align: left;
 }
-
 .input {
   flex: 1;
   padding: 8px;
@@ -76,7 +73,7 @@ label {
   color: #999;
   text-decoration: underline;
   text-underline-offset: 4px;
-  font-size: 14px;
+  font-size: 12px;
   font-family: 'MyFont';
   cursor: pointer;
 }
