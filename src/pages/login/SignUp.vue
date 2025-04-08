@@ -14,11 +14,11 @@
         </div>
         <div class="input-row">
           <label for="input-id">비밀번호</label>
-          <input type="text" id="input-id" class="input" />
+          <input type="password" id="input-id" class="input" />
         </div>
         <div class="input-row">
           <label for="input-id">비밀번호 확인</label>
-          <input type="text" id="input-id" class="input" />
+          <input type="password" id="input-id" class="input" />
         </div>
       </form>
       <div class="register">

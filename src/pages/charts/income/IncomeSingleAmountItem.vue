@@ -4,7 +4,7 @@
       <div class="item-row">
         <div class="icon">
           <img
-            :src="`/src/assets/images/${getCategoryKeyFromLabel(category)}.png`"
+            :src="`/src/assets/images/income/${getCategoryKeyFromLabel(category)}.png`"
             style="width: 100%"
           />
         </div>
@@ -93,6 +93,7 @@ function getCategoryKeyFromLabel(label) {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-right: 10px;
+  margin-left: 5px;
+  padding-right: 5px;
 }
 </style>

@@ -60,4 +60,15 @@ const tab = ref('expense')
 .tab.active::after {
   display: none;
 }
+.tab-content {
+  height: calc(100vh - 65px);
+  overflow-y: auto;
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.tab-content::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
 </style>

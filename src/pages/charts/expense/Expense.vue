@@ -48,7 +48,6 @@ onMounted(async () => {
   width: 100%;
   background-color: #f6f6f6;
   padding: 25px;
-  margin-bottom: 50px;
 }
 .expense-ranking {
   border: 1px solid white;

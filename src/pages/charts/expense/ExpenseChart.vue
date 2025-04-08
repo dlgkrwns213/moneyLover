@@ -7,30 +7,32 @@ import axios from 'axios'
 Chart.register(PieController, ArcElement, Legend, ChartDataLabels)
 
 const bgc = [
-  '#1F77B4',
-  '#FF7F0E',
-  '#2CA02C',
-  '#D62728',
-  '#9467BD',
-  '#8C564B',
-  '#E377C2',
-  '#7F7F7F',
-  '#BCBD22',
-  '#17BECF',
-  '#AEC7E8',
-  '#FFBB78',
-  '#98DF8A',
-  '#FF9896',
-  '#C5B0D5',
-  '#C49C94',
-  '#F7B6D2',
-  '#C7C7C7',
-  '#DBDB8D',
-  '#9EDAE5',
-  '#393B79',
-  '#637939',
-  '#8C6D31',
-  '#843C39',
+  '#1F77B4', // 파랑
+  '#FF7F0E', // 주황
+  '#2CA02C', // 초록
+  '#D62728', // 빨강
+  '#9467BD', // 보라
+  '#8C564B', // 갈색
+  '#E377C2', // 핑크
+  '#7F7F7F', // 회색
+  '#BCBD22', // 연두
+  '#17BECF', // 청록
+
+  '#AEC7E8', // 연파랑
+  '#FFBB78', // 연주황
+  '#98DF8A', // 연초록
+  '#FF9896', // 연분홍
+  '#C5B0D5', // 연보라
+  '#C49C94', // 살색
+  '#F7B6D2', // 연핑크
+  '#C7C7C7', // 연회색
+  '#DBDB8D', // 베이지/연노랑
+  '#9EDAE5', // 하늘청록
+
+  '#393B79', // 짙은 남색
+  '#637939', // 짙은 올리브
+  '#8C6D31', // 짙은 황토
+  '#843C39', // 진한 적갈색
 ]
 
 onMounted(async () => {
@@ -42,12 +44,15 @@ onMounted(async () => {
 
   const grouped = {}
   for (const item of expenses) {
-    const name = item.cashflowName || '기타'
+    const name = item.category || '기타'
     grouped[name] = (grouped[name] || 0) + item.cashflowValue
   }
 
-  const labels = Object.keys(grouped)
-  const data = Object.values(grouped)
+  const sorted = Object.entries(grouped).sort((a, b) => b[1] - a[1])
+
+  const labels = sorted.map(([key]) => key)
+  const data = sorted.map(([, value]) => value)
+  const backgroundColor = bgc.slice(0, data.length)
 
   const canvas = document.getElementById('chartCanvas')
   if (!canvas) return
@@ -69,7 +74,7 @@ onMounted(async () => {
       datasets: [
         {
           data,
-          backgroundColor: bgc,
+          backgroundColor: backgroundColor,
           hoverOffset: 4,
         },
       ],
@@ -124,7 +129,7 @@ onMounted(async () => {
 <style scoped>
 .chart-wrapper {
   width: 100%;
-  max-width: 250px;
+  max-width: 225px;
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
   display: flex;

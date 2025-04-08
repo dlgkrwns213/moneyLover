@@ -42,12 +42,15 @@ onMounted(async () => {
 
   const grouped = {}
   for (const item of expenses) {
-    const name = item.cashflowName || '기타'
+    const name = item.category || '기타'
     grouped[name] = (grouped[name] || 0) + item.cashflowValue
   }
 
-  const labels = Object.keys(grouped)
-  const data = Object.values(grouped)
+  const sorted = Object.entries(grouped).sort((a, b) => b[1] - a[1])
+
+  const labels = sorted.map(([key]) => key)
+  const data = sorted.map(([, value]) => value)
+  const backgroundColor = bgc.slice(0, data.length)
 
   const canvas = document.getElementById('chartCanvas')
   if (!canvas) return
@@ -69,7 +72,7 @@ onMounted(async () => {
       datasets: [
         {
           data,
-          backgroundColor: bgc,
+          backgroundColor: backgroundColor,
           hoverOffset: 4,
         },
       ],
@@ -124,7 +127,7 @@ onMounted(async () => {
 <style scoped>
 .chart-wrapper {
   width: 100%;
-  max-width: 250px;
+  max-width: 225px;
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
   display: flex;
