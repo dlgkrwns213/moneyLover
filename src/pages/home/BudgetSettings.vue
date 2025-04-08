@@ -14,6 +14,10 @@ function saveBudget() {
   router.push('/')
 }
 
+const goToSearch = () => {
+  router.push('/SearchFilter')
+}
+
 function goBack() {
   window.history.back()
 }
@@ -35,7 +39,7 @@ function goBack() {
       <i class="bi bi-x"></i>
     </span>
     <span class="menu-budgetsetting">예산설정</span>
-    <span class="icon" @click="goBack">
+    <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
   </div>
