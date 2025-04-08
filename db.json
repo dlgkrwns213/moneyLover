@@ -120,7 +120,7 @@
         {
           "date": "2025-04-09",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-10",
@@ -133,8 +133,8 @@
           "done": false
         }
       ],
-      "saved": 100000,
-      "percent": 50
+      "saved": 50000,
+      "percent": 25
     },
     {
       "id": "7cc1",
