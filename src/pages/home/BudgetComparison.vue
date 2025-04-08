@@ -140,7 +140,7 @@ const chartOptions = {
         <div class="info">
           <div class="line">
             <span class="label"
-              >목표 예산을 정해두면 <br />충동적인 소비를 줄일 수 있습니다! :)
+              >목표 예산을 정해두면 <br />충동적인 소비를 줄일 수 <br />있습니다! :)
             </span>
           </div>
         </div>
