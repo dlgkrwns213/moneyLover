@@ -124,7 +124,7 @@ onMounted(async () => {
 <style scoped>
 .chart-wrapper {
   width: 100%;
-  max-width: 250px;
+  max-width: 225px;
   aspect-ratio: 1 / 1;
   box-sizing: border-box;
   display: flex;
