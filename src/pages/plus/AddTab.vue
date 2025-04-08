@@ -2,8 +2,6 @@
 import { ref, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-import AddTabIncome from './AddTabIncome.vue';
-import AddTabOutcome from './AddTabOutcome.vue';
 import AddCalendarModal from './AddCalendarModal.vue';
 import { getEntryFromPath } from '@/utils/navigation';
 

@@ -126,6 +126,15 @@
       "cashflowValue": 36665,
       "date": "2025-04-08 TUE",
       "category": "의료"
+    },
+    {
+      "id": "4b3d",
+      "cashflowType": false,
+      "userId": 1,
+      "cashflowName": "커피",
+      "cashflowValue": 33000,
+      "date": "2025-04-01 TUE",
+      "category": "음료"
     }
   ],
   "saving": [
