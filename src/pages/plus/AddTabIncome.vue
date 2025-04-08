@@ -6,12 +6,12 @@ import { TRANSLATIONS } from '@/constants/translate.js'
 const incomeKeys = [
   'bonus',
   'debt',
-  'etc',
   'in_cash',
   'interest',
   'mature',
   'salary',
   'side_job',
+  'etc_income',
 ]
 
 const incomeItems = computed(() =>

@@ -7,7 +7,7 @@ const outcomeKeys = [
   'book', 'car', 'clothes', 'cosmetics', 'delivery', 'drink', 'drinking',
   'entertainment', 'exercise', 'house', 'loan', 'maintenance_cost', 'meal',
   'medical', 'necessities', 'out_cash', 'pet', 'phone_bill', 'present',
-  'public_transport', 'shopping', 'study',
+  'public_transport', 'shopping', 'study', 'etc_outcome',
 ]
 
 const outcomeItems = computed(() =>

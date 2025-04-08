@@ -1,12 +1,12 @@
 export const TRANSLATIONS = {
   bonus: '보너스',
   debt: '부채',
-  etc: '기타',
   in_cash: '현금 수입',
   interest: '이자',
   mature: '만기',
   salary: '급여',
   side_job: '부업',
+  etc_income: '기타 수입',
 
   book: '도서',
   car: '자동차',
@@ -30,5 +30,6 @@ export const TRANSLATIONS = {
   public_transport: '교통',
   shopping: '쇼핑',
   study: '학습',
+  etc_outcome: '기타 지출',
 }
 
