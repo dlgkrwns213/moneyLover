@@ -26,24 +26,22 @@
   </div>
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import axios from 'axios';
-import Chart from '@/components/chart.vue';
-import ExpenseList from '@/components/ExpenseList.vue';
-import ExpenseSingleAmount from '@/components/ExpenseSingleAmount.vue';
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+import Chart from '@/pages/charts/expense/chart.vue'
+import ExpenseList from '@/pages/charts/expense/ExpenseList.vue'
+import ExpenseSingleAmount from '@/pages/charts/expense/ExpenseSingleAmount.vue'
 
-const hasData = ref(false);
+const hasData = ref(false)
 
 onMounted(async () => {
   try {
-    const res = await axios.get(
-      'http://localhost:3000/cashflows?cashflowType=false'
-    );
-    hasData.value = res.data.length > 0;
+    const res = await axios.get('http://localhost:3000/cashflows?cashflowType=false')
+    hasData.value = res.data.length > 0
   } catch (error) {
-    hasData.value = false;
+    hasData.value = false
   }
-});
+})
 </script>
 <style scoped>
 .expense-wrap {
@@ -51,6 +49,7 @@ onMounted(async () => {
   max-width: 360px;
   background-color: #f6f6f6;
   padding: 25px;
+  margin: auto;
 }
 .expense-ranking {
   border: 1px solid #61905a;
