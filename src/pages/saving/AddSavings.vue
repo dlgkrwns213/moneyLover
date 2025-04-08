@@ -93,16 +93,25 @@ const saveData = async () => {
 
 <template>
   <div class="container-fluid bg-light-gray min-vh-100 py-3 px-3">
-    <div class="text-center position-relative mb-3">
-      <h4 class="text-dark fw-bold m-0">저축</h4> 
-      <img
-        src="@/assets/images/saving/check_green.png"
-        alt="저장"
-        class="check-icon position-absolute end-0 top-50 translate-middle-y"
-        @click="saveData"
-      />
-    </div>
+    <div class="d-flex justify-content-between align-items-center mb-3 px-1 position-relative">
+  <!-- 뒤로가기 버튼 (좌측) -->
+  <img
+    src="@/assets/images/saving/close.png"
+    alt="뒤로가기"
+    class="icon-close"
+    @click="router.push('/saving')"  />
 
+  <!-- 제목 (가운데 정렬을 위해 절대 위치 사용) -->
+  <h4 class="text-dark fw-bold m-0 position-absolute start-50 top-50 translate-middle">저축</h4>
+
+  <!-- 저장 버튼 (우측) -->
+  <img
+    src="@/assets/images/saving/check_green.png"
+    alt="저장"
+    class="check-icon"
+    @click="saveData"
+  />
+</div>
     <div class="card saving-card p-4 ps-4 pe-4">
       <div class="d-flex align-items-center mb-3">
         <img src="@/assets/images/saving/saving_coin.png" alt="코인" class="icon me-2" />
@@ -216,6 +225,10 @@ const saveData = async () => {
 .check-icon {
   width: 24px;
   height: 24px;
+  cursor: pointer;
+}
+.icon-close {
+  width: 20px;
   cursor: pointer;
 }
 .row-item {
