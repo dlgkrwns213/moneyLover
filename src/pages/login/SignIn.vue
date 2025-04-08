@@ -5,11 +5,17 @@
       <form class="input-sign-in-group">
         <div class="input-row">
           <label for="input-id">아이디:</label>
-          <input type="text" id="input-id" class="input" />
+          <input type="text" id="input-id" class="input" v-model="id" />
         </div>
         <div class="input-row">
           <label for="input-pw">비밀번호:</label>
-          <input type="password" id="input-pw" class="input" />
+          <input
+            type="password"
+            id="input-pw"
+            class="input"
+            v-model="pw"
+            @keydown.enter="tryLogin"
+          />
         </div>
       </form>
       <div class="sign-up-link">
@@ -19,7 +25,45 @@
   </div>
 </template>
 <script setup>
-import { RouterLink } from 'vue-router'
+import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+import { useUserStore } from '@/stores/user'
+
+const id = ref('')
+const pw = ref('')
+const router = useRouter()
+const userStore = useUserStore()
+
+const tryLogin = async () => {
+  if (!id.value || !pw.value) {
+    alert('아이디와 비밀번호를 입력하세요.')
+    return
+  }
+
+  try {
+    const res = await axios.get(`http://localhost:3000/users?user=${id.value}`)
+    const user = res.data[0]
+
+    if (!user) {
+      alert('존재하지 않는 아이디입니다.')
+      return
+    }
+
+    if (user.password !== pw.value) {
+      alert('비밀번호가 일치하지 않습니다.')
+      return
+    }
+
+    const fakeToken = 'fake-access-token-1234'
+    userStore.login(fakeToken)
+    alert('로그인 성공!')
+    router.push('/chart')
+  } catch (error) {
+    console.error('로그인 에러:', error)
+    alert('로그인 중 오류가 발생했습니다.')
+  }
+}
 </script>
 <style scoped>
 .container {
