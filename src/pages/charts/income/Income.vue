@@ -20,8 +20,8 @@
 
     <template v-else>
       <div class="no-data-container">
-        <!-- <img src="" alt="데이터 없음" /> -->
-        <p>데이터가 없습니다.</p>
+        <img src="/src/assets/images/clover/clover_default.png" alt="데이터 없음" />
+        <p>아직 집계된 내역이 없습니다.</p>
       </div>
     </template>
   </div>
@@ -76,5 +76,21 @@ onMounted(async () => {
   font-family: 'MyFontBold';
   justify-content: space-between;
   padding: 0 10px;
+}
+.no-data-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  gap: 25px;
+  font-weight: bold;
+  font-family: 'MyFontBold';
+  text-align: center;
+  margin-top: 50px;
+}
+img {
+  width: 207px;
+  height: 207px;
 }
 </style>

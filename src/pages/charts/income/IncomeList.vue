@@ -58,4 +58,13 @@ ul {
   padding: 0;
   margin: 0;
 }
+li {
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
+  list-style: none;
+}
+li:last-child {
+  border-bottom: none;
+}
 </style>

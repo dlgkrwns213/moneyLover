@@ -35,8 +35,6 @@ const tab = ref('expense')
   left: 0;
   right: 0;
   display: flex;
-  justify-content: right;
-  gap: 30px;
   background-color: #f6f6f6;
   padding: 15px 10px;
   z-index: 1000;
@@ -45,6 +43,8 @@ const tab = ref('expense')
 }
 
 .tab {
+  flex: 1;
+  text-align: center;
   font-size: 16px;
   font-weight: bold;
   color: #333;
@@ -53,14 +53,11 @@ const tab = ref('expense')
   padding-bottom: 6px;
 }
 
+.tab.active {
+  color: #61905a;
+}
+
 .tab.active::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 4px;
-  width: 100%;
-  background-color: #ffd700; /* 노란색 */
-  border-radius: 2px;
+  display: none;
 }
 </style>
