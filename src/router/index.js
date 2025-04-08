@@ -11,6 +11,8 @@ import HomeView from '@/pages/home/HomeView.vue'
 import AddTab from '@/pages/plus/AddTab.vue'
 import AddTabOutcome from '@/pages/plus/AddTabOutcome.vue'
 import AddTabIncome from '@/pages/plus/AddTabIncome.vue'
+import SignIn from '@/pages/login/SignIn.vue'
+import SignUp from '@/pages/login/SignUp.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -23,7 +25,7 @@ const router = createRouter({
     {
       path: '/chart',
       name: 'chart',
-      component: Chart,
+      component: SignIn,
     },
     {
       path: '/add',
@@ -64,6 +66,16 @@ const router = createRouter({
       path: '/budgetSetting',
       name: 'budgetSettings',
       component: BudgetSettings,
+    },
+    {
+      path: '/signin',
+      name: 'signin',
+      component: SignIn,
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp,
     },
   ],
 })
