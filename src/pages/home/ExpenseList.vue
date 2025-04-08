@@ -2,14 +2,25 @@
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 import { TRANSLATIONS } from '@/constants/translate'
+import { useUserStore } from '@/stores/user'
 
 const cashflows = ref([])
+const userStore = useUserStore()
+
 onMounted(async () => {
+  if (!userStore.userId) {
+    console.warn('userId가 없습니다. cashflow를 불러오지 않습니다.')
+    return
+  }
   try {
-    const response = await axios.get('http://localhost:3000/cashflows')
+    const response = await axios.get(`http://localhost:3000/cashflows`, {
+      params: {
+        userId: userStore.userId, // user.js에서 정의한 userId 사용
+      },
+    })
     cashflows.value = response.data
   } catch (error) {
-    console.error('Error fetching cashflows:', error)
+    console.error('cashflow 불러오기 실패:', error)
   }
 })
 
@@ -71,7 +82,7 @@ const deleteCashflow = async (id) => {
   display: flex;
   flex-direction: column;
   gap: 12px;
-  width: 330px;
+  width: 320px;
   font-family: 'MyFontBold';
 }
 
