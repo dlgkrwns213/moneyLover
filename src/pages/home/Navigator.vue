@@ -1,15 +1,14 @@
 <script setup>
 import { useRoute, useRouter, RouterLink } from 'vue-router'
-import { setEntryFromPath } from '@/utils/navigation';
+import { setEntryFromPath } from '@/utils/navigation'
 
-const router = useRouter();
-const route = useRoute();
+const router = useRouter()
+const route = useRoute()
 
 function handlePlusClick() {
-  setEntryFromPath(route.fullPath);
-  router.push('/add/outcome');
+  setEntryFromPath(route.fullPath)
+  router.push('/add/outcome')
 }
-
 </script>
 
 <template>
@@ -25,10 +24,10 @@ function handlePlusClick() {
     </RouterLink>
 
     <div class="nav-item" @click="handlePlusClick">
-      <img 
-        src="@/assets/images/navigator/footer_plus.png" 
-        alt="더하기" 
-        style="width: 48px; height: 48px;"
+      <img
+        src="@/assets/images/navigator/footer_plus.png"
+        alt="더하기"
+        style="width: 48px; height: 48px"
       />
     </div>
 

@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 import App from './App.vue'
 import router from './router'
@@ -18,8 +19,9 @@ library.add(faXmark)
 const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
-
+const pinia = createPinia()
 app.use(createPinia())
+pinia.use(piniaPluginPersistedstate)
 app.use(router)
 
 app.mount('#app')

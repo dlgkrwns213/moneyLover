@@ -7,7 +7,6 @@ export const TRANSLATIONS = {
   salary: '급여',
   side_job: '부업',
   etc_income: '기타 수입',
-
   book: '도서',
   car: '자동차',
   clothes: '의류',
@@ -32,4 +31,38 @@ export const TRANSLATIONS = {
   study: '학습',
   etc_outcome: '기타 지출',
 }
-
+const incomeKeys = [
+  'bonus',
+  'debt',
+  'in_cash',
+  'interest',
+  'mature',
+  'salary',
+  'side_job',
+  'etc_income',
+]
+const outcomeKeys = [
+  'book',
+  'car',
+  'clothes',
+  'cosmetics',
+  'delivery',
+  'drink',
+  'drinking',
+  'entertainment',
+  'exercise',
+  'house',
+  'loan',
+  'maintenance_cost',
+  'meal',
+  'medical',
+  'necessities',
+  'out_cash',
+  'pet',
+  'phone_bill',
+  'present',
+  'public_transport',
+  'shopping',
+  'study',
+  'etc_outcome',
+]

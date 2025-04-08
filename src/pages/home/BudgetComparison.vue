@@ -4,7 +4,11 @@ import { reactive, ref, onMounted, computed } from 'vue'
 import { Doughnut } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { useRouter } from 'vue-router'
+import { useBudgetStore } from '@/stores/budget'
+import axios from 'axios'
 
+const budgetStore = useBudgetStore()
+const budget = computed(() => budgetStore.budget)
 const router = useRouter()
 
 const goToBudgetSettings = () => {
@@ -17,8 +21,21 @@ const props = defineProps({
   remain: Number,
 })
 
-const budget = ref(200000)
-const remain = ref(150000)
+const cashflows = ref([])
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/cashflows')
+    cashflows.value = response.data
+  } catch (error) {
+    console.error('데이터 불러오기 실패', error)
+  }
+})
+const totalOutcome = computed(() => {
+  return cashflows.value
+    .filter((item) => item.cashflowType === false)
+    .reduce((sum, item) => sum + item.cashflowValue, 0)
+})
+const remain = computed(() => budget.value - totalOutcome.value)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
   '/src/assets/images/clover/clover_25.png',
@@ -27,29 +44,26 @@ const imageurls = [
   '/src/assets/images/clover/clover_default.png',
 ]
 const cloverImageUrl = computed(() => {
-  if (percent === 0) return imageurls[0]
-  if (percent <= 25) return imageurls[1]
-  if (percent <= 50) return imageurls[2]
-  if (percent <= 75) return imageurls[3]
+  if (percent.value === 0) return imageurls[0]
+  if (percent.value <= 25) return imageurls[1]
+  if (percent.value <= 50) return imageurls[2]
+  if (percent.value <= 75) return imageurls[3]
   return imageurls[4]
 })
 
-// const used = props.budget - props.remain
-// const percent = Math.round((props.remain / props.budget) * 100)
+const used = computed(() => budget.value - remain.value)
+const percent = computed(() => Math.round((remain.value / budget.value) * 100))
 
-const used = budget.value - remain.value
-const percent = Math.round((remain.value / budget.value) * 100)
-
-const chartData = {
+const chartData = computed(() => ({
   labels: ['사용한 금액', '남은 금액'],
   datasets: [
     {
-      data: [used, remain.value],
+      data: [used.value, remain.value],
       backgroundColor: ['#ffffff', '#61905a'],
       borderWidth: 0,
     },
   ],
-}
+}))
 
 const chartOptions = {
   responsive: true,
@@ -59,6 +73,7 @@ const chartOptions = {
       display: false,
     },
     tooltip: {
+      enabled: false,
       callbacks: {
         label: (context) => `${context.label}: ${context.raw}원`,
       },
@@ -68,11 +83,29 @@ const chartOptions = {
 </script>
 
 <template>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <!-- Bootstrap Icons -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
+  <div class="header">
+    <span class="icon" @click="goBack">
+      <i class="bi bi-x"></i>
+    </span>
+    <span class="menu-budgetsetting">예산설정</span>
+    <span class="icon" @click="goBack">
+      <i class="bi bi-search"></i>
+    </span>
+  </div>
   <div class="page-wrapper">
     <!-- v-id 에 true false 로 budget 설정 여부를 분별하여 다른 창을 띄운다. -->
     <div v-if="budget" class="donut-row">
       <!-- 왼쪽: 도넛 + 이미지 -->
-      <div class="donut-container">
+      <div class="donut-container" @click="goToBudgetSettings">
         <Doughnut :data="chartData" :options="chartOptions" />
         <img class="donut-image" :src="cloverImageUrl" />
       </div>
@@ -148,16 +181,32 @@ const chartOptions = {
 
 .donut-container {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 214px;
   height: 100px;
   flex-shrink: 0;
+  cursor: pointer;
 }
+
+/* .donut-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-170%, -50%);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+  z-index: 1;
+} */
 
 .donut-image {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-170%, -50%);
+  transform: translate(-50%, -50%);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -180,6 +229,7 @@ const chartOptions = {
 
 .label {
   padding: 10px;
+  font-size: 14px;
   font-weight: bold;
   color: #444;
   flex: 1;
@@ -191,11 +241,52 @@ const chartOptions = {
   flex: 1;
   color: #61905a;
 }
+.empty-budget {
+  cursor: pointer;
+}
 
 .page-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
   color: #f6f6f6;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 360px;
+  height: 50px;
+  padding: 0 10px;
+  background-color: #f6f6f6;
+  border-bottom: 1px solid #f6f6f6;
+  margin: 0 auto;
+  font-family: 'MyFontBold'; /* 폰트 커스텀 가능 */
+}
+
+.icon {
+  width: 24px;
+  text-align: center;
+}
+
+.bi-x {
+  font-size: 40px;
+  visibility: hidden;
+  color: #444;
+}
+
+.menu-budgetsetting {
+  text-align: center;
+  font-family: 'MyFontBold';
+  font-size: 20px;
+  color: #444;
+}
+
+.bi-search {
+  font-family: 'MyFontBold';
+  font-size: 20px;
+  color: #444;
+  cursor: pointer;
 }
 </style>

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
+import { TRANSLATIONS } from '@/constants/translate'
 
 const cashflows = ref([])
 onMounted(async () => {
@@ -15,6 +16,25 @@ onMounted(async () => {
 const sortedCashflows = computed(() => {
   return [...cashflows.value].sort((a, b) => new Date(b.date) - new Date(a.date))
 })
+
+const getCategorykey = (koreanCategory) => {
+  const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
+  return entry ? entry[0] : null
+}
+
+const getIconPath = (koreanCategory) => {
+  const key = getCategorykey(koreanCategory)
+  return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+}
+
+const deleteCashflow = async (id) => {
+  try {
+    await axios.delete(`http://localhost:3000/cashflows/${id}`)
+    cashflows.value = cashflows.value.filter((item) => item.id !== id)
+  } catch (error) {
+    console.error('삭제 중 오류발생:', error)
+  }
+}
 </script>
 
 <template>
@@ -22,7 +42,7 @@ const sortedCashflows = computed(() => {
     <div v-for="(item, index) in sortedCashflows" :key="item.id">
       <div class="expense-header">
         <span class="date">{{ item.date }}</span>
-        <span class="delete">삭제🗑</span>
+        <span class="delete" @click="deleteCashflow(item.id)">삭제🗑</span>
         <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
           {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
         </span>
@@ -31,8 +51,7 @@ const sortedCashflows = computed(() => {
       <div class="expense-item">
         <div class="expense-content">
           <div class="icon">
-            <!-- 여기에 나중에 카테고리별 아이콘 매핑 -->
-            📦
+            <img :src="getIconPath(item.category)" alt="카테고리 아이콘" class="category-icon" />
           </div>
           <div class="info">
             <div class="title">{{ item.cashflowName }}</div>
@@ -74,6 +93,12 @@ const sortedCashflows = computed(() => {
   padding: 4px 6px;
   margin-bottom: 4px;
 }
+.category-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  /* padding-right: 50px; */
+}
 
 .amount.income {
   color: #61905a;
@@ -90,8 +115,17 @@ const sortedCashflows = computed(() => {
 }
 
 .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
   font-size: 20px;
   margin-right: 10px;
+  background-color: #f0f0f0; /* 회색 배경 원 */
+  margin-right: 14px; /* 글자와의 간격 */
+  margin-left: 6px; /* 왼쪽에서 조금 떨어뜨림 */
 }
 
 .info {
@@ -115,6 +149,7 @@ const sortedCashflows = computed(() => {
 .delete {
   margin-left: 10px;
   color: #e35050;
+  cursor: pointer;
 }
 .amount {
   margin-left: auto;

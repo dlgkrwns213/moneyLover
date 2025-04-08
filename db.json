@@ -35,7 +35,7 @@
       "cashflowName": "월급",
       "cashflowValue": 5000000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "급여"
     },
     {
       "id": "2xh0",
@@ -44,25 +44,25 @@
       "cashflowName": "이자",
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "이자"
     },
     {
       "id": "d82x2",
       "cashflowType": false,
       "userId": 1,
       "cashflowName": "TV",
-      "cashflowValue": 5000000,
+      "cashflowValue": 500000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "쇼핑"
     },
     {
-      "id": "2x3x",
+      "id": "d82x3",
       "cashflowType": false,
       "userId": 1,
       "cashflowName": "점심",
-      "cashflowValue": 5000,
+      "cashflowValue": 8000,
       "date": "2025-04-08 TUE",
-      "category": ""
+      "category": "식사"
     },
     {
       "id": "4842",
@@ -71,7 +71,7 @@
       "cashflowName": "",
       "cashflowValue": 2222,
       "date": "2025-4-8 2",
-      "category": "house"
+      "category": "주거"
     },
     {
       "id": "2568",
@@ -80,7 +80,7 @@
       "cashflowName": "",
       "cashflowValue": 2556,
       "date": "2025-04-08 TUE",
-      "category": "medical"
+      "category": "의료"
     },
     {
       "id": "dc91",
@@ -89,7 +89,7 @@
       "cashflowName": "",
       "cashflowValue": 25563652,
       "date": "2025-04-08 TUE",
-      "category": "necessities"
+      "category": "생필품"
     },
     {
       "id": "696c",
@@ -98,7 +98,7 @@
       "cashflowName": "",
       "cashflowValue": 5689,
       "date": "2025-04-08 TUE",
-      "category": "medical"
+      "category": "의료"
     },
     {
       "id": "eee8",
@@ -107,7 +107,7 @@
       "cashflowName": "",
       "cashflowValue": 55555,
       "date": "2025-04-08 TUE",
-      "category": "medical"
+      "category": "의료"
     }
   ]
 }
