@@ -238,6 +238,7 @@ function calculateButtonClick(content) {
 </script>
 
 <template>
+  <div class="add-page-wrapper">  <!-- 배경색 지정 -->
   <div class="header">
     <button class="back-button" @click="goBack">
       <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
@@ -285,13 +286,18 @@ function calculateButtonClick(content) {
         class="calculate-section__image"
       />
 
-    </div>
+      </div>
     </div>
   </div>
-
+  </div>
 </template>
 
 <style scoped>
+.add-page-wrapper {
+  background-color: white;
+  min-height: 100vh; /* ⬅️ 뷰포트 전체 높이만큼 차지하게 하기 */
+}
+
 .header {
   position: fixed;
   top: 0;
@@ -336,7 +342,7 @@ function calculateButtonClick(content) {
 .tab {
   font-size: 16px;
   font-weight: 600;
-  color: #555;
+  color: black;
   text-decoration: none;
   padding: 6px 12px;
 }
@@ -346,15 +352,15 @@ function calculateButtonClick(content) {
 }
 
 .tab.active {
-  color: #2e7d32; /* 초록색 */
-  border-bottom: 3px solid #2e7d32;
+  color: #61905A; /* 초록색 */
+  border-bottom: 5px solid #497552;
 }
 .footer-calculate {
   position: fixed;
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: gray;
+  background-color: #F0F0F0;
   z-index: 100;
 
   display: flex;
