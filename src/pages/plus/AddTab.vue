@@ -283,7 +283,7 @@ function calculateButtonClick(content) {
 }
 .input-container {
   position: relative;
-  width: 280px; /* 컨테이너 너비 */
+  width: 296px; /* 컨테이너 너비 */
 }
 
 .input-memo {
@@ -292,6 +292,7 @@ function calculateButtonClick(content) {
   margin: 10px 0 ; /* 위 아래 margin만 설정 */
   border-radius: 10px;
   text-align: left;
+  padding: 0 15px;
 }
 
 .money {
