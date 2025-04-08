@@ -51,7 +51,7 @@ onMounted(async () => {
       <hr class="border border-1 border-green opacity-100 mt-0" />
 
       <div v-if="savings.length === 0" class="d-flex justify-content-center align-items-center flex-grow-1">
-        <img src="@/assets/images/saving/saving_empty.png" alt="행운 클로버" class="img-fluid" style="width: 300px; opacity: 0.7;" />
+        <img src="@/assets/images/saving/saving_empty.png" alt="행운 클로버" class="img-fluid" style="width: 200px; opacity: 0.7;" />
       </div>
 
       <div v-else class="d-flex flex-column gap-3 mb-5">
