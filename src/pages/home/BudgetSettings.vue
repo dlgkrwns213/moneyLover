@@ -1,6 +1,17 @@
 <script setup>
 import { reactive, ref, onMounted, computed } from 'vue'
+import { useRouter } from 'vue-router'
+import { useBudgetStore } from '@/stores/budget'
 import '@/assets/main.css'
+
+const router = useRouter()
+const inputValue = ref(0)
+const budgetStore = useBudgetStore()
+
+function saveBudget() {
+  budgetStore.setBudget(Number(inputValue.value))
+  router.push('/')
+}
 
 function goBack() {
   window.history.back()
@@ -45,7 +56,9 @@ function goBack() {
             <div class="submit">
               <div class="input-group">
                 <input type="number" class="form-control" />
-                <span class="input-group-text"> <i class="bi bi-pencil"></i></span>
+                <span class="input-group-text">
+                  <i class="bi bi-pencil" @click="saveBudget"></i
+                ></span>
               </div>
             </div>
           </div>
@@ -77,6 +90,9 @@ function goBack() {
 .icon {
   width: 24px;
   text-align: center;
+}
+.bi-pencil {
+  cursor: pointer;
 }
 
 .bi-x {

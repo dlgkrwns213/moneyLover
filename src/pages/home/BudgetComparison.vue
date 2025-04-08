@@ -4,7 +4,10 @@ import { reactive, ref, onMounted, computed } from 'vue'
 import { Doughnut } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { useRouter } from 'vue-router'
+import { useBudgetStore } from '@/stores/budget'
 
+const budgetStore = useBudgetStore()
+const budget = computed(() => budgetStore.budget)
 const router = useRouter()
 
 const goToBudgetSettings = () => {
@@ -17,7 +20,6 @@ const props = defineProps({
   remain: Number,
 })
 
-const budget = ref(222220)
 const remain = ref(150000)
 const imageurls = [
   '/src/assets/images/clover/clover_0.png',
@@ -59,6 +61,7 @@ const chartOptions = {
       display: false,
     },
     tooltip: {
+      enabled: false,
       callbacks: {
         label: (context) => `${context.label}: ${context.raw}원`,
       },
@@ -90,7 +93,7 @@ const chartOptions = {
     <!-- v-id 에 true false 로 budget 설정 여부를 분별하여 다른 창을 띄운다. -->
     <div v-if="budget" class="donut-row">
       <!-- 왼쪽: 도넛 + 이미지 -->
-      <div class="donut-container">
+      <div class="donut-container" @click="goToBudgetSettings">
         <Doughnut :data="chartData" :options="chartOptions" />
         <img class="donut-image" :src="cloverImageUrl" />
       </div>
@@ -169,6 +172,7 @@ const chartOptions = {
   width: 214px;
   height: 100px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .donut-image {
