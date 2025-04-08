@@ -5,26 +5,7 @@
       "username": "Lee",
       "user": "admin",
       "password": "1234",
-      "setAmount": 0,
-      "isLogin": false
-    }
-  ],
-  "categories": [
-    {
-      "id": "29xl",
-      "category": "월급"
-    },
-    {
-      "id": "29ds",
-      "category": "이자"
-    },
-    {
-      "id": "232l",
-      "category": "점심"
-    },
-    {
-      "id": "2cil",
-      "category": "TV"
+      "setAmount": 0
     }
   ],
   "cashflows": [
