@@ -56,7 +56,7 @@ const tryLogin = async () => {
     }
 
     const fakeToken = 'fake-access-token-1234'
-    userStore.login(fakeToken)
+    userStore.login(fakeToken, user.id)
     alert('로그인 성공!')
     router.push('/chart')
   } catch (error) {
