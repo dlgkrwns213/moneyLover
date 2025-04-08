@@ -204,6 +204,7 @@ function calculateButtonClick(content) {
       <button class="back-button" @click="goBack">
         <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
       </button>
+      <br>
 
       <div class="tab-wrapper">
         <router-link to="/add/outcome" class="tab" :class="{ active: $route.path === '/add/outcome' }">지출</router-link>
