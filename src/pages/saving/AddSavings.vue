@@ -1,17 +1,22 @@
+<!-- AddSavings.vue -->
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import axios from 'axios'
 import dayjs from 'dayjs'
 
 const router = useRouter()
+
+// 폼 입력값
 const name = ref('')
 const nameInputRef = ref(null)
 const targetAmount = ref('')
 const frequency = ref('매일')
-const repeatOptions = Array.from({ length: 96 }, (_, i) => i + 4) // 4 ~ 99
+const repeatOptions = Array.from({ length: 96 }, (_, i) => i + 4)
 const repeatCount = ref(4)
 const startDate = dayjs().format('YYYY-MM-DD')
 
+// 종료 날짜 계산
 const endDate = computed(() => {
   const base = dayjs(startDate)
   switch (frequency.value) {
@@ -24,23 +29,72 @@ const endDate = computed(() => {
   }
 })
 
+// 1회 금액 계산
 const perAmount = computed(() => {
   const total = parseInt(targetAmount.value || '0')
   const count = parseInt(repeatCount.value || '1')
   return count > 0 ? Math.floor(total / count) : 0
 })
 
-const saveData = () => {
-  if (!name.value || !targetAmount.value) return alert('입력값을 확인해주세요!')
-  alert('저축이 저장되었습니다!')
-  router.push('/saving')
+// 저장 로직
+const saveData = async () => {
+  if (!name.value || !targetAmount.value) {
+    alert('입력값을 확인해주세요!')
+    return
+  }
+
+  const schedule = []
+  let currentDate = dayjs(startDate)
+
+  for (let i = 0; i < repeatCount.value; i++) {
+    schedule.push({
+      date: currentDate.format('YYYY-MM-DD'),
+      amount: perAmount.value,
+      done: false,
+    })
+
+    switch (frequency.value) {
+      case '매주':
+        currentDate = currentDate.add(1, 'week')
+        break
+      case '매달':
+        currentDate = currentDate.add(1, 'month')
+        break
+      default:
+        currentDate = currentDate.add(1, 'day')
+        break
+    }
+  }
+
+  const savingData = {
+    name: name.value,
+    targetAmount: parseInt(targetAmount.value),
+    startDate,
+    endDate: endDate.value,
+    frequency: frequency.value,
+    repeatCount: repeatCount.value,
+    perAmount: perAmount.value,
+    schedule,
+    saved: 0, // 저장된 금액 초기화
+    percent: 0, // 진행률 초기화
+  }
+
+  try {
+    const res = await axios.post('http://localhost:3000/saving', savingData)
+    const newId = res.data.id
+    alert('저축이 저장되었습니다!')
+    router.push(`/saving/${newId}`)
+  } catch (err) {
+    alert('저장 중 오류가 발생했습니다.')
+    console.error(err)
+  }
 }
 </script>
 
 <template>
   <div class="container-fluid bg-light-gray min-vh-100 py-3 px-3">
     <div class="text-center position-relative mb-3">
-      <h4 class="fw-bold text-dark m-0">저축</h4>
+      <h4 class="text-dark fw-bold m-0">저축</h4> 
       <img
         src="@/assets/images/saving/check_green.png"
         alt="저장"
@@ -116,7 +170,6 @@ const saveData = () => {
 </template>
 
 <style scoped>
-/* 색상 및 공통 스타일 */
 .bg-light-gray {
   background-color: #F6F6F6;
 }
@@ -133,8 +186,6 @@ const saveData = () => {
   border-radius: 12px;
   letter-spacing: -0.05em;
 }
-
-/* 입력 스타일 */
 .name-input {
   background: transparent;
   border: none;
@@ -150,8 +201,6 @@ const saveData = () => {
   width: 180px;
   letter-spacing: -0.05em;
 }
-
-/* 텍스트 및 아이콘 */
 .label-text {
   font-weight: bold;
   color: #000;
