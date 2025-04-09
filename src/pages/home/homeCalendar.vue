@@ -179,7 +179,8 @@ const getColorClass = (value) => {
     </button>
   </div>
   <div class="container">
-    <!-- 📅 FullCalendar -->
+    <div class="calendar-wrapper">
+    <!-- FullCalendar -->
     <v-calendar
       is-expanded
       :attributes="attributes"
@@ -207,11 +208,13 @@ const getColorClass = (value) => {
               {{ num }}
             </span>
           </template>
+          
         </div>
+        
       </template>
     </v-calendar>
 
-    <!-- 💰 월 수입/지출/수익 요약 -->
+    <!-- 월 수입/지출/수익 요약 -->
     <div class="month-data">
       월 수입: <span style="color: #61905a">{{ monthlyIncome.toLocaleString('ko-KR') + '₩' }}</span
       ><br />
@@ -231,15 +234,15 @@ const getColorClass = (value) => {
         {{ (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') + '₩' }}
       </span>
     </div>
-
+  </div>
     <!-- 📋 선택된 날짜의 상세 내역 -->
     <div class="event-panel">
-      <h5>
+      <h6>
         선택 날짜:
         <span class="selected-date">
-          {{ formatDateWithWeekday(innerSelectedDate) }}
+          {{ formatDateWithWeekday(innerSelectedDate) }}요일
         </span>
-      </h5>
+      </h6>
 
       <div class="expense-list" v-if="cashflows.length">
         <div v-for="(item, index) in cashflows" :key="item.id">
@@ -266,8 +269,9 @@ const getColorClass = (value) => {
         </div>
       </div>
 
-      <p v-else class="no-event">기록이 없습니다.</p>
+      <p v-else class="no-event">~ 기록이 없습니다 ~</p>
     </div>
+
   </div>
 </template>
 
@@ -290,7 +294,7 @@ const getColorClass = (value) => {
   font-size: 24px;
 }
 
-/* 📌 기본 컨테이너 */
+/* 기본 컨테이너 */
 .container {
   display: flex;
   flex-direction: column;
@@ -300,13 +304,13 @@ const getColorClass = (value) => {
   position: relative;
 }
 
-/* ✅ FullCalendar 날짜 스타일 */
+/* FullCalendar 날짜 스타일 */
 :deep(.vc-day) {
   position: relative;
   min-height: 68px; /* 날짜 크기 조정 */
 }
 
-/* 🔢 날짜 안의 숫자 content 스타일 */
+/* 날짜 안의 숫자 content 스타일 */
 .day-content {
   display: flex;
   flex-direction: column;
@@ -324,9 +328,9 @@ const getColorClass = (value) => {
   font-family: 'MyFontBold';
 }
 
-/* ✅ 선택된 날짜 (초록색 네모 테두리) */
+/* 선택된 날짜 (초록색 네모 테두리) */
 .day-content.selected {
-  border: 2px solid #4caf50 !important; /* 초록색 테두리 */
+  border: 2px solid #61905A !important; /* 초록색 테두리 */
 }
 
 /* 지정 불가 날짜 설정 */
@@ -335,15 +339,15 @@ const getColorClass = (value) => {
   opacity: 0.3;
 }
 
-/* 🎨 content 색상 */
+/* content 색상 */
 .positive {
   color: #61905a; /* 초록색 */
-  font-size: 9px;
+  font-size: 8px;
 }
 
 .negative {
   color: #e35050; /* 빨간색 */
-  font-size: 9px;
+  font-size: 8px;
 }
 
 .zero {
@@ -351,17 +355,27 @@ const getColorClass = (value) => {
   font-size: 10px;
 }
 
+.calendar-wrapper {
+  position: relative;
+  max-width: 360px;
+  margin: 0 auto;
+  overflow: hidden; 
+}
+
 .month-data {
   position: absolute;
-  top: 420px; /* 살짝 위로 올림 */
-  left: 45%; /* 살짝 오른쪽으로 이동 */
+  right: 0;
+  bottom: 0;
+  transform: translate(-10px, -10px);
   background-color: #fff;
   padding: 8px 12px;
   border-radius: 8px;
   box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
   font-size: 14px;
   font-weight: bold;
+  z-index: 10;
 }
+
 .month-data .income {
   color: #61905a;
   font-weight: bold;
@@ -467,5 +481,9 @@ const getColorClass = (value) => {
 
 .amount {
   margin-left: auto;
+}
+.no-event{
+  margin: 2rem;
+  font-family: "Myfont";
 }
 </style>
