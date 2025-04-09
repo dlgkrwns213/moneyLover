@@ -18,7 +18,7 @@ import SettingsMain from '@/pages/mypage/SettingsMain.vue'
 import SearchFilter from '@/pages/home/SearchFilter.vue'
 import TransactionDetail from '@/pages/home/TransactionDetail.vue'
 import HomeCalendar from '@/pages/home/homeCalendar.vue'
-
+import ChangePassword from '@/pages/login/ChangePassword.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -112,6 +112,11 @@ const router = createRouter({
       path: '/:pathMatch(.*)*',
       name: 'NotFound',
       component: NotFound,
+    },
+    {
+      path: '/changePassword',
+      name: 'changePassword',
+      component: ChangePassword,
     },
   ],
 })

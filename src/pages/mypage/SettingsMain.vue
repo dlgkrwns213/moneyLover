@@ -16,11 +16,12 @@
       </div>
       <div class="settings-list">
         <ul class="list-row">
-          <li><RouterLink to="/signup" class="settings-text">비밀번호 변경</RouterLink></li>
+          <li><span class="settings-text" @click="showModal = true">비밀번호 변경</span></li>
           <li><span class="settings-text" @click="handleLogout">로그아웃</span></li>
         </ul>
       </div>
     </div>
+    <ChangePassword v-if="showModal" @close="showModal = false" />
   </div>
 </template>
 <script setup>
@@ -28,9 +29,10 @@ import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import axios from 'axios'
+import ChangePassword from '../login/ChangePassword.vue'
 const router = useRouter()
 const userStore = useUserStore()
-
+const showModal = ref(false)
 const username = ref('')
 
 const handleLogout = () => {
