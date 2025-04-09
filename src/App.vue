@@ -1,12 +1,15 @@
 <script setup>
+import { useRoute } from 'vue-router'
 import Navigator from './pages/home/Navigator.vue'
 import './assets/main.css'
+
+const route = useRoute()
 </script>
 
 <template>
   <div id="app" class="app-background">
     <RouterView />
-    <Navigator />
+    <Navigator v-if="!route.meta.hideNav" />
   </div>
 </template>
 
