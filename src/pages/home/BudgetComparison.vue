@@ -117,7 +117,7 @@ const chartOptions = {
   />
   <div class="header">
     <span class="icon" @click="goToCalendar">
-      <i class="fa-solid fa-calendar-days icon-img"></i>
+      <img src="@/assets/images/all/calendar.png" alt="달력 아이콘" class="icon-img" />
     </span>
     <span class="menu-budgetsetting">예산설정</span>
     <span class="icon" @click="goToSearch">
@@ -294,6 +294,14 @@ const chartOptions = {
 .icon {
   width: 24px;
   text-align: center;
+}
+
+.icon-img {
+  width: 29px;
+  height: 29px;
+  transform: scaleX(-1); /* 좌우반전 */
+  object-fit: contain;
+  cursor: pointer;
 }
 
 .icon-img:hover {
