@@ -91,15 +91,16 @@ const tryLogin = async () => {
     Swal.fire({
       icon: 'success',
       title: '로그인 성공',
+      timer: 1000,
+      showConfirmButton: false,
       confirmButtonColor: '#429f50',
       customClass: {
         title: 'swal-title',
         confirmButton: 'swal-confirm',
       },
-    }).then((result) => {
-      if (result.isConfirmed) {
+      willClose: () => {
         router.push('/')
-      }
+      },
     })
   } catch (error) {
     console.error('로그인 에러:', error)
