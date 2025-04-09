@@ -119,7 +119,10 @@ const chartOptions = {
     <span class="icon" @click="goToCalendar">
       <img src="@/assets/images/all/calendar.png" alt="달력 아이콘" class="icon-img" />
     </span>
-    <span class="menu-budgetsetting">예산설정</span>
+    <!-- <span class="menu-budgetsetting">moneyLover</span> -->
+    <span class="menu-logo">
+  <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
+</span>
     <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
@@ -326,5 +329,18 @@ const chartOptions = {
   font-size: 20px;
   color: #444;
   cursor: pointer;
+}
+
+.menu-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+}
+
+.logo-img {
+  height: 26px; 
+  object-fit: contain;
 }
 </style>
