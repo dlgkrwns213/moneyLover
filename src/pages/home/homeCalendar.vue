@@ -3,10 +3,13 @@ import axios from 'axios'
 import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { TRANSLATIONS } from '@/constants/translate'
+import { useRouter } from 'vue-router'
 
 // ✅ 사용자 정보 및 데이터 로드
 const userStore = useUserStore()
 const allCashflowData = ref([])
+const router = useRouter()
+
 
 onMounted(async () => {
   try {
@@ -63,6 +66,10 @@ const getCategorykey = (koreanCategory) => {
 const getIconPath = (koreanCategory) => {
   const key = getCategorykey(koreanCategory)
   return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+}
+
+const goToDetail = (id) => {
+  router.push(`/transaction/${id}`)
 }
 
 const deleteCashflow = async (id) => {
@@ -224,14 +231,7 @@ const getColorClass = (value) => {
 
     <div class="expense-list" v-if="cashflows.length">
       <div v-for="(item, index) in cashflows" :key="item.id">
-        <div class="expense-header">
-          <span class="date">{{ item.date }}</span>
-          <span class="delete" @click="deleteCashflow(item.id)">삭제🗑</span>
-          <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
-            {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
-          </span>
-        </div>
-
+    
         <div class="expense-item" @click="goToDetail(item.id)">
           <div class="expense-content">
             <div class="icon">
@@ -242,7 +242,9 @@ const getColorClass = (value) => {
               <div class="category">{{ item.category || '카테고리 없음' }}</div>
             </div>
             <div class="value">
-              {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
+              <span :style="{ color: item.cashflowType ? '#61905A' : '#E35050'}">
+                {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
+              </span>
             </div>
           </div>
         </div>
@@ -349,6 +351,7 @@ const getColorClass = (value) => {
   gap: 12px;
   width: 320px;
   font-family: 'MyFontBold';
+  padding-bottom: 60px;
 }
 
 .expense-item {
@@ -410,11 +413,13 @@ const getColorClass = (value) => {
 
 .title {
   font-weight: bold;
+  text-align: left;
 }
 
 .category {
   font-size: 12px;
   color: #61905a;
+  text-align: left;
 }
 
 .value {
