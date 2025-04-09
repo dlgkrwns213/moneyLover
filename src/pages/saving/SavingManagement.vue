@@ -1,31 +1,22 @@
 <!-- SavingManagement.vue -->
 <script setup>
-import { ref, onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
+import { useSavingStore } from '@/stores/saving'
+import { useUserStore } from '@/stores/user'
 import Navigator from '@/pages/home/Navigator.vue';
 
 const router = useRouter()
-
-const savings = ref([
-])
+const savingStore = useSavingStore()
+const userStore = useUserStore()
 
 const goToAddSaving = () => {
   router.push('/add-saving')
 }
 
-onMounted(async () => {
-  try {
-    const res = await axios.get('http://localhost:3000/saving')
-    savings.value = res.data.map(item => ({
-      name: item.name,
-      saved: item.saved,
-      percent: item.percent,
-      target: item.targetAmount,
-      id: item.id,
-    }))
-  } catch (err) {
-    console.error('저축 목록을 불러오는 데 실패했습니다:', err)
+onMounted(() => {
+  if (userStore.isLoggedIn) {
+    savingStore.fetchSavings(userStore.userId)
   }
 })
 </script>
@@ -50,12 +41,12 @@ onMounted(async () => {
       <h5 class="custom-light text-center mt-3 mb-2">내 저축 목록</h5>
       <hr class="border border-1 border-green opacity-100 mt-0" />
 
-      <div v-if="savings.length === 0" class="d-flex justify-content-center align-items-center flex-grow-1">
+      <div v-if="savingStore.savings.length === 0" class="d-flex justify-content-center align-items-center flex-grow-1">
         <img src="@/assets/images/saving/saving_empty.png" alt="행운 클로버" class="img-fluid" style="width: 200px; opacity: 0.7;" />
       </div>
 
       <div v-else class="d-flex flex-column gap-3 mb-5">
-        <div v-for="(saving, index) in savings" :key="saving.id" class="p-3 bg-white rounded-4 shadow-sm" @click="router.push(`/saving/${saving.id}`)">
+        <div v-for="saving in savingStore.savings" :key="saving.id" class="p-3 bg-white rounded-4 shadow-sm" @click="router.push(`/saving/${saving.id}`)">
           <div class="d-flex align-items-center mb-2">
             <img src="@/assets/images/saving/piggy.png" alt="저금통" class="me-2" style="width: 36px;" />
             <span class="custom-bold fw-bold" style="font-size: 1.1rem">{{ saving.name }}</span>
@@ -73,7 +64,7 @@ onMounted(async () => {
               {{ saving.percent }}%<br /><small class="opacity-75">진행</small>
             </div>
             <div>
-              ₩{{ saving.target.toLocaleString() }}<br /><small class="opacity-75">목표</small>
+              ₩{{ (saving.targetAmount || 0).toLocaleString() }}<br /><small class="opacity-75">목표</small>
             </div>
           </div>
         </div>

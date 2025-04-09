@@ -2,68 +2,60 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import axios from 'axios'
 import dayjs from 'dayjs'
+import { useSavingStore } from '@/stores/saving'
 
 const router = useRouter()
+const savingStore = useSavingStore()
 
 // 폼 입력값
 const name = ref('')
 const nameInputRef = ref(null)
 const targetAmount = ref('')
 const frequency = ref('매일')
-const repeatOptions = Array.from({ length: 96 }, (_, i) => i + 4)
 const repeatCount = ref(4)
 const startDate = dayjs().format('YYYY-MM-DD')
+const repeatOptions = Array.from({ length: 96 }, (_, i) => i + 4)
 
 // 종료 날짜 계산
-const endDate = computed(() => {
-  const base = dayjs(startDate)
-  switch (frequency.value) {
-    case '매주':
-      return base.add(repeatCount.value - 1, 'week').format('YYYY-MM-DD')
-    case '매달':
-      return base.add(repeatCount.value - 1, 'month').format('YYYY-MM-DD')
-    default:
-      return base.add(repeatCount.value - 1, 'day').format('YYYY-MM-DD')
-  }
-})
+const endDate = computed(() => calculateEndDate(startDate, frequency.value, repeatCount.value))
 
 // 1회 금액 계산
 const perAmount = computed(() => {
   const total = parseInt(targetAmount.value || '0')
-  const count = parseInt(repeatCount.value || '1')
-  return count > 0 ? Math.floor(total / count) : 0
+  return repeatCount.value > 0 ? Math.floor(total / repeatCount.value) : 0
 })
+
+// 날짜 계산 함수
+const calculateEndDate = (start, freq, count) => {
+  const base = dayjs(start)
+  const unit = freq === '매주' ? 'week' : freq === '매달' ? 'month' : 'day'
+  return base.add(count - 1, unit).format('YYYY-MM-DD')
+}
+
+// 스케줄 생성 함수
+const generateSchedule = (start, freq, count, amount) => {
+  const schedule = []
+  let currentDate = dayjs(start)
+  const unit = freq === '매주' ? 'week' : freq === '매달' ? 'month' : 'day'
+
+  for (let i = 0; i < count; i++) {
+    schedule.push({
+      date: currentDate.format('YYYY-MM-DD'),
+      amount,
+      done: false
+    })
+    currentDate = currentDate.add(1, unit)
+  }
+
+  return schedule
+}
 
 // 저장 로직
 const saveData = async () => {
   if (!name.value || !targetAmount.value) {
     alert('입력값을 확인해주세요!')
     return
-  }
-
-  const schedule = []
-  let currentDate = dayjs(startDate)
-
-  for (let i = 0; i < repeatCount.value; i++) {
-    schedule.push({
-      date: currentDate.format('YYYY-MM-DD'),
-      amount: perAmount.value,
-      done: false,
-    })
-
-    switch (frequency.value) {
-      case '매주':
-        currentDate = currentDate.add(1, 'week')
-        break
-      case '매달':
-        currentDate = currentDate.add(1, 'month')
-        break
-      default:
-        currentDate = currentDate.add(1, 'day')
-        break
-    }
   }
 
   const savingData = {
@@ -74,16 +66,19 @@ const saveData = async () => {
     frequency: frequency.value,
     repeatCount: repeatCount.value,
     perAmount: perAmount.value,
-    schedule,
-    saved: 0, // 저장된 금액 초기화
-    percent: 0, // 진행률 초기화
+    schedule: generateSchedule(startDate, frequency.value, repeatCount.value, perAmount.value),
+    saved: 0,
+    percent: 0
   }
 
   try {
-    const res = await axios.post('http://localhost:3000/saving', savingData)
-    const newId = res.data.id
-    alert('저축이 저장되었습니다!')
-    router.push(`/saving/${newId}`)
+    const newId = await savingStore.addSaving(savingData)
+    if (newId) {
+      alert('저축이 저장되었습니다!')
+      router.push(`/saving/${newId}`)
+    } else {
+      alert('저장에 성공했지만 ID를 받아오지 못했습니다.')
+    }
   } catch (err) {
     alert('저장 중 오류가 발생했습니다.')
     console.error(err)
