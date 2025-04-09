@@ -4,6 +4,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { TRANSLATIONS } from '@/constants/translate'
 import { useRouter } from 'vue-router'
+import TransactionDetailModal from './TransactionDetailModal.vue'
 
 // ✅ 사용자 정보 및 데이터 로드
 const userStore = useUserStore()
@@ -79,9 +80,14 @@ const getIconPath = (koreanCategory) => {
   return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
 }
 
+const showModal = ref(false)
+const selectedId = ref(null)
+
 const goToDetail = (id) => {
-  router.push(`/transaction/${id}`)
+  selectedId.value = id
+  showModal.value = true
 }
+
 
 const deleteCashflow = async (id) => {
   try {
@@ -268,6 +274,12 @@ const getColorClass = (value) => {
     </div>
     
     <p v-else class="no-event">기록이 없습니다.</p>
+
+    <TransactionDetailModal
+      v-if="showModal"
+      :id="selectedId"
+      @close="showModal = false"
+    />
   </div>
 </div>
 

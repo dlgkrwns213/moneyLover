@@ -1,24 +1,25 @@
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
 
-import backIcon from '@/assets/images/saving/back.png'
 import { TRANSLATIONS } from '@/constants/translate'
 
-const route = useRoute()
-const router = useRouter()
+const props = defineProps({
+  id: String
+})
+
+const emit = defineEmits(['close'])
 
 const transaction = ref(null)
 const includeInBudget = ref(true)
 
 onMounted(async () => {
-  const id = route.params.id
-  const res = await axios.get(`http://localhost:3000/cashflows/${id}`)
-
+  const res = await axios.get(`http://localhost:3000/cashflows/${props.id}`)
   transaction.value = res.data
   includeInBudget.value = res.data.includeInBudget
 })
+
+const close = () => emit('close')
 
 const getCategoryKey = (koreanCategory) => {
   const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
@@ -30,7 +31,6 @@ const icons = import.meta.glob('@/assets/images/all/*.png', { eager: true, impor
 const getIconPath = (category) => {
   const key = getCategoryKey(category)
   const path = `/src/assets/images/all/${key}.png`
-  // 이미지 로딩 오류시 기본 클로버 이미지가 뜨도록
   return icons[path] || icons['/src/assets/images/clover/clover_default.png']
 }
 
@@ -44,15 +44,17 @@ const toggleBudget = async () => {
 const deleteItem = async () => {
   if (!confirm('정말 삭제하시겠습니까?')) return
   await axios.delete(`http://localhost:3000/cashflows/${transaction.value.id}`)
-  router.push('/')
+  emit('close')
 }
 </script>
 
 <template>
+  <div class="modal-overlay" @click.self="close">
+  <div class="modal-content">
   <div class="container-fluid bg-light-gray min-vh-100 px-3 py-3">
     <!-- 상단 헤더 -->
     <div class="d-flex justify-content-between align-items-center mb-3">
-      <img :src="backIcon" alt="뒤로가기" class="icon-back" @click="router.back()" />
+      <img :src="backIcon" alt="뒤로가기" class="icon-back" @click="close" />
       <h5 class="m-0 custom-bold text-center flex-grow-1">세부 정보</h5>
 
       <div style="width: 20px"></div>
@@ -99,7 +101,10 @@ const deleteItem = async () => {
       </div>
 
       <!-- 예산 포함 -->
-      <div class="d-flex justify-content-between align-items-center">
+      <div
+        v-if="!transaction.cashflowType"
+        class="d-flex justify-content-between align-items-center"
+      >
         <div class="custom-bold">예산 포함</div>
         <label class="switch">
           <input type="checkbox" v-model="includeInBudget" @click="toggleBudget" />
@@ -108,9 +113,33 @@ const deleteItem = async () => {
       </div>
     </div>
   </div>
+  </div>
+  </div>
 </template>
 
 <style scoped>
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 20px;
+}
 .bg-light-gray {
   background-color: #f6f6f6;
 }
