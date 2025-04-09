@@ -212,9 +212,10 @@ const chartOptions = {
   justify-content: center;
   align-items: center;
   width: 150px;
-  height: 100px;
+  height: 110px;
   flex-shrink: 0;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 /* .donut-image {
@@ -258,6 +259,7 @@ const chartOptions = {
 .label {
   padding: 10px;
   font-size: 16px;
+  text-align: center;
   color: #444;
   flex: 1;
 }
@@ -267,6 +269,7 @@ const chartOptions = {
   text-align: right;
   flex: 1;
   color: #61905a;
+  margin-right: 1rem;
 }
 .empty-budget {
   cursor: pointer;
