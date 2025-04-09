@@ -179,147 +179,38 @@
   ],
   "saving": [
     {
-      "id": "536e",
-      "name": "저축 샘플1",
-      "targetAmount": 200000,
-      "startDate": "2025-04-08",
-      "endDate": "2025-04-11",
-      "frequency": "매일",
-      "repeatCount": 4,
-      "perAmount": 50000,
-      "schedule": [
-        {
-          "date": "2025-04-08",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-09",
-          "amount": 50000,
-          "done": false
-        },
-        {
-          "date": "2025-04-10",
-          "amount": 50000,
-          "done": false
-        },
-        {
-          "date": "2025-04-11",
-          "amount": 50000,
-          "done": false
-        }
-      ],
-      "saved": 50000,
-      "percent": 25
-    },
-    {
-      "id": "7cc1",
-      "name": "저축 샘플2",
-      "targetAmount": 100000,
-      "startDate": "2025-04-08",
-      "endDate": "2025-08-08",
-      "frequency": "매달",
-      "repeatCount": 5,
-      "perAmount": 20000,
-      "schedule": [
-        {
-          "date": "2025-04-08",
-          "amount": 20000,
-          "done": true
-        },
-        {
-          "date": "2025-05-08",
-          "amount": 20000,
-          "done": true
-        },
-        {
-          "date": "2025-06-08",
-          "amount": 20000,
-          "done": true
-        },
-        {
-          "date": "2025-07-08",
-          "amount": 20000,
-          "done": true
-        },
-        {
-          "date": "2025-08-08",
-          "amount": 20000,
-          "done": false
-        }
-      ],
-      "saved": 80000,
-      "percent": 80
-    },
-    {
-      "id": "b8cf",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "22",
-      "cashflowValue": 222,
-      "date": "2025-04-08 TUE",
-      "category": "음료"
-    },
-    {
-      "id": "d8b7",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "1212",
-      "cashflowValue": 2,
-      "date": "2025-04-08 TUE",
-      "category": "대출"
-    },
-    {
-      "id": "22cd",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "test",
-      "cashflowValue": 10000000,
-      "date": "2025-03-05 WED",
-      "category": "기타 지출"
-    },
-    {
-      "id": "fd07",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "로션",
-      "cashflowValue": 2555921,
-      "date": "2025-04-08 TUE",
-      "category": "생필품"
-    },
-    {
-      "id": "8664",
+      "id": "4b3c",
       "name": "샘플1",
-      "targetAmount": 100000,
+      "targetAmount": 400000,
       "startDate": "2025-04-09",
       "endDate": "2025-04-12",
       "frequency": "매일",
       "repeatCount": 4,
-      "perAmount": 25000,
+      "perAmount": 100000,
       "schedule": [
         {
           "date": "2025-04-09",
-          "amount": 25000,
-          "done": false
+          "amount": 100000,
+          "done": true
         },
         {
           "date": "2025-04-10",
-          "amount": 25000,
-          "done": false
+          "amount": 100000,
+          "done": true
         },
         {
           "date": "2025-04-11",
-          "amount": 25000,
+          "amount": 100000,
           "done": false
         },
         {
           "date": "2025-04-12",
-          "amount": 25000,
+          "amount": 100000,
           "done": false
         }
       ],
-      "saved": 0,
-      "percent": 0
+      "saved": 200000,
+      "percent": 50
     }
   ]
 }
