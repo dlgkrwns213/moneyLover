@@ -15,6 +15,7 @@ import SignIn from '@/pages/login/SignIn.vue'
 import SignUp from '@/pages/login/SignUp.vue'
 import SettingsMain from '@/pages/settings/SettingsMain.vue'
 import SearchFilter from '@/pages/home/SearchFilter.vue'
+import TransactionDetail from '@/pages/home/TransactionDetail.vue'
 
 
 const router = createRouter({
@@ -89,6 +90,11 @@ const router = createRouter({
       path: '/searchFilter',
       name: 'searchFilter',
       component: SearchFilter,
+    },
+    {
+      path: '/transaction/:id',
+      name: 'TransactionDetail',
+      component: TransactionDetail,
     },
   ],
 })
