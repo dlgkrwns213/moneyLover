@@ -36,7 +36,7 @@ onMounted(async () => {
 })
 const totalOutcome = computed(() => {
   return cashflows.value
-    .filter((item) => item.cashflowType === false)
+    .filter((item) => item.cashflowType === false && item.includeInBudget)
     .reduce((sum, item) => sum + item.cashflowValue, 0)
 })
 const remain = computed(() => budget.value - totalOutcome.value)
