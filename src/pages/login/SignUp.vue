@@ -32,6 +32,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { hashPassword } from '@/utils/hash'
+import Swal from 'sweetalert2'
 const router = useRouter()
 
 // 입력받은 정보
@@ -44,7 +45,15 @@ const isIdAvailable = ref(false)
 
 const checkUserId = async () => {
   if (!user.value) {
-    alert('아이디를 입력하세요.')
+    Swal.fire({
+      icon: 'warning',
+      title: '아이디를 입력해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
@@ -52,30 +61,84 @@ const checkUserId = async () => {
     const res = await axios.get(`http://localhost:3000/users?user=${user.value}`)
     if (res.data.length > 0) {
       isIdAvailable.value = false
-      alert('이미 존재하는 아이디입니다.')
+      Swal.fire({
+        icon: 'warning',
+        title: '이미 존재하는 아이디 입니다..',
+        confirmButtonColor: '#429f50',
+        customClass: {
+          title: 'swal-title',
+          popup: 'swal-popup',
+          confirmButton: 'swal-confirm',
+        },
+      })
     } else {
       isIdAvailable.value = true
-      alert('사용 가능한 아이디입니다.')
+      Swal.fire({
+        icon: 'success',
+        title: '사용가능한 아이디 입니다..',
+        confirmButtonColor: '#429f50',
+        customClass: {
+          title: 'swal-title',
+          confirmButton: 'swal-confirm',
+        },
+      })
     }
   } catch (error) {
-    console.error('아이디 중복 확인 오류:', error)
-    alert('확인 중 오류 발생')
+    Swal.fire({
+      icon: 'error',
+      title: '오류가 발생했습니다.',
+      text: '잠시후 다시 시도해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
   }
 }
 
 const handleRegister = async () => {
   if (!username.value || !user.value || !password.value || !checkPassword.value) {
-    alert('정보를 입력해 주세요.')
+    Swal.fire({
+      icon: 'warning',
+      title: '정보를 입력해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
   if (!isIdAvailable.value) {
-    alert('아이디 중복 확인을 먼저 해주세요.')
+    Swal.fire({
+      icon: 'warning',
+      title: '아이디 중복 확인을 먼저 진행해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
   if (password.value !== checkPassword.value) {
-    alert('비밀번호가 일치하지 않습니다.')
+    Swal.fire({
+      icon: 'warning',
+      title: '비밀번호가 일치하지 않습니다.',
+      text: '비밀번호를 다시 입력해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
@@ -91,11 +154,33 @@ const handleRegister = async () => {
 
   try {
     await axios.post('http://localhost:3000/users', newUser)
-    alert('회원가입 완료!')
-    router.push('/signin')
+    Swal.fire({
+      icon: 'success',
+      title: '회원가입이 완료되었습니다.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push('/signin')
+      }
+    })
   } catch (error) {
     console.error('회원가입 오류:', error)
-    alert('회원가입 실패')
+    Swal.fire({
+      icon: 'error',
+      title: '회원가입 중 오류가 발생했습니다.',
+      text: '잠시 후 다시 시도해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
   }
 }
 </script>

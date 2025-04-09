@@ -31,6 +31,7 @@ import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { hashPassword } from '@/utils/hash'
 import { useBudgetStore } from '@/stores/budget'
+import Swal from 'sweetalert2'
 
 const id = ref('')
 const pw = ref('')
@@ -40,7 +41,15 @@ const budgetStore = useBudgetStore()
 
 const tryLogin = async () => {
   if (!id.value || !pw.value) {
-    alert('아이디와 비밀번호를 입력하세요.')
+    Swal.fire({
+      icon: 'warning',
+      title: '아이디와 비밀번호를 입력해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
@@ -50,23 +59,64 @@ const tryLogin = async () => {
     const hashedInput = hashPassword(pw.value)
 
     if (!user) {
-      alert('존재하지 않는 아이디입니다.')
+      Swal.fire({
+        icon: 'warning',
+        title: '존재하지 않는 아이디 입니다.',
+        text: '아이디를 확인해 주세요',
+        confirmButtonColor: '#429f50',
+        customClass: {
+          title: 'swal-title',
+          popup: 'swal-popup',
+          confirmButton: 'swal-confirm',
+        },
+      })
       return
     }
 
     if (hashedInput !== user.password) {
-      alert('비밀번호가 일치하지 않습니다.')
+      Swal.fire({
+        icon: 'warning',
+        title: '비밀번호가 일치하지 않습니다.',
+        text: '비밀번호를 다시 입력해 주세요.',
+        confirmButtonColor: '#429f50',
+        customClass: {
+          title: 'swal-title',
+          popup: 'swal-popup',
+          confirmButton: 'swal-confirm',
+        },
+      })
       return
     }
 
     const fakeToken = 'fake-access-token-1234'
     userStore.login(fakeToken, user.id)
     budgetStore.loadBudget()
-    alert('로그인 성공!')
-    router.push('/')
+    Swal.fire({
+      icon: 'success',
+      title: '로그인 성공',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push('/')
+      }
+    })
   } catch (error) {
     console.error('로그인 에러:', error)
-    alert('로그인 중 오류가 발생했습니다.')
+    Swal.fire({
+      icon: 'error',
+      title: '로그인 중 오류가 발생했습니다.',
+      text: '잠시 후 다시 시도해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
   }
 }
 </script>
