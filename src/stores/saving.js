@@ -66,32 +66,28 @@ export const useSavingStore = defineStore('saving', {
       }
     },
     async toggleScheduleCheck(index) {
-        if (!this.currentSaving?.schedule) return
+        if (!this.currentSaving || !Array.isArray(this.currentSaving.schedule)) return
       
-        // 상태 토글
         this.currentSaving.schedule[index].done = !this.currentSaving.schedule[index].done
       
-        // ✅ 새로 저장된 금액 계산
         const saved = this.currentSaving.schedule
           .filter(item => item.done)
           .reduce((sum, item) => sum + item.amount, 0)
       
-        // ✅ 퍼센트 계산
-        const percent = Math.floor((saved / this.currentSaving.targetAmount) * 100)
+        const target = this.currentSaving.targetAmount || 1  // 혹시 0일 수도 있으니까 방어 코드
+        const percent = Math.floor((saved / target) * 100)
       
-        // 상태 업데이트
         this.currentSaving.saved = saved
         this.currentSaving.percent = percent
       
         try {
-          // 서버에 PATCH
           await axios.patch(`http://localhost:3000/saving/${this.currentSaving.id}`, {
             schedule: this.currentSaving.schedule,
             saved: saved,
-            percent: percent,
+            percent: percent
           })
         } catch (err) {
-          console.error('스케줄 상태 저장 실패:', err)
+          console.error('스케줄 체크 상태 저장 실패:', err)
         }
       }
       
