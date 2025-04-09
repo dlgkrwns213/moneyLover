@@ -258,7 +258,7 @@ label {
 }
 .register-btn {
   width: 56px;
-  height: 35px;
+  height: 33px;
   border: 1px solid #61905a;
   border-radius: 12px;
   font-size: 16px;
