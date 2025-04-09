@@ -21,6 +21,8 @@ const getIconSrc = (path, baseName) => {
     import.meta.url
   ).href
 }
+
+const getTextClass = (path) => (isActive(path) ? 'text-bold' : '')
 </script>
 
 <template>
@@ -28,11 +30,11 @@ const getIconSrc = (path, baseName) => {
     <nav class="bottom-nav">
       <RouterLink to="/" class="nav-item">
         <img :src="getIconSrc('/', 'home')" alt="홈" />
-        <span>홈</span>
+        <span :class="getTextClass('/')">홈</span>
       </RouterLink>
       <RouterLink to="/chart" class="nav-item">
         <img :src="getIconSrc('/chart', 'chart')" alt="보고서" />
-        <span>보고서</span>
+        <span :class="getTextClass('/chart')">보고서</span>
       </RouterLink>
 
       <div class="nav-item" @click="handlePlusClick">
@@ -45,11 +47,12 @@ const getIconSrc = (path, baseName) => {
 
       <RouterLink to="/saving" class="nav-item">
         <img :src="getIconSrc('/saving', 'saving')" alt="저축" />
-        <span>저축</span>
+        <span :class="getTextClass('/saving')">저축</span>
       </RouterLink>
+
       <RouterLink to="/settings" class="nav-item">
         <img :src="getIconSrc('/settings', 'setting')" alt="설정" />
-        <span>설정</span>
+        <span :class="getTextClass('/settings')">설정</span>
       </RouterLink>
     </nav>
   </div>
@@ -77,6 +80,7 @@ const getIconSrc = (path, baseName) => {
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: Myfont;
   font-size: 12px;
   color: #444;
   text-decoration: none;
@@ -115,5 +119,9 @@ const getIconSrc = (path, baseName) => {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.text-bold{
+  font-family: "MyfontBold";
 }
 </style>

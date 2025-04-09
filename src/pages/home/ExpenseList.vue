@@ -92,7 +92,7 @@ const goToDetail = (id) => {
   flex-direction: column;
   gap: 12px;
   width: 320px;
-  font-family: 'MyFontBold';
+  font-family: 'MyFont';
 }
 
 .expense-item {
@@ -167,6 +167,7 @@ const goToDetail = (id) => {
   font-family: "MyfontBold";
   color: #333;
 }
+
 
 .amount {
   margin-left: auto;

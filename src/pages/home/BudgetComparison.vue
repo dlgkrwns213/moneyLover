@@ -121,8 +121,8 @@ const chartOptions = {
     </span>
     <!-- <span class="menu-budgetsetting">moneyLover</span> -->
     <span class="menu-logo">
-  <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
-</span>
+    <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
+    </span>
     <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
@@ -291,7 +291,6 @@ const chartOptions = {
   background-color: #f6f6f6;
   border-bottom: 1px solid #f6f6f6;
   margin: 0 auto;
-  font-family: 'MyFontbold';
 }
 
 .icon {
