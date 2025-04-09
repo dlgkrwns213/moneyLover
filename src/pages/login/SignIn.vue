@@ -9,15 +9,12 @@
         </div>
         <div class="input-row">
           <label for="input-pw">비밀번호:</label>
-          <input
-            type="password"
-            id="input-pw"
-            class="input"
-            v-model="pw"
-            @keydown.enter="tryLogin"
-          />
+          <input type="password" id="input-pw" class="input" v-model="pw" />
         </div>
       </form>
+      <div class="login-btn">
+        <button @click="tryLogin">로그인</button>
+      </div>
       <div class="sign-up-link">
         <RouterLink to="/signup">회원가입</RouterLink>
       </div>
@@ -174,7 +171,7 @@ label {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 30px;
+  margin-top: 13px;
 }
 .sign-up-link a {
   color: #909090;
@@ -182,6 +179,22 @@ label {
   text-underline-offset: 4px;
   font-size: 12px;
   font-family: 'MyFont';
+  cursor: pointer;
+}
+.login-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}
+.login-btn button {
+  width: 211px;
+  height: 30px;
+  border: 1px solid #61905a;
+  font-family: 'myFont';
+  font-size: 14px;
+  background-color: white;
+  border-radius: 12px;
   cursor: pointer;
 }
 </style>
