@@ -2,6 +2,8 @@
 import { ref, computed, onMounted } from 'vue'
 import axios from 'axios'
 import { TRANSLATIONS } from '@/constants/translate'
+import { useRouter } from 'vue-router'
+
 
 const cashflows = ref([])
 onMounted(async () => {
@@ -35,6 +37,10 @@ const deleteCashflow = async (id) => {
     console.error('삭제 중 오류발생:', error)
   }
 }
+const router = useRouter()
+const goToDetail = (id) => {
+  router.push(`/transaction/${id}`)
+}
 </script>
 
 <template>
@@ -48,7 +54,7 @@ const deleteCashflow = async (id) => {
         </span>
       </div>
 
-      <div class="expense-item">
+      <div class="expense-item" @click="goToDetail(item.id)">
         <div class="expense-content">
           <div class="icon">
             <img :src="getIconPath(item.category)" alt="카테고리 아이콘" class="category-icon" />
@@ -81,7 +87,7 @@ const deleteCashflow = async (id) => {
   padding: 10px;
   background-color: white;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  border: 1px solid green;
+  border: 1px solid #61905a;
 }
 
 .expense-header {
