@@ -51,26 +51,26 @@
       "userId": 1,
       "cashflowName": "전기세",
       "cashflowValue": 2222,
-      "date": "2025-4-8 TUE",
+      "date": "2025-04-08 TUE",
       "category": "주거"
     },
     {
       "id": "2568",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "식염수",
+      "cashflowName": "스팀게임 결제",
       "cashflowValue": 2556,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "여가/오락"
     },
     {
       "id": "696c",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "위장약",
+      "cashflowName": "틴트",
       "cashflowValue": 5689,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "화장품"
     },
     {
       "id": "eee8",
@@ -85,19 +85,19 @@
       "id": "9e76",
       "cashflowType": true,
       "userId": 1,
-      "cashflowName": "소아과",
+      "cashflowName": "원소주",
       "cashflowValue": 3633332,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "술"
     },
     {
       "id": "8bde",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "1231",
+      "cashflowName": "어버이날",
       "cashflowValue": 36665,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "선물"
     },
     {
       "id": "4b3d",

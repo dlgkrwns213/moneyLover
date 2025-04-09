@@ -40,7 +40,7 @@
     </div>
 
     <!-- Results -->
-    <div v-if="filteredItems.length">
+    <div v-if="filteredItems.length" class="result-filter">
       <div
         v-for="item in filteredItems"
         :key="item.id"
@@ -92,10 +92,12 @@ import DateRangeFilter from './DateRangeFilter.vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { TRANSLATIONS } from '@/constants/translate'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
 const goHome = () => router.push('/')
 const items = ref([])
+const userStore = useUserStore()
 
 const searchText = ref('')
 
@@ -114,7 +116,11 @@ const filters = reactive({
 
 const fetchItems = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/cashflows?userId=1')
+    const response = await axios.get(`http://localhost:3000/cashflows`, {
+      params: {
+        userId: userStore.userId, // user.js에서 정의한 userId 사용
+      },
+    })
     items.value = response.data.map((item) => ({
       id: item.id,
       type: item.cashflowType ? '수입' : '지출',
@@ -222,12 +228,18 @@ const getIconPath = (koreanCategory) => {
 @media (max-width: 360px) {
   .container {
     padding: 1rem;
+    scrollbar-width: none;
     /* font-family: 'MyFontBold'; */
   }
 }
 
 .container {
   font-family: 'MyFont';
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .fs-4 {
@@ -249,5 +261,8 @@ const getIconPath = (koreanCategory) => {
   height: 24px;
   object-fit: contain;
   /* padding-right: 50px; */
+}
+.result-filter {
+  padding-bottom: 60px;
 }
 </style>
