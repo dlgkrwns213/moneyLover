@@ -21,6 +21,10 @@ onMounted(async () => {
   }
 })
 
+function goBack() {
+  router.replace('/')
+}
+
 // ✅ 날짜 선택 관련
 const selectedDate = ref('')
 const newEvent = ref('')
@@ -170,6 +174,11 @@ const getColorClass = (value) => {
 </script>
 
 <template>
+<div style="background-color: #f6f6f6;">
+  <button class="back-button" @click="goBack">
+    <font-awesome-icon :icon="['fas', 'xmark']" class="xmark-icon" />
+  </button>
+</div>
 <div class="container">
   <!-- 📅 FullCalendar -->
   <v-calendar 
@@ -258,12 +267,31 @@ const getColorClass = (value) => {
 </template>
 
 <style scoped>
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+
+  border: none;
+  padding: 0;
+  background-color: #f6f6f6;
+}
+
+.back-button:hover {
+  cursor: pointer;
+}
+
+.xmark-icon {
+  font-size: 24px;
+}
+
+
 /* 📌 기본 컨테이너 */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
+  padding: 50px 20px 20px 20px;
   font-family: 'MyFontBold';
   position: relative;
 }
