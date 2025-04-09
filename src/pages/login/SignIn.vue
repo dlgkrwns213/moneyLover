@@ -30,11 +30,13 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { hashPassword } from '@/utils/hash'
+import { useBudgetStore } from '@/stores/budget'
 
 const id = ref('')
 const pw = ref('')
 const router = useRouter()
 const userStore = useUserStore()
+const budgetStore = useBudgetStore()
 
 const tryLogin = async () => {
   if (!id.value || !pw.value) {
@@ -59,6 +61,7 @@ const tryLogin = async () => {
 
     const fakeToken = 'fake-access-token-1234'
     userStore.login(fakeToken, user.id)
+    budgetStore.loadBudget()
     alert('로그인 성공!')
     router.push('/chart')
   } catch (error) {
