@@ -77,11 +77,10 @@ onMounted(async () => {
 }
 .top-text {
   display: flex;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 12px;
   font-family: 'MyFontBold';
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 10px 10px;
 }
 .no-data-container {
   display: flex;
