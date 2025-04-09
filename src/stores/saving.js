@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { useUserStore } from './user'
 import axios from 'axios'
 
 export const useSavingStore = defineStore('saving', {
@@ -11,11 +12,15 @@ export const useSavingStore = defineStore('saving', {
   actions: {
     async addSaving(newSaving) {
         this.loading = true
+        const userStore = useUserStore()
         try {
-          const res = await axios.post('http://localhost:3000/saving', newSaving)
+          const res = await axios.post('http://localhost:3000/saving', {
+            ...newSaving,
+            userId: userStore.userId, 
+          })          
           this.savings.push(res.data)
           this.error = null
-          return res.data.id // 이 줄 추가!!
+          return res.data.id 
         } catch (err) {
           this.error = err
           console.error('저축 추가 실패:', err)

@@ -19,6 +19,7 @@ onMounted(() => {
     savingStore.fetchSavings(userStore.userId)
   }
 })
+console.log('userId:', userStore.userId)
 </script>
 
 
