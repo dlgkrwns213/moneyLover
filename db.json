@@ -24,7 +24,8 @@
       "cashflowName": "월급",
       "cashflowValue": 5000000,
       "date": "2025-04-08 TUE",
-      "category": "급여"
+      "category": "급여",
+      "includeInBudget": true
     },
     {
       "id": "2xh0",
@@ -36,7 +37,7 @@
       "category": "이자"
     },
     {
-      "id": "d82x2",
+      "id": "d82x3",
       "cashflowType": false,
       "userId": 1,
       "cashflowName": "TV",
@@ -244,6 +245,40 @@
       "cashflowValue": 2555921,
       "date": "2025-04-08 TUE",
       "category": "생필품"
+    },
+    {
+      "id": "8664",
+      "name": "샘플1",
+      "targetAmount": 100000,
+      "startDate": "2025-04-09",
+      "endDate": "2025-04-12",
+      "frequency": "매일",
+      "repeatCount": 4,
+      "perAmount": 25000,
+      "schedule": [
+        {
+          "date": "2025-04-09",
+          "amount": 25000,
+          "done": false
+        },
+        {
+          "date": "2025-04-10",
+          "amount": 25000,
+          "done": false
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 25000,
+          "done": false
+        },
+        {
+          "date": "2025-04-12",
+          "amount": 25000,
+          "done": false
+        }
+      ],
+      "saved": 0,
+      "percent": 0
     }
   ]
 }
