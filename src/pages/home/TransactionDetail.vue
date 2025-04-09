@@ -99,7 +99,10 @@ const deleteItem = async () => {
       </div>
 
       <!-- 예산 포함 -->
-      <div class="d-flex justify-content-between align-items-center">
+      <div
+        v-if="!transaction.cashflowType"
+        class="d-flex justify-content-between align-items-center"
+      >
         <div class="custom-bold">예산 포함</div>
         <label class="switch">
           <input type="checkbox" v-model="includeInBudget" @click="toggleBudget" />
