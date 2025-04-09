@@ -35,9 +35,15 @@ const bgc = [
   '#843C39', // 진한 적갈색
 ]
 
+import { useUserStore } from '@/stores/user'
+const userStore = useUserStore()
 onMounted(async () => {
   const url = 'http://localhost:3000/cashflows'
-  const res = await axios.get(url)
+  const res = await axios.get(url, {
+    params: {
+      userId: userStore.userId,
+    },
+  })
   const cashflows = res.data
 
   const expenses = cashflows.filter((item) => item.cashflowType === false)
