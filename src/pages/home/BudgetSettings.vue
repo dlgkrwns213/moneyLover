@@ -9,6 +9,10 @@ const router = useRouter()
 const inputValue = ref(0)
 const budgetStore = useBudgetStore()
 
+onMounted(() => {
+  inputValue.value = budgetStore.budget
+})
+
 function saveBudget() {
   budgetStore.setBudget(Number(inputValue.value))
   router.push('/')
