@@ -20,7 +20,7 @@ onMounted(async () => {
 // ✅ 날짜 선택 관련
 const selectedDate = ref('')
 const newEvent = ref('')
-const events = ref({})
+const cashflows = ref({})
 
 const today = new Date()
 const innerSelectedDate = ref(today)
@@ -43,16 +43,7 @@ function formatDateWithWeekday(date) {
 
 function onDayClick(day) {
   innerSelectedDate.value = day.date
-}
 
-function addEvent() {
-  if (!selectedDate.value || !newEvent.value.trim()) return
-
-  if (!events.value[selectedDate.value]) {
-    events.value[selectedDate.value] = []
-  }
-  events.value[selectedDate.value].push(newEvent.value.trim())
-  newEvent.value = ''
 }
 
 // 월간 데이터를 추적할 pages (페이지 네이션이나 뷰어 기반)
@@ -144,71 +135,72 @@ const getColorClass = (value) => {
 </script>
 
 <template>
-  <div class="container">
-    <!-- FullCalendar -->
-    <v-calendar 
-      is-expanded 
-      :attributes="attributes" 
-      :max-date="maxDate"
-      @update:pages="onPagesUpdate"
+<div class="container">
+  <!-- 📅 FullCalendar -->
+  <v-calendar 
+    is-expanded 
+    :attributes="attributes" 
+    :max-date="maxDate"
+    @update:pages="onPagesUpdate"
+  >
+    <!-- 날짜 안에 content (숫자) 표시 -->
+    <template #day-content="{ day, attributes }">
+      <div 
+        class="day-content" 
+        :class="{
+          selected: innerSelectedDate && formatDateLocal(innerSelectedDate) === formatDateLocal(day.date),
+          disabled: day.date > maxDate
+        }"
+        @click="onDayClick(day)"
+      >
+        <span>{{ day.day }}</span>
+        <template v-if="attributes[0]?.content?.base?.color">
+          <span 
+            v-for="(num, index) in attributes[0].content.base.color" 
+            :key="index" 
+            :class="getColorClass(num)"
+          >
+            {{ num }}
+          </span>
+        </template>
+      </div>
+    </template>
+  </v-calendar>
+
+  <!-- 💰 월 수입/지출/수익 요약 -->
+  <div class="month-data">
+    월 수입: <span style="color: #61905A;">{{ monthlyIncome.toLocaleString('ko-KR') + "₩" }}</span><br>
+    월 지출: <span style="color: #E35050;">{{ monthlyOutcome.toLocaleString('ko-KR') + "₩" }}</span><br>
+    월 수익: 
+    <span 
+      :style="{
+        color: (monthlyIncome - monthlyOutcome) > 0
+          ? '#61905A'
+          : (monthlyIncome - monthlyOutcome) < 0
+            ? '#E35050'
+            : '#000000'
+      }"
     >
-      <!-- 날짜 안에 content (숫자) 표시 -->
-      <template #day-content="{ day, attributes }">
-        <div 
-          class="day-content" 
-          :class="{
-            selected: innerSelectedDate && formatDateLocal(innerSelectedDate) === formatDateLocal(day.date),
-            disabled: day.date > maxDate
-          }"          
-          @click="onDayClick(day)"
-        >
-          <span>{{ day.day }}</span> <!-- 날짜 숫자 -->
-
-          <template v-if="attributes[0]?.content?.base?.color">
-            <span 
-              v-for="(num, index) in attributes[0].content.base.color" 
-              :key="index" 
-              :class="getColorClass(num)"
-            >
-              {{ num }}
-            </span>
-          </template>
-        </div>
-      </template>
-    </v-calendar>
-
-    <div class="month-data">
-      월 수입: <span style="color: #61905A;">{{ monthlyIncome.toLocaleString('ko-kr') + "₩"}}</span><br>
-      월 지출: <span style="color: #E35050;">{{ monthlyOutcome.toLocaleString('ko-kr')  + "₩"}}</span><br>
-      월 수익: 
-        <span 
-          :style="{
-            color: (monthlyIncome - monthlyOutcome) > 0
-              ? '#61905A'    // plus면 초록
-              : (monthlyIncome - monthlyOutcome) < 0
-                ? '#E35050'  // minus면 빨강
-                : '#000000'  // 같으면 검정
-          }"
-        >
-          {{ (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') + '₩' }}
-        </span>
-    </div>
-
-    <div class="event-panel">
-      <h5>선택 날짜: 
-        <span class="selected-date">
-          {{ formatDateWithWeekday(innerSelectedDate)}}
-        </span>
-      </h5>
-
-      <ul class="event-list" v-if="events[selectedDate]?.length">
-        <li v-for="(event, idx) in events[selectedDate]" :key="idx">
-          📌 {{ event }}
-        </li>
-      </ul>
-      <p v-else class="no-event">기록이 없습니다.</p>
-    </div>
+      {{ (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') + '₩' }}
+    </span>
   </div>
+
+  <!-- 📋 선택된 날짜의 상세 내역 -->
+  <div class="event-panel">
+    <h5>
+      선택 날짜: 
+      <span class="selected-date">
+        {{ formatDateWithWeekday(innerSelectedDate) }}
+      </span>
+    </h5>
+
+    <div class="event-list" v-if="cashflows[selectedDate]?.length">
+    </div>
+    
+    <p v-else class="no-event">기록이 없습니다.</p>
+  </div>
+</div>
+
 </template>
 
 <style scoped>
