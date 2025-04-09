@@ -93,7 +93,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
 .stat-card {
   flex: 1;
   background-color: white;
-  border: 2px solid #61905a;
+  border: 1.5px solid;
   border-radius: 12px;
   padding: 12px;
   max-width: 340px;
@@ -103,12 +103,10 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
 
 .stat-card.expense {
   border-color: #cc4444;
-  color: rgb(3, 3, 3);
 }
 
 .stat-card.income {
   border-color: #61905a;
-  color: rgb(0, 0, 0);
 }
 
 .label {
