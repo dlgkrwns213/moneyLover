@@ -13,18 +13,16 @@ const router = useRouter()
 
 onMounted(async () => {
   try {
-    const today = new Date()
-    const date = today
+    const userId = userStore.userId || 'unknown'
+    const res = await axios.get(`http://localhost:3000/cashflows?userId=${userId}`)
+    allCashflowData.value = res.data
+
+    const date = new Date()
     const y = date.getFullYear()
     const m = String(date.getMonth() + 1).padStart(2, '0')
     const d = String(date.getDate()).padStart(2, '0')
     const dateKey = `${y}-${m}-${d}`;
-
     cashflows.value = monthlyData.value.filter(data => data.date.startsWith(dateKey));
-
-    const userId = userStore.userId || 'unknown'
-    const res = await axios.get(`http://localhost:3000/cashflows?userId=${userId}`)
-    allCashflowData.value = res.data
   } catch (error) {
     console.error('데이터 불러오기 실패', error)
   }
