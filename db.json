@@ -4,13 +4,21 @@
       "id": "1",
       "username": "Lee",
       "user": "admin",
-      "password": "1234",
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
       "setAmount": 0
+    },
+    {
+      "id": "65dc",
+      "username": "박예빈",
+      "user": "ye2000bin",
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+      "setAmount": 0,
+      "isLogin": false
     }
   ],
   "cashflows": [
     {
-      "id": "d82x2",
+      "id": "d82x3",
       "cashflowType": true,
       "userId": 1,
       "cashflowName": "월급",
@@ -52,26 +60,26 @@
       "userId": 1,
       "cashflowName": "전기세",
       "cashflowValue": 2222,
-      "date": "2025-4-8 TUE",
+      "date": "2025-04-08 TUE",
       "category": "주거"
     },
     {
       "id": "2568",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "식염수",
+      "cashflowName": "스팀게임 결제",
       "cashflowValue": 2556,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "여가/오락"
     },
     {
       "id": "696c",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "위장약",
+      "cashflowName": "틴트",
       "cashflowValue": 5689,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "화장품"
     },
     {
       "id": "eee8",
@@ -84,21 +92,21 @@
     },
     {
       "id": "9e76",
-      "cashflowType": true,
+      "cashflowType": false,
       "userId": 1,
-      "cashflowName": "소아과",
-      "cashflowValue": 3633332,
+      "cashflowName": "원소주",
+      "cashflowValue": 36000,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "술"
     },
     {
       "id": "8bde",
       "cashflowType": false,
       "userId": 1,
-      "cashflowName": "1231",
+      "cashflowName": "어버이날",
       "cashflowValue": 36665,
       "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "선물"
     },
     {
       "id": "4b3d",
@@ -108,6 +116,24 @@
       "cashflowValue": 33000,
       "date": "2025-04-01 TUE",
       "category": "음료"
+    },
+    {
+      "id": "7a66",
+      "cashflowType": false,
+      "userId": "unKnown",
+      "cashflowName": "skt",
+      "cashflowValue": 33333,
+      "date": "2025-04-08 TUE",
+      "category": "통신비"
+    },
+    {
+      "id": "72af",
+      "cashflowType": false,
+      "userId": "65dc",
+      "cashflowName": "문제집",
+      "cashflowValue": 5000,
+      "date": "2025-04-03 THU",
+      "category": "도서"
     }
   ],
   "saving": [

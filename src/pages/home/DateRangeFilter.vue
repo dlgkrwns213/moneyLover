@@ -7,7 +7,7 @@
     <div
       v-if="menuVisible"
       class="border rounded shadow p-3 bg-white position-absolute"
-      style="z-index: 1000; width: 260px; top: 100%; left: 0; margin-top: 5px"
+      style="z-index: 1000; width: 260px; top: 100%; transform: translateX(-80%); margin-top: 5px"
     >
       <div class="mb-2">
         <label class="form-label">시작 날짜</label>
@@ -31,7 +31,7 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 
 const props = defineProps({
   label: String,
-  modelValue: Object, 
+  modelValue: Object,
 })
 const emit = defineEmits(['update:modelValue'])
 

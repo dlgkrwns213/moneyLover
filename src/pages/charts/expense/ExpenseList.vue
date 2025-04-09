@@ -15,12 +15,18 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import ExpenseListItem from './ExpenseListItem.vue'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const categorySummary = ref([])
 
 onMounted(async () => {
   const url = 'http://localhost:3000/cashflows?cashflowType=false'
-  const res = await axios.get(url)
+  const res = await axios.get(url, {
+    params: {
+      userId: userStore.userId,
+    },
+  })
   const expenses = res.data
 
   // 총 지출 구하기

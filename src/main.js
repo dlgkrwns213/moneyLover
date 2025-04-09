@@ -25,8 +25,22 @@ const app = createApp(App)
 app.use(VCalendar, {})
 app.component('font-awesome-icon', FontAwesomeIcon)
 const pinia = createPinia()
-app.use(createPinia())
 pinia.use(piniaPluginPersistedstate)
 app.use(router)
+app.use(pinia)
+
+import { useUserStore } from '@/stores/user'
+
+router.beforeEach((to, from, next) => {
+  const userStore = useUserStore()
+
+  userStore.checkToken()
+
+  if (to.meta.requiresAuth && !userStore.isLoggedIn) {
+    next('/signin')
+  } else {
+    next()
+  }
+})
 
 app.mount('#app')
