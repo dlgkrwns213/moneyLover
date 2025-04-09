@@ -180,7 +180,7 @@ const getColorClass = (value) => {
           📌 {{ event }}
         </li>
       </ul>
-      <p v-else class="no-event">등록된 일정이 없습니다.</p>
+      <p v-else class="no-event">기록이 없습니다.</p>
     </div>
   </div>
 </template>
@@ -224,6 +224,12 @@ const getColorClass = (value) => {
   font-weight: bold;
 }
 
+/* 지정 불가 날짜 설정 */
+.day-content.disabled {
+  pointer-events: none;
+  opacity: 0.3;
+}
+
 /* 🎨 content 색상 */
 .positive {
   color: #61905A; /* 초록색 */
@@ -238,6 +244,12 @@ const getColorClass = (value) => {
 .zero {
   visibility: hidden;
   font-size: 10px;
+}
+
+.event-panel {
+  margin-top: 10px;
+
+  text-align: center;
 }
 
 </style>
