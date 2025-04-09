@@ -25,10 +25,11 @@
   </div>
 </template>
 <script setup>
-import { ref, watch } from 'vue'
+import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { useUserStore } from '@/stores/user'
+import { hashPassword } from '@/utils/hash'
 
 const id = ref('')
 const pw = ref('')
@@ -44,13 +45,14 @@ const tryLogin = async () => {
   try {
     const res = await axios.get(`http://localhost:3000/users?user=${id.value}`)
     const user = res.data[0]
+    const hashedInput = hashPassword(pw.value)
 
     if (!user) {
       alert('존재하지 않는 아이디입니다.')
       return
     }
 
-    if (user.password !== pw.value) {
+    if (hashedInput !== user.password) {
       alert('비밀번호가 일치하지 않습니다.')
       return
     }

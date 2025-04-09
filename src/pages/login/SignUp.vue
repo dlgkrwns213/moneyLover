@@ -32,6 +32,7 @@ import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { hashPassword } from '@/utils/hash'
 const router = useRouter()
 
 const username = ref('')
@@ -81,10 +82,13 @@ const handleRegister = async () => {
     return
   }
 
+  // 비밀번호 해시값 설정
+  const hashedPassword = hashPassword(password.value)
+
   const newUser = {
     username: username.value,
     user: user.value,
-    password: password.value,
+    password: hashedPassword,
     setAmount: 0,
     isLogin: false,
   }
