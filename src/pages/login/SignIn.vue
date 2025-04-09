@@ -63,7 +63,7 @@ const tryLogin = async () => {
     userStore.login(fakeToken, user.id)
     budgetStore.loadBudget()
     alert('로그인 성공!')
-    router.push('/chart')
+    router.push('/')
   } catch (error) {
     console.error('로그인 에러:', error)
     alert('로그인 중 오류가 발생했습니다.')
@@ -124,7 +124,7 @@ label {
   margin-top: 30px;
 }
 .sign-up-link a {
-  color: #999;
+  color: #909090;
   text-decoration: underline;
   text-underline-offset: 4px;
   font-size: 12px;
