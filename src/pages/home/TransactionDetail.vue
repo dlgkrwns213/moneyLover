@@ -10,7 +10,7 @@ const route = useRoute()
 const router = useRouter()
 
 const transaction = ref(null)
-const includeInBudget = ref(false)
+const includeInBudget = ref(true)
 
 onMounted(async () => {
   const id = route.params.id
@@ -30,14 +30,14 @@ const icons = import.meta.glob('@/assets/images/all/*.png', { eager: true, impor
 const getIconPath = (category) => {
   const key = getCategoryKey(category)
   const path = `/src/assets/images/all/${key}.png`
-    // 이미지 로딩 오류시 기본 클로버 이미지가 뜨도록
+  // 이미지 로딩 오류시 기본 클로버 이미지가 뜨도록
   return icons[path] || icons['/src/assets/images/clover/clover_default.png']
 }
 
 const toggleBudget = async () => {
   includeInBudget.value = !includeInBudget.value
   await axios.patch(`http://localhost:3000/cashflows/${transaction.value.id}`, {
-    includeInBudget: includeInBudget.value
+    includeInBudget: includeInBudget.value,
   })
 }
 
@@ -54,67 +54,65 @@ const deleteItem = async () => {
     <div class="d-flex justify-content-between align-items-center mb-3">
       <img :src="backIcon" alt="뒤로가기" class="icon-back" @click="router.back()" />
       <h5 class="m-0 custom-bold text-center flex-grow-1">세부 정보</h5>
-      
-      <div style="width: 20px;"></div>
-        <!-- 버튼 -->
-  <div class="d-flex justify-content-end gap-2 mt-2">
-    <img
-    src="@/assets/images/saving/delete.png"
-    alt="삭제"
-    class="icon-delete"
-    @click="deleteItem"
-  />
-  </div>
+
+      <div style="width: 20px"></div>
+      <!-- 버튼 -->
+      <div class="d-flex justify-content-end gap-2 mt-2">
+        <img
+          src="@/assets/images/saving/delete.png"
+          alt="삭제"
+          class="icon-delete"
+          @click="deleteItem"
+        />
+      </div>
     </div>
 
     <!-- 내용 카드 -->
-<div v-if="transaction" class="box shadow-sm p-3 d-flex flex-column gap-3">
-  <!-- 카테고리 / 금액 -->
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="d-flex align-items-center gap-3">
-      <div class="icon-wrapper">
-        <img :src="getIconPath(transaction.category)" alt="카테고리" class="category-icon" />
+    <div v-if="transaction" class="box shadow-sm p-3 d-flex flex-column gap-3">
+      <!-- 카테고리 / 금액 -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex align-items-center gap-3">
+          <div class="icon-wrapper">
+            <img :src="getIconPath(transaction.category)" alt="카테고리" class="category-icon" />
+          </div>
+
+          <div>
+            <div class="custom-light text-dark">{{ transaction.category }}</div>
+          </div>
+        </div>
+        <div class="custom-light text-green text-end">
+          {{ transaction.cashflowType ? '+' : '-' }}₩{{
+            transaction.cashflowValue.toLocaleString('ko-KR')
+          }}
+        </div>
       </div>
 
-      
-      <div>
-        <div class="custom-light text-dark">{{ transaction.category }}</div>
+      <!-- 메모 -->
+      <div class="d-flex justify-content-between">
+        <div class="custom-bold">메모</div>
+        <div class="custom-light text-end">{{ transaction.cashflowName }}</div>
       </div>
-    </div>
-    <div class="custom-light text-green text-end">
-      {{ transaction.cashflowType ? '+' : '-' }}₩{{ transaction.cashflowValue.toLocaleString('ko-KR') }}
-    </div>
-  </div>
-
-  <!-- 메모 -->
-  <div class="d-flex justify-content-between">
-    <div class="custom-bold">메모</div>
-    <div class="custom-light text-end">{{ transaction.cashflowName }}</div>
-  </div>
-  <!-- 날짜 -->
-  <div class="d-flex justify-content-between">
+      <!-- 날짜 -->
+      <div class="d-flex justify-content-between">
         <div class="custom-bold">날짜</div>
         <div class="custom-light text-end">{{ transaction.date }}</div>
       </div>
 
-  <!-- 예산 포함 -->
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="custom-bold">예산 포함</div>
-    <label class="switch">
-  <input type="checkbox" v-model="includeInBudget" @click="toggleBudget" />
-  <span class="slider round"></span>
-</label>
-  </div>
-  
-
-
-</div>
+      <!-- 예산 포함 -->
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="custom-bold">예산 포함</div>
+        <label class="switch">
+          <input type="checkbox" v-model="includeInBudget" @click="toggleBudget" />
+          <span class="slider round"></span>
+        </label>
+      </div>
+    </div>
   </div>
 </template>
 
 <style scoped>
 .bg-light-gray {
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 }
 .box {
   background: #fff;
@@ -122,10 +120,10 @@ const deleteItem = async () => {
   letter-spacing: -0.05em;
 }
 .custom-bold {
-  font-family: "MyFontBold";
+  font-family: 'MyFontBold';
 }
 .custom-light {
-  font-family: "MyFont";
+  font-family: 'MyFont';
 }
 .icon-back {
   width: 20px;
@@ -167,15 +165,17 @@ const deleteItem = async () => {
 .slider {
   position: absolute;
   cursor: pointer;
-  top: 0; left: 0;
-  right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 24px;
 }
 .slider:before {
   position: absolute;
-  content: "";
+  content: '';
   height: 18px;
   width: 18px;
   left: 3px;
@@ -185,7 +185,7 @@ const deleteItem = async () => {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 input:checked + .slider {
@@ -193,6 +193,6 @@ input:checked + .slider {
 }
 input:checked + .slider:before {
   transform: translateX(20px);
-  background-image: url('@/assets/images/all/toggle_after.jpg')
+  background-image: url('@/assets/images/all/toggle_after.jpg');
 }
 </style>
