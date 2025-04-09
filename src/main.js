@@ -25,9 +25,9 @@ const app = createApp(App)
 app.use(VCalendar, {})
 app.component('font-awesome-icon', FontAwesomeIcon)
 const pinia = createPinia()
-app.use(createPinia())
 pinia.use(piniaPluginPersistedstate)
 app.use(router)
+app.use(pinia)
 
 import { useUserStore } from '@/stores/user'
 
