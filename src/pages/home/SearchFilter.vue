@@ -40,7 +40,7 @@
     </div>
 
     <!-- Results -->
-    <div v-if="filteredItems.length">
+    <div v-if="filteredItems.length" class="result-filter">
       <div
         v-for="item in filteredItems"
         :key="item.id"
@@ -92,10 +92,12 @@ import DateRangeFilter from './DateRangeFilter.vue'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 import { TRANSLATIONS } from '@/constants/translate'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
 const goHome = () => router.push('/')
 const items = ref([])
+const userStore = useUserStore()
 
 const searchText = ref('')
 
@@ -114,7 +116,11 @@ const filters = reactive({
 
 const fetchItems = async () => {
   try {
-    const response = await axios.get('http://localhost:3000/cashflows?userId=1')
+    const response = await axios.get(`http://localhost:3000/cashflows`, {
+      params: {
+        userId: userStore.userId, // user.js에서 정의한 userId 사용
+      },
+    })
     items.value = response.data.map((item) => ({
       id: item.id,
       type: item.cashflowType ? '수입' : '지출',
@@ -170,7 +176,39 @@ const evalAmountFilter = (itemAmount, amountFilter) => {
 }
 
 const typeOptions = ['지출', '수입']
-const categoryOptions = ['식비', '교통', '쇼핑', '급여', '기타']
+const categoryOptions = [
+  '보너스',
+  '부채',
+  '현금 수입',
+  '이자',
+  '만기',
+  '급여',
+  '부업',
+  '기타 수입',
+  '도서',
+  '자동차',
+  '의류',
+  '화장품',
+  '배달',
+  '음료',
+  '술',
+  '여가/오락',
+  '운동',
+  '주거',
+  '대출',
+  '관리비',
+  '식사',
+  '의료',
+  '생필품',
+  '현금 지출',
+  '반려동물',
+  '통신비',
+  '선물',
+  '교통',
+  '쇼핑',
+  '학습',
+  '기타 지출',
+]
 const amountOptions = ['10만원 이상', '10만원 미만']
 const dateOptions = ['2025-04', '2025-03', '2025-02']
 
@@ -190,12 +228,18 @@ const getIconPath = (koreanCategory) => {
 @media (max-width: 360px) {
   .container {
     padding: 1rem;
+    scrollbar-width: none;
     /* font-family: 'MyFontBold'; */
   }
 }
 
 .container {
   font-family: 'MyFont';
+  scrollbar-width: none;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
 }
 
 .fs-4 {
@@ -217,5 +261,8 @@ const getIconPath = (koreanCategory) => {
   height: 24px;
   object-fit: contain;
   /* padding-right: 50px; */
+}
+.result-filter {
+  padding-bottom: 60px;
 }
 </style>

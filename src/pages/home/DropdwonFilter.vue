@@ -8,7 +8,7 @@
       {{ modelValue || label }}
     </button>
 
-    <div class="dropdown-menu p-2" style="width: 360px;">
+    <div class="dropdown-menu p-2" style="width: 360px">
       <div class="category-grid">
         <a
           v-for="option in options"
@@ -19,15 +19,15 @@
         >
           {{ option }}
         </a>
-    </div>
-    <hr class="my-2" />
-    <a
-      class="dropdown-item text-warning text-center"
-      href="#"
-      @click.prevent="$emit('update:modelValue', '')"
-    >
-    초기화
-    </a>
+      </div>
+      <hr class="my-2" />
+      <a
+        class="dropdown-item text-warning text-center"
+        href="#"
+        @click.prevent="$emit('update:modelValue', '')"
+      >
+        초기화
+      </a>
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ defineEmits(['update:modelValue'])
 <style scoped>
 .category-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 4px;
 }
 </style>
