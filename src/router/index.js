@@ -79,11 +79,13 @@ const router = createRouter({
       path: '/signin',
       name: 'signin',
       component: SignIn,
+      meta: { hideNav: true },
     },
     {
       path: '/signup',
       name: 'SignUp',
       component: SignUp,
+      meta: { hideNav: true },
     },
     {
       path: '/settings',
