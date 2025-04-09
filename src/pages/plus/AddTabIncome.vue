@@ -16,9 +16,7 @@ const incomeKeys = [
   'etc_income',
 ]
 
-const incomeItems = computed(() =>
-  incomeKeys.map((key) => ({ key, text: TRANSLATIONS[key] }))
-)
+const incomeItems = computed(() => incomeKeys.map((key) => ({ key, text: TRANSLATIONS[key] })))
 
 const selectedKey = ref(null)
 
@@ -26,10 +24,9 @@ const selectCard = (key) => {
   selectedKey.value = key
   emit('update-category', {
     type: 'income',
-    category: key,
+    category: TRANSLATIONS[key],
   })
 }
-
 </script>
 
 <template>
