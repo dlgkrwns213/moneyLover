@@ -32,6 +32,7 @@ import axios from 'axios'
 import { useUserStore } from '@/stores/user'
 import { hashPassword } from '@/utils/hash'
 import { useRouter } from 'vue-router'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 const userStore = useUserStore()
@@ -63,12 +64,32 @@ const changePassword = async () => {
   const chkPw = hashPassword(checkPassword.value)
 
   if (user.password !== curPw) {
-    alert('현재 비밀번호가 일치하지 않습니다.')
+    Swal.fire({
+      icon: 'warning',
+      title: '현재 비밀번호가 일치하지 않습니다.',
+      text: '비밀번호를 다시 입력해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
   if (newPw !== chkPw) {
-    alert('새 비밀번호가 일치하지 않습니다.')
+    Swal.fire({
+      icon: 'warning',
+      title: '새 비밀번호가 일치하지 않습니다.',
+      text: '비밀번호를 확인해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
@@ -77,11 +98,32 @@ const changePassword = async () => {
       ...user,
       password: newPw,
     })
-    alert('비밀번호가 성공적으로 변경되었습니다.')
+    Swal.fire({
+      icon: 'success',
+      title: '비밀번호가 성공적으로 변경되었습니다.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        router.push('/signin')
+      }
+    })
     router.push('/')
   } catch (error) {
-    console.error('비밀번호 변경 실패:', error)
-    alert('비밀번호 변경에 실패했습니다.')
+    Swal.fire({
+      icon: 'error',
+      title: '비밀번호 변경에 실패했습니다.',
+      text: '잠시후 다시 시도해 주세요.',
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        popup: 'swal-popup',
+        confirmButton: 'swal-confirm',
+      },
+    })
   }
 }
 </script>
