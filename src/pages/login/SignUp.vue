@@ -31,10 +31,10 @@
 import { ref } from 'vue'
 import axios from 'axios'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
 import { hashPassword } from '@/utils/hash'
 const router = useRouter()
 
+// 입력받은 정보
 const username = ref('')
 const user = ref('')
 const password = ref('')
@@ -43,9 +43,6 @@ const checkPassword = ref('')
 const isIdAvailable = ref(false)
 
 const checkUserId = async () => {
-  // 로그아웃 체크용으로 대체중
-  const userStore = useUserStore()
-  userStore.logout()
   if (!user.value) {
     alert('아이디를 입력하세요.')
     return
@@ -90,7 +87,6 @@ const handleRegister = async () => {
     user: user.value,
     password: hashedPassword,
     setAmount: 0,
-    isLogin: false,
   }
 
   try {
@@ -111,6 +107,8 @@ const handleRegister = async () => {
   justify-content: center;
   align-items: center;
   margin: auto;
+  position: relative;
+  z-index: 1001;
 }
 img {
   width: 277px;
@@ -166,6 +164,7 @@ label {
   border-bottom: 2px solid #61905a;
   outline: none;
   background-color: transparent;
+  caret-color: #61905a;
 }
 .register {
   display: flex;
