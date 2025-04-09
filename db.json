@@ -134,7 +134,47 @@
       "cashflowValue": 5000,
       "date": "2025-04-03 THU",
       "category": "도서",
-      "includeInBudget": false
+      "includeInBudget": true
+    },
+    {
+      "id": "d77c",
+      "cashflowType": false,
+      "userId": "65dc",
+      "cashflowName": "아버지 생신",
+      "cashflowValue": 25000,
+      "date": "2025-04-09 WED",
+      "category": "선물",
+      "includeInBudget": true
+    },
+    {
+      "id": "df6d",
+      "cashflowType": false,
+      "userId": "65dc",
+      "cashflowName": "참이슬",
+      "cashflowValue": 3000,
+      "date": "2025-04-09 WED",
+      "category": "술",
+      "includeInBudget": true
+    },
+    {
+      "id": "1b69",
+      "cashflowType": true,
+      "userId": "1",
+      "cashflowName": "보너스 받음",
+      "cashflowValue": 30000,
+      "date": "2025-04-08 TUE",
+      "category": "보너스",
+      "includeInBudget": true
+    },
+    {
+      "id": "2466",
+      "cashflowType": true,
+      "userId": "65dc",
+      "cashflowName": "주웠음",
+      "cashflowValue": 5000,
+      "date": "2025-04-09 WED",
+      "category": "현금 수입",
+      "includeInBudget": true
     },
     {
       "id": "e92c",
