@@ -78,6 +78,8 @@ const tryLogin = async () => {
   justify-content: center;
   align-items: center;
   margin: auto;
+  position: relative;
+  z-index: 1001;
 }
 img {
   width: 277px;
@@ -115,6 +117,7 @@ label {
   border-bottom: 2px solid #61905a;
   outline: none;
   background-color: transparent;
+  caret-color: #61905a;
 }
 .sign-up-link {
   width: 100%;
