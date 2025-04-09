@@ -320,7 +320,7 @@ const getColorClass = (value) => {
 
 .month-data {
   position: absolute;
-  bottom: 110px; /* 살짝 위로 올림 */
+  top: 420px; /* 살짝 위로 올림 */
   left: 45%;  /* 살짝 오른쪽으로 이동 */
   background-color: #fff;
   padding: 8px 12px;
