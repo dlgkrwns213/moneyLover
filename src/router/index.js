@@ -17,7 +17,7 @@ import SignUp from '@/pages/login/SignUp.vue'
 import SettingsMain from '@/pages/mypage/SettingsMain.vue'
 import SearchFilter from '@/pages/home/SearchFilter.vue'
 import TransactionDetail from '@/pages/home/TransactionDetail.vue'
-import HomeCalendar from '@/pages/home/homeCalendar.vue'
+import HomeCalendar from '@/pages/home/HomeCalendar.vue'
 import ChangePassword from '@/pages/login/ChangePassword.vue'
 
 const router = createRouter({

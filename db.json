@@ -24,7 +24,7 @@
       "cashflowValue": 5000000,
       "date": "2025-04-08 TUE",
       "category": "급여",
-      "includeInBudget": false
+      "includeInBudget": true
     },
     {
       "id": "2xh0",
@@ -44,7 +44,7 @@
       "cashflowValue": 36000,
       "date": "2025-04-08 TUE",
       "category": "술",
-      "includeInBudget": false
+      "includeInBudget": true
     },
     {
       "id": "7a66",
@@ -105,6 +105,16 @@
       "date": "2025-04-09 WED",
       "category": "현금 수입",
       "includeInBudget": true
+    },
+    {
+      "id": "ee42",
+      "cashflowType": true,
+      "userId": "1",
+      "cashflowName": "용돈",
+      "cashflowValue": 50000,
+      "date": "2025-04-09 WED",
+      "category": "현금 수입",
+      "includeInBudget": false
     }
   ],
   "saving": [
