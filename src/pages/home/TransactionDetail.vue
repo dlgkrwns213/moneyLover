@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 import backIcon from '@/assets/images/saving/back.png'
 import { TRANSLATIONS } from '@/constants/translate'
@@ -42,9 +43,49 @@ const toggleBudget = async () => {
 }
 
 const deleteItem = async () => {
-  if (!confirm('정말 삭제하시겠습니까?')) return
-  await axios.delete(`http://localhost:3000/cashflows/${transaction.value.id}`)
-  router.push('/')
+  const result = await Swal.fire({
+    title: '정말 삭제하시겠습니까?',
+    text: '삭제 후 되돌릴 수 없습니다.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#d33',
+    cancelButtonColor: '#aaa',
+    confirmButtonText: '삭제하기',
+    cancelButtonText: '취소',
+    customClass: {
+      title: 'swal-title',
+      popup: 'swal-popup',
+      confirmButton: 'swal-confirm',
+    },
+  })
+
+  if (result.isConfirmed) {
+    try {
+      await axios.delete(`http://localhost:3000/cashflows/${transaction.value.id}`)
+
+      Swal.fire({
+        title: '삭제 완료!',
+        text: '항목이 삭제되었습니다.',
+        icon: 'success',
+        showConfirmButton: false,
+        timer: 1000,
+        timerProgressBar: true,
+        customClass: {
+          title: 'swal-title',
+          popup: 'swal-popup',
+        },
+        willClose: () => {
+          router.push('/')
+        },
+      })
+    } catch (err) {
+      Swal.fire({
+        title: '오류 발생!',
+        text: '삭제에 실패했습니다.',
+        icon: 'error',
+      })
+    }
+  }
 }
 </script>
 
