@@ -1,6 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { ref, computed, onMounted } from 'vue'
+import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/user'
 
 // ✅ 사용자 정보 및 데이터 로드
@@ -68,6 +68,24 @@ const monthlyData = computed(() => {
   return allCashflowData.value.filter(data => data.date.startsWith(yearMonth))
 })
 
+const monthlyIncome = ref(0)
+const monthlyOutcome = ref(0)
+watchEffect(() => {
+  let income = 0
+  let outcome = 0
+
+  for (const data of monthlyData.value) {
+    if (data.cashflowType) {
+      income += data.cashflowValue
+    } else {
+      outcome += data.cashflowValue
+    }
+  }
+
+  monthlyIncome.value = income
+  monthlyOutcome.value = outcome
+})
+
 // ✅ 날짜별 attributes 설정
 const attributes = computed(() => {
   // const mapByDate = {}
@@ -101,10 +119,6 @@ const attributes = computed(() => {
 
   for (const data of monthlyData.value) {
     const dateKey = data.date.split(" ")[0] // yyyy-mm-dd
-    if (!mapByDateSum[dateKey]) mapByDateSum[dateKey] = {income: 0, outcome: 0}
-
-    console.log(data.cashflowValue)
-    console.log(mapByDateSum[dateKey])
     if (data.cashflowType) {
       mapByDateSum[dateKey].income += data.cashflowValue
     } else {
@@ -112,14 +126,11 @@ const attributes = computed(() => {
     }
   }
 
-  console.log(mapByDateSum)
-
   return Object.entries(mapByDateSum).map(([date, items], i) => ({
     key: `date-${i}`,
     dates: date,
     content: {
       base: {
-        // 예시: 수입-지출 차액을 기준으로 색상 설정
         color: [items.income, -items.outcome]
       }
     }
@@ -167,6 +178,11 @@ const getColorClass = (value) => {
       </template>
     </v-calendar>
 
+    <div class="month-data">
+      월 수입: <span style="color: #61905A;">{{ monthlyIncome.toLocaleString('ko-kr') + "₩"}}</span><br>
+      월 지출: <span style="color: #E35050;">{{ monthlyOutcome.toLocaleString('ko-kr')  + "₩"}}</span>
+    </div>
+
     <!-- 일정 추가 패널 -->
     <div class="event-panel">
       <h5>선택 날짜: 
@@ -193,6 +209,8 @@ const getColorClass = (value) => {
   align-items: center;
   padding: 20px;
   background: #f4f6f9;
+  font-family: 'MyFontBold';
+  position: relative;
 }
 
 /* ✅ FullCalendar 날짜 스타일 */
@@ -216,12 +234,13 @@ const getColorClass = (value) => {
   width: 45px;
   height: 68px;
   transition: all 0.3s;
+  font-family: 'MyFontBold';
 }
 
 /* ✅ 선택된 날짜 (초록색 네모 테두리) */
 .day-content.selected {
   border: 2px solid #4caf50 !important; /* 초록색 테두리 */
-  font-weight: bold;
+
 }
 
 /* 지정 불가 날짜 설정 */
@@ -233,17 +252,36 @@ const getColorClass = (value) => {
 /* 🎨 content 색상 */
 .positive {
   color: #61905A; /* 초록색 */
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .negative {
   color: #E35050; /* 빨간색 */
-  font-size: 10px;
+  font-size: 9px;
 }
 
 .zero {
   visibility: hidden;
   font-size: 10px;
+}
+
+.month-data {
+  position: absolute;
+  bottom: 110px; /* 살짝 위로 올림 */
+  left: 45%;  /* 살짝 오른쪽으로 이동 */
+  background-color: #fff;
+  padding: 8px 12px;
+  border-radius: 8px;
+  box-shadow: 0 0 6px rgba(0,0,0,0.1);
+  font-size: 14px;
+}
+.month-data .income {
+  color: #61905A;
+  font-weight: bold;
+}
+.month-data .outcome {
+  color: #E35050;
+  font-weight: bold;
 }
 
 .event-panel {
