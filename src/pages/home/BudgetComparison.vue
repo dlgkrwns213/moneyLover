@@ -259,7 +259,7 @@ const chartOptions = {
 .label {
   padding: 10px;
   font-size: 16px;
-  text-align: center;
+  text-align: left;
   color: #444;
   flex: 1;
 }
