@@ -93,7 +93,6 @@ const goToDetail = (id) => {
   gap: 16px;
   width: 320px;
   font-family: 'MyFont';
-  margin-left: 8px;
 }
 
 .expense-item {
