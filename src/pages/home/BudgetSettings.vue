@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useBudgetStore } from '@/stores/budget'
 import axios from 'axios'
 import '@/assets/main.css'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 const inputValue = ref(0)
@@ -14,8 +15,22 @@ onMounted(() => {
 })
 
 function saveBudget() {
-  budgetStore.setBudget(Number(inputValue.value))
-  router.push('/')
+  if (Number(inputValue.value) < 0) {
+    Swal.fire({
+      icon: 'warning',
+      title: '0보다 낮은 수는 설정할 수 없습니다',
+      timer: 2000,
+      showConfirmButton: false,
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
+  } else {
+    budgetStore.setBudget(Number(inputValue.value))
+    router.push('/')
+  }
 }
 
 const goToSearch = () => {

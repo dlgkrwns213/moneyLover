@@ -398,11 +398,15 @@ function calculateButtonClick(content) {
 }
 
 .money {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   right: 15px; /* input 박스 오른쪽에 위치 */
   transform: translateY(-50%); /* 세로 중앙 정렬 */
   font-size: 16px;
+  font-weight: bold;
   pointer-events: none; /* 클릭 방지 */
   z-index: 1000;
 }
