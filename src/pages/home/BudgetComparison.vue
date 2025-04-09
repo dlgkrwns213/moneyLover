@@ -173,18 +173,19 @@ const chartOptions = {
   display: flex;
   align-items: center;
   /* padding: 16px; */
-  background-color: #f6f6f6;
-  border-radius: 16px;
+  background-color: #ffffff;
+  /* border: 1px solid #61905a; */
+  border-radius: 12px;
   width: 360px;
   height: 200px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.05); */
 }
 .other-donut-row {
   display: flex;
   align-items: center;
   /* padding: 16px; */
   background-color: rgb(255, 255, 255);
-  border-radius: 16px;
+  border-radius: 12px;
   width: 360px;
   height: 200px;
   box-shadow: 0 0 5px rgba(87, 87, 87, 0.05);
@@ -254,7 +255,6 @@ const chartOptions = {
 .label {
   padding: 10px;
   font-size: 16px;
-  font-weight: bold;
   color: #444;
   flex: 1;
 }

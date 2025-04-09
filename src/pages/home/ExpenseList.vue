@@ -51,14 +51,6 @@ const getIconPath = (koreanCategory) => {
   // return `/src/assets/images/all/${key}.png`
 }
 
-const deleteCashflow = async (id) => {
-  try {
-    await axios.delete(`http://localhost:3000/cashflows/${id}`)
-    cashflows.value = cashflows.value.filter((item) => item.id !== id)
-  } catch (error) {
-    console.error('삭제 중 오류발생:', error)
-  }
-}
 const router = useRouter()
 const goToDetail = (id) => {
   router.push(`/transaction/${id}`)
@@ -70,10 +62,9 @@ const goToDetail = (id) => {
     <div v-for="(item, index) in sortedCashflows" :key="item.id">
       <div class="expense-header">
         <span class="date">{{ item.date }}</span>
-        <span class="delete" @click="deleteCashflow(item.id)">삭제🗑</span>
-        <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
+        <!-- <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
           {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
-        </span>
+        </span> -->
       </div>
 
       <div class="expense-item" @click="goToDetail(item.id)">
@@ -86,8 +77,9 @@ const goToDetail = (id) => {
             <div class="category">{{ item.category || '카테고리 없음' }}</div>
           </div>
           <div class="value">
-            {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
-          </div>
+        <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
+          {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}<span class="won"> 원</span>
+        </span></div>
         </div>
       </div>
     </div>
@@ -133,7 +125,7 @@ const goToDetail = (id) => {
 }
 
 .amount.expense {
-  color: #e35050;
+  color: #e04141;
 }
 
 .expense-content {
@@ -161,25 +153,29 @@ const goToDetail = (id) => {
 }
 
 .title {
-  font-weight: bold;
+  font-family: "MyfontBold";
 }
 
 .category {
-  font-size: 12px;
+  font-size: 11px;
+  font-family: "Myfont";
   color: #61905a;
+  padding-left: 1px;
 }
 
 .value {
-  font-weight: bold;
+  font-family: "MyfontBold";
   color: #333;
 }
 
-.delete {
-  margin-left: 10px;
-  color: #e35050;
-  cursor: pointer;
-}
 .amount {
   margin-left: auto;
 }
+.won {
+  color: #000;
+}
+* {
+  letter-spacing: -0.05em;
+}
+
 </style>
