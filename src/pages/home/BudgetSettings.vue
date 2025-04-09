@@ -75,7 +75,7 @@ function goBack() {
 
 <style scoped>
 .input-group {
-  width: 145px;
+  width: 175px;
   height: 38px;
   padding-right: 20px;
 }
@@ -171,7 +171,7 @@ function goBack() {
 
 .donut-container {
   position: relative;
-  width: 214px;
+  width: 180px;
   height: 100px;
   flex-shrink: 0;
 }
