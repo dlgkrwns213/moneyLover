@@ -282,7 +282,7 @@ function calculateButtonClick(content) {
           v-model="cashflowName"
           type="text"
           class="input-cashflow-name"
-          placeholder="분류를 입력하세요."
+          placeholder="상세정보를 입력하세요."
         />
         <div class="money">{{ formattedValue }}</div>
       </div>
@@ -397,6 +397,8 @@ function calculateButtonClick(content) {
   text-align: left;
   padding: 0 15px;
   font-size: 12px;
+  border: 1.5px solid #61905a;
+  letter-spacing: -0.05em;
 }
 
 .money {
