@@ -1,64 +1,52 @@
+<!-- SavingDetail.vue -->
 <script setup>
-import { ref, onMounted, computed } from 'vue'
+import { onMounted, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import axios from 'axios'
-
+import { useSavingStore } from '@/stores/saving'
 import checkGreen from '@/assets/images/saving/check_green.png'
 import checkGray from '@/assets/images/saving/check_gray.png'
 
 const route = useRoute()
 const router = useRouter()
-
-const saving = ref(null)
-const schedule = ref([])
+const savingStore = useSavingStore()
 
 // 저장 내역 불러오기
-onMounted(async () => {
-  try {
-    const res = await axios.get(`http://localhost:3000/saving/${route.params.id}`)
-    saving.value = res.data
-    schedule.value = res.data.schedule
-  } catch (err) {
-    console.error('저축 데이터를 불러오는 데 실패했습니다.', err)
-  }
+onMounted(() => {
+  savingStore.fetchSavingById(route.params.id)
+})
+
+const saving = computed(() => savingStore.currentSaving)
+const schedule = computed(() => saving.value?.schedule || [])
+
+const savedAmount = computed(() => {
+  if (!saving.value || !Array.isArray(saving.value.schedule)) return 0
+  return saving.value.schedule
+    .filter(item => item.done)
+    .reduce((sum, item) => sum + item.amount, 0)
 })
 
 // 퍼센트 계산
 const percent = computed(() => {
-  if (!saving.value) return 0
-  return Math.floor((saving.value.saved / saving.value.targetAmount) * 100)
+  const target = Number(saving.value?.targetAmount || 0)
+  const saved = savedAmount.value
+  if (!target) return 0
+  return Math.floor((saved / target) * 100)
 })
 
+
 // 체크 토글
-const toggleCheck = async (index) => {
-  const item = schedule.value[index]
-  item.done = !item.done
-
-  const totalSaved = schedule.value.filter(i => i.done).reduce((acc, cur) => acc + cur.amount, 0)
-
-  try {
-    await axios.patch(`http://localhost:3000/saving/${route.params.id}`, {
-      schedule: schedule.value,
-      saved: totalSaved,
-      percent: Math.floor((totalSaved / saving.value.targetAmount) * 100)
-    })
-
-    saving.value.saved = totalSaved
-    saving.value.percent = Math.floor((totalSaved / saving.value.targetAmount) * 100)
-  } catch (err) {
-    alert('업데이트 중 오류가 발생했습니다.')
-    console.error(err)
-  }
+const toggleCheck = (index) => {
+  savingStore.toggleScheduleCheck(index)
 }
 
 // 삭제
 const deleteSaving = async () => {
   if (!confirm('정말 이 저축을 삭제하시겠습니까?')) return
   try {
-    await axios.delete(`http://localhost:3000/saving/${route.params.id}`)
+    await savingStore.deleteSaving(route.params.id)
     router.push('/saving')
   } catch (err) {
-    alert('삭제 중 오류가 발생했습니다.')
+    console.error(err)
   }
 }
 </script>
@@ -72,7 +60,7 @@ const deleteSaving = async () => {
     src="@/assets/images/saving/back.png"
     alt="뒤로가기"
     class="icon-back"
-    @click="router.back()"
+    @click="router.push('/saving')"
   />
 
   <!-- 가운데 제목 -->
