@@ -32,12 +32,19 @@ import axios from 'axios'
 import IncomeChart from '@/pages/charts/income/IncomeChart.vue'
 import IncomeList from '@/pages/charts/income/IncomeList.vue'
 import IncomeSingleAmount from '@/pages/charts/income/IncomeSingleAmount.vue'
+import { useUserStore } from '@/stores/user'
 
 const hasData = ref(false)
+const userStore = useUserStore()
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:3000/cashflows?cashflowType=true')
+    const res = await axios.get('http://localhost:3000/cashflows?cashflowType=true', {
+      params: {
+        userId: userStore.userId,
+        cashflowType: true,
+      },
+    })
     hasData.value = res.data.length > 0
   } catch (error) {
     hasData.value = false

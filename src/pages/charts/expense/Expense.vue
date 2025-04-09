@@ -31,12 +31,19 @@ import axios from 'axios'
 import ExpenseChart from '@/pages/charts/expense/ExpenseChart.vue'
 import ExpenseList from '@/pages/charts/expense/ExpenseList.vue'
 import ExpenseSingleAmount from '@/pages/charts/expense/ExpenseSingleAmount.vue'
+import { useUserStore } from '@/stores/user'
 
 const hasData = ref(false)
+const userStore = useUserStore()
 
 onMounted(async () => {
   try {
-    const res = await axios.get('http://localhost:3000/cashflows?cashflowType=false')
+    const res = await axios.get('http://localhost:3000/cashflows', {
+      params: {
+        userId: userStore.userId,
+        cashflowType: false,
+      },
+    })
     hasData.value = res.data.length > 0
   } catch (error) {
     hasData.value = false

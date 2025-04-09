@@ -14,12 +14,18 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import IncomeSignleAmountItem from './IncomeSingleAmountItem.vue'
+import { useUserStore } from '@/stores/user'
 
+const userStore = useUserStore()
 const top10List = ref([])
 
 onMounted(async () => {
   const url = 'http://localhost:3000/cashflows?cashflowType=true'
-  const res = await axios.get(url)
+  const res = await axios.get(url, {
+    params: {
+      userId: userStore.userId,
+    },
+  })
   const cashflows = res.data
 
   const singleList = cashflows
