@@ -17,6 +17,8 @@ import SignUp from '@/pages/login/SignUp.vue'
 import SettingsMain from '@/pages/mypage/SettingsMain.vue'
 import SearchFilter from '@/pages/home/SearchFilter.vue'
 import TransactionDetail from '@/pages/home/TransactionDetail.vue'
+import HomeCalendar from '@/pages/home/homeCalendar.vue'
+
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -68,12 +70,6 @@ const router = createRouter({
       meta: { requiresAuth: true },
     },
     {
-      path: '/:pathMatch(.*)*',
-      name: 'NotFound',
-      component: NotFound,
-      meta: { requiresAuth: true },
-    },
-    {
       path: '/budgetSetting',
       name: 'budgetSettings',
       component: BudgetSettings,
@@ -105,6 +101,17 @@ const router = createRouter({
       path: '/transaction/:id',
       name: 'TransactionDetail',
       component: TransactionDetail,
+    },
+    {
+      path: '/home/calendar',
+      name: 'home-calendar',
+      component: HomeCalendar,
+    },
+
+    {
+      path: '/:pathMatch(.*)*',
+      name: 'NotFound',
+      component: NotFound,
     },
   ],
 })
