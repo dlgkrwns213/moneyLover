@@ -34,27 +34,7 @@
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
       "category": "이자",
-      "includeInBudget": true
-    },
-    {
-      "id": "d82x3",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "TV",
-      "cashflowValue": 500000,
-      "date": "2025-04-08 TUE",
-      "category": "쇼핑",
-      "includeInBudget": true
-    },
-    {
-      "id": "d82x3",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "점심",
-      "cashflowValue": 8000,
-      "date": "2025-04-08 TUE",
-      "category": "식사",
-      "includeInBudget": true
+      "includeInBudget": false
     },
     {
       "id": "9e76",
@@ -64,7 +44,7 @@
       "cashflowValue": 36000,
       "date": "2025-04-08 TUE",
       "category": "술",
-      "includeInBudget": true
+      "includeInBudget": false
     },
     {
       "id": "7a66",
@@ -114,7 +94,7 @@
       "cashflowValue": 30000,
       "date": "2025-04-08 TUE",
       "category": "보너스",
-      "includeInBudget": true
+      "includeInBudget": false
     },
     {
       "id": "2466",
