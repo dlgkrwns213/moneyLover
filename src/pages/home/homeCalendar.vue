@@ -137,7 +137,6 @@ const attributes = computed(() => {
   }))
 })
 
-
 // 숫자 색상 클래스 반환
 const getColorClass = (value) => {
   return value > 0 ? 'positive' : value < 0 ? 'negative' : 'zero'
@@ -180,10 +179,21 @@ const getColorClass = (value) => {
 
     <div class="month-data">
       월 수입: <span style="color: #61905A;">{{ monthlyIncome.toLocaleString('ko-kr') + "₩"}}</span><br>
-      월 지출: <span style="color: #E35050;">{{ monthlyOutcome.toLocaleString('ko-kr')  + "₩"}}</span>
+      월 지출: <span style="color: #E35050;">{{ monthlyOutcome.toLocaleString('ko-kr')  + "₩"}}</span><br>
+      월 수익: 
+        <span 
+          :style="{
+            color: (monthlyIncome - monthlyOutcome) > 0
+              ? '#61905A'    // plus면 초록
+              : (monthlyIncome - monthlyOutcome) < 0
+                ? '#E35050'  // minus면 빨강
+                : '#000000'  // 같으면 검정
+          }"
+        >
+          {{ (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') + '₩' }}
+        </span>
     </div>
 
-    <!-- 일정 추가 패널 -->
     <div class="event-panel">
       <h5>선택 날짜: 
         <span class="selected-date">
@@ -208,7 +218,6 @@ const getColorClass = (value) => {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  background: #f4f6f9;
   font-family: 'MyFontBold';
   position: relative;
 }

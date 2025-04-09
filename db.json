@@ -135,6 +135,15 @@
       "date": "2025-04-03 THU",
       "category": "도서",
       "includeInBudget": false
+    },
+    {
+      "id": "e92c",
+      "cashflowType": true,
+      "userId": "65dc",
+      "cashflowName": "보너스1",
+      "cashflowValue": 1255,
+      "date": "2025-04-09 WED",
+      "category": "bonus"
     }
   ],
   "saving": [
