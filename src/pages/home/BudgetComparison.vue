@@ -11,6 +11,10 @@ const budgetStore = useBudgetStore()
 const budget = computed(() => budgetStore.budget)
 const router = useRouter()
 
+const goToCalendar = () => {
+  router.push('/home/calendar')
+}
+
 const goToBudgetSettings = () => {
   router.push('/budgetSetting')
 }
@@ -94,14 +98,19 @@ const chartOptions = {
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
     rel="stylesheet"
   />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+  />
+
   <!-- Bootstrap Icons -->
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
     rel="stylesheet"
   />
   <div class="header">
-    <span class="icon" @click="goBack">
-      <i class="bi bi-x"></i>
+    <span class="icon" @click="goToCalendar">
+      <i class="fa-solid fa-calendar-days icon-img"></i>
     </span>
     <span class="menu-budgetsetting">예산설정</span>
     <span class="icon" @click="goToSearch">
@@ -278,6 +287,10 @@ const chartOptions = {
 .icon {
   width: 24px;
   text-align: center;
+}
+
+.icon-img:hover {
+  cursor: pointer;
 }
 
 .bi-x {
