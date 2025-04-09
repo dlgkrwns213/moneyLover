@@ -133,7 +133,8 @@
       "cashflowName": "문제집",
       "cashflowValue": 5000,
       "date": "2025-04-03 THU",
-      "category": "도서"
+      "category": "도서",
+      "includeInBudget": false
     }
   ],
   "saving": [
