@@ -26,7 +26,11 @@ onMounted(async () => {
 })
 
 const sortedCashflows = computed(() => {
-  return [...cashflows.value].sort((a, b) => new Date(b.date) - new Date(a.date))
+  return [...cashflows.value].sort((a, b) => {
+    const dateA = new Date(a.date.split(' ')[0])
+    const dateB = new Date(b.date.split(' ')[0])
+    return dateB - dateA
+  })
 })
 
 // const getCategorykey = (koreanCategory) => {
