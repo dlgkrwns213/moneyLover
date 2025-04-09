@@ -26,17 +26,29 @@ onMounted(async () => {
 })
 
 const sortedCashflows = computed(() => {
-  return [...cashflows.value].sort((a, b) => new Date(b.date) - new Date(a.date))
+  return [...cashflows.value].sort((a, b) => {
+    const dateA = new Date(a.date.split(' ')[0])
+    const dateB = new Date(b.date.split(' ')[0])
+    return dateB - dateA
+  })
 })
 
+// const getCategorykey = (koreanCategory) => {
+//   const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
+//   return entry ? entry[0] : null
+// }
+
 const getCategorykey = (koreanCategory) => {
-  const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
+  if (typeof koreanCategory !== 'string') return null
+  const trimmed = koreanCategory.trim()
+  const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value.trim() === trimmed)
   return entry ? entry[0] : null
 }
 
 const getIconPath = (koreanCategory) => {
   const key = getCategorykey(koreanCategory)
-  return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+  return key ? `/src/assets/images/all/${key}.png` : `src/assets/images/all/${key}.png`
+  // return `/src/assets/images/all/${key}.png`
 }
 
 const deleteCashflow = async (id) => {

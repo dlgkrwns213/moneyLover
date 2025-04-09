@@ -6,10 +6,12 @@ import { Chart as ChartJS, Title, Tooltip, Legend, ArcElement } from 'chart.js'
 import { useRouter } from 'vue-router'
 import { useBudgetStore } from '@/stores/budget'
 import axios from 'axios'
+import { useUserStore } from '@/stores/user'
 
 const budgetStore = useBudgetStore()
 const budget = computed(() => budgetStore.budget)
 const router = useRouter()
+const userStore = useUserStore()
 
 const goToCalendar = () => {
   router.push('/home/calendar')
@@ -30,9 +32,14 @@ const props = defineProps({
 })
 
 const cashflows = ref([])
+
 onMounted(async () => {
   try {
-    const response = await axios.get('http://localhost:3000/cashflows')
+    const response = await axios.get('http://localhost:3000/cashflows', {
+      params: {
+        userId: userStore.userId, // user.js에서 정의한 userId 사용
+      },
+    })
     cashflows.value = response.data
   } catch (error) {
     console.error('데이터 불러오기 실패', error)
