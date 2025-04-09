@@ -34,7 +34,8 @@
       "cashflowName": "이자",
       "cashflowValue": 5000,
       "date": "2025-04-08 TUE",
-      "category": "이자"
+      "category": "이자",
+      "includeInBudget": true
     },
     {
       "id": "d82x3",
@@ -43,7 +44,8 @@
       "cashflowName": "TV",
       "cashflowValue": 500000,
       "date": "2025-04-08 TUE",
-      "category": "쇼핑"
+      "category": "쇼핑",
+      "includeInBudget": true
     },
     {
       "id": "d82x3",
@@ -52,43 +54,8 @@
       "cashflowName": "점심",
       "cashflowValue": 8000,
       "date": "2025-04-08 TUE",
-      "category": "식사"
-    },
-    {
-      "id": "4842",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "전기세",
-      "cashflowValue": 2222,
-      "date": "2025-04-08 TUE",
-      "category": "주거"
-    },
-    {
-      "id": "2568",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "스팀게임 결제",
-      "cashflowValue": 2556,
-      "date": "2025-04-08 TUE",
-      "category": "여가/오락"
-    },
-    {
-      "id": "696c",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "틴트",
-      "cashflowValue": 5689,
-      "date": "2025-04-08 TUE",
-      "category": "화장품"
-    },
-    {
-      "id": "eee8",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "감기약",
-      "cashflowValue": 55555,
-      "date": "2025-04-08 TUE",
-      "category": "의료"
+      "category": "식사",
+      "includeInBudget": true
     },
     {
       "id": "9e76",
@@ -97,25 +64,8 @@
       "cashflowName": "원소주",
       "cashflowValue": 36000,
       "date": "2025-04-08 TUE",
-      "category": "술"
-    },
-    {
-      "id": "8bde",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "어버이날",
-      "cashflowValue": 36665,
-      "date": "2025-04-08 TUE",
-      "category": "선물"
-    },
-    {
-      "id": "4b3d",
-      "cashflowType": false,
-      "userId": 1,
-      "cashflowName": "커피",
-      "cashflowValue": 33000,
-      "date": "2025-04-01 TUE",
-      "category": "음료"
+      "category": "술",
+      "includeInBudget": true
     },
     {
       "id": "7a66",
@@ -124,7 +74,8 @@
       "cashflowName": "skt",
       "cashflowValue": 33333,
       "date": "2025-04-08 TUE",
-      "category": "통신비"
+      "category": "통신비",
+      "includeInBudget": true
     },
     {
       "id": "72af",
@@ -191,12 +142,12 @@
         {
           "date": "2025-04-09",
           "amount": 100000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-10",
           "amount": 100000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-11",
@@ -209,8 +160,42 @@
           "done": false
         }
       ],
-      "saved": 200000,
-      "percent": 50
+      "saved": 0,
+      "percent": 0
+    },
+    {
+      "id": "4580",
+      "name": "이탈리아여행",
+      "targetAmount": 23000000,
+      "startDate": "2025-04-09",
+      "endDate": "2025-04-12",
+      "frequency": "매일",
+      "repeatCount": 4,
+      "perAmount": 5750000,
+      "schedule": [
+        {
+          "date": "2025-04-09",
+          "amount": 5750000,
+          "done": true
+        },
+        {
+          "date": "2025-04-10",
+          "amount": 5750000,
+          "done": false
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 5750000,
+          "done": false
+        },
+        {
+          "date": "2025-04-12",
+          "amount": 5750000,
+          "done": false
+        }
+      ],
+      "saved": 5750000,
+      "percent": 25
     }
   ]
 }
