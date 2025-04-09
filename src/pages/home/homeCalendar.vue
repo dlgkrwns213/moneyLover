@@ -13,7 +13,16 @@ const router = useRouter()
 
 onMounted(async () => {
   try {
-    const userId = userStore.userId || '1' || 'unknown'
+    const today = new Date()
+    const date = today
+    const y = date.getFullYear()
+    const m = String(date.getMonth() + 1).padStart(2, '0')
+    const d = String(date.getDate()).padStart(2, '0')
+    const dateKey = `${y}-${m}-${d}`;
+
+    cashflows.value = monthlyData.value.filter(data => data.date.startsWith(dateKey));
+
+    const userId = userStore.userId || 'unknown'
     const res = await axios.get(`http://localhost:3000/cashflows?userId=${userId}`)
     allCashflowData.value = res.data
   } catch (error) {
@@ -350,8 +359,8 @@ const getColorClass = (value) => {
 
 .month-data {
   position: absolute;
-  top: 420px; /* 살짝 위로 올림 */
-  left: 45%;  /* 살짝 오른쪽으로 이동 */
+  top: 450px;
+  left: 45%;
   background-color: #fff;
   padding: 8px 12px;
   border-radius: 8px;
