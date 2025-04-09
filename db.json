@@ -130,72 +130,79 @@
   ],
   "saving": [
     {
-      "id": "4b3c",
-      "name": "샘플1",
-      "targetAmount": 400000,
+      "id": "5032",
+      "name": "Lee-saving",
+      "targetAmount": 100000,
       "startDate": "2025-04-09",
       "endDate": "2025-04-12",
       "frequency": "매일",
       "repeatCount": 4,
+      "perAmount": 25000,
+      "schedule": [
+        {
+          "date": "2025-04-09",
+          "amount": 25000,
+          "done": true
+        },
+        {
+          "date": "2025-04-10",
+          "amount": 25000,
+          "done": true
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 25000,
+          "done": false
+        },
+        {
+          "date": "2025-04-12",
+          "amount": 25000,
+          "done": false
+        }
+      ],
+      "saved": 50000,
+      "percent": 50,
+      "userId": "1"
+    },
+    {
+      "id": "84d1",
+      "name": "ye-saving",
+      "targetAmount": 500000,
+      "startDate": "2025-04-09",
+      "endDate": "2025-05-07",
+      "frequency": "매주",
+      "repeatCount": 5,
       "perAmount": 100000,
       "schedule": [
         {
           "date": "2025-04-09",
           "amount": 100000,
-          "done": false
-        },
-        {
-          "date": "2025-04-10",
-          "amount": 100000,
-          "done": false
-        },
-        {
-          "date": "2025-04-11",
-          "amount": 100000,
-          "done": false
-        },
-        {
-          "date": "2025-04-12",
-          "amount": 100000,
-          "done": false
-        }
-      ],
-      "saved": 0,
-      "percent": 0
-    },
-    {
-      "id": "4580",
-      "name": "이탈리아여행",
-      "targetAmount": 23000000,
-      "startDate": "2025-04-09",
-      "endDate": "2025-04-12",
-      "frequency": "매일",
-      "repeatCount": 4,
-      "perAmount": 5750000,
-      "schedule": [
-        {
-          "date": "2025-04-09",
-          "amount": 5750000,
           "done": true
         },
         {
-          "date": "2025-04-10",
-          "amount": 5750000,
+          "date": "2025-04-16",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-04-23",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-04-30",
+          "amount": 100000,
           "done": false
         },
         {
-          "date": "2025-04-11",
-          "amount": 5750000,
-          "done": false
-        },
-        {
-          "date": "2025-04-12",
-          "amount": 5750000,
+          "date": "2025-05-07",
+          "amount": 100000,
           "done": false
         }
       ],
-      "saved": 5750000,
-      "percent": 25
+      "saved": 300000,
+      "percent": 60,
+      "userId": "65dc"
     }
   ]
 }
