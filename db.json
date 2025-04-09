@@ -6,11 +6,19 @@
       "user": "admin",
       "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
       "setAmount": 0
+    },
+    {
+      "id": "65dc",
+      "username": "박예빈",
+      "user": "ye2000bin",
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+      "setAmount": 0,
+      "isLogin": false
     }
   ],
   "cashflows": [
     {
-      "id": "d82x2",
+      "id": "d82x3",
       "cashflowType": true,
       "userId": 1,
       "cashflowName": "월급",
@@ -116,6 +124,15 @@
       "cashflowValue": 33333,
       "date": "2025-04-08 TUE",
       "category": "통신비"
+    },
+    {
+      "id": "72af",
+      "cashflowType": false,
+      "userId": "65dc",
+      "cashflowName": "문제집",
+      "cashflowValue": 5000,
+      "date": "2025-04-03 THU",
+      "category": "도서"
     }
   ],
   "saving": [
