@@ -52,6 +52,7 @@ const deleteSaving = async () => {
 </script>
 
 <template>
+  <div class="fixed-wrapper">
   <div class="container-fluid bg-light-gray min-vh-100 px-3 py-3">
 <!-- 헤더 -->
 <div class="d-flex justify-content-between align-items-center mb-3 px-1">
@@ -117,9 +118,21 @@ const deleteSaving = async () => {
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <style scoped>
+.fixed-wrapper {
+  width: 360px;
+  height: 740px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin: 0 auto;
+  position: relative; 
+  top: 0;
+  left: 0;
+  transform: none;
+}
 .bg-light-gray {
   background-color: #F6F6F6;
 }

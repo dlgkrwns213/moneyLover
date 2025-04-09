@@ -24,6 +24,7 @@ console.log('userId:', userStore.userId)
 
 
 <template>
+   <div class="fixed-wrapper">
   <div class="container-fluid bg-light-green min-vh-100 d-flex flex-column">
     <!-- Header -->
     <header class="text-center py-3">
@@ -74,11 +75,23 @@ console.log('userId:', userStore.userId)
 
     <Navigator />
   </div>
+</div>
 </template>
 
 
 
 <style scoped>
+.fixed-wrapper {
+  width: 360px;
+  height: 740px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin: 0 auto;
+  position: relative; 
+  top: 0;
+  left: 0;
+  transform: none;
+}
 .bg-light-green {
   background-color: #F6F6F6;
 }
