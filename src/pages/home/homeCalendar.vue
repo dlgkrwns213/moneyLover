@@ -2,6 +2,7 @@
 import axios from 'axios'
 import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { TRANSLATIONS } from '@/constants/translate'
 
 // ✅ 사용자 정보 및 데이터 로드
 const userStore = useUserStore()
@@ -20,7 +21,7 @@ onMounted(async () => {
 // ✅ 날짜 선택 관련
 const selectedDate = ref('')
 const newEvent = ref('')
-const cashflows = ref({})
+const cashflows = ref([])
 
 const today = new Date()
 const innerSelectedDate = ref(today)
@@ -41,9 +42,36 @@ function formatDateWithWeekday(date) {
   return `${y}-${m}-${d} ${weekday}`
 }
 
+// 달력에서 일 하나를 눌렀을때 event 처리
 function onDayClick(day) {
   innerSelectedDate.value = day.date
+  const date = day.date
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  const dateKey = `${y}-${m}-${d}`;
 
+  cashflows.value = monthlyData.value.filter(data => data.date.startsWith(dateKey));
+  console.log(cashflows.value)
+}
+
+const getCategorykey = (koreanCategory) => {
+  const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
+  return entry ? entry[0] : null
+}
+
+const getIconPath = (koreanCategory) => {
+  const key = getCategorykey(koreanCategory)
+  return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+}
+
+const deleteCashflow = async (id) => {
+  try {
+    await axios.delete(`http://localhost:3000/cashflows/${id}`)
+    cashflows.value = cashflows.value.filter((item) => item.id !== id)
+  } catch (error) {
+    console.error('삭제 중 오류발생:', error)
+  }
 }
 
 // 월간 데이터를 추적할 pages (페이지 네이션이나 뷰어 기반)
@@ -194,7 +222,31 @@ const getColorClass = (value) => {
       </span>
     </h5>
 
-    <div class="event-list" v-if="cashflows[selectedDate]?.length">
+    <div class="expense-list" v-if="cashflows.length">
+      <div v-for="(item, index) in cashflows" :key="item.id">
+        <div class="expense-header">
+          <span class="date">{{ item.date }}</span>
+          <span class="delete" @click="deleteCashflow(item.id)">삭제🗑</span>
+          <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
+            {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
+          </span>
+        </div>
+
+        <div class="expense-item" @click="goToDetail(item.id)">
+          <div class="expense-content">
+            <div class="icon">
+              <img :src="getIconPath(item.category)" alt="카테고리 아이콘" class="category-icon" />
+            </div>
+            <div class="info">
+              <div class="title">{{ item.cashflowName }}</div>
+              <div class="category">{{ item.category || '카테고리 없음' }}</div>
+            </div>
+            <div class="value">
+              {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}원
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     
     <p v-else class="no-event">기록이 없습니다.</p>
@@ -291,4 +343,92 @@ const getColorClass = (value) => {
   text-align: center;
 }
 
+.expense-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 320px;
+  font-family: 'MyFontBold';
+}
+
+.expense-item {
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  padding: 10px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  border: 1px solid #61905a;
+}
+
+.expense-header {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: left;
+  font-size: 12px;
+  color: black;
+  padding: 4px 6px;
+  margin-bottom: 4px;
+}
+.category-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  /* padding-right: 50px; */
+}
+
+.amount.income {
+  color: #61905a;
+}
+
+.amount.expense {
+  color: #e35050;
+}
+
+.expense-content {
+  display: flex;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 43px;
+  height: 43px;
+  border-radius: 50%;
+  font-size: 20px;
+  margin-right: 10px;
+  background-color: #f0f0f0;
+  margin-right: 14px;
+  margin-left: 6px;
+}
+
+.info {
+  flex-grow: 1;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.category {
+  font-size: 12px;
+  color: #61905a;
+}
+
+.value {
+  font-weight: bold;
+  color: #333;
+}
+
+.delete {
+  margin-left: 10px;
+  color: #e35050;
+  cursor: pointer;
+}
+
+.amount {
+  margin-left: auto;
+}
 </style>
