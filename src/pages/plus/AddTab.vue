@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import axios from 'axios'
 import AddCalendarModal from './AddCalendarModal.vue'
 import { getEntryFromPath } from '@/utils/navigation'
+import Swal from 'sweetalert2'
 
 import button_1 from '@/assets/images/keyboard/button_1.png'
 import button_2 from '@/assets/images/keyboard/button_2.png'
@@ -165,9 +166,42 @@ function calculateButtonClick(content) {
       const money = Number(inputValue.value)
       const formattedDate = formatDateWithWeekday(selectedDate.value)
       console.log(formattedDate)
-      if (!selectedCategory.value) return alert('카테고리를 정하세요')
-      if (!cashflowName.value) return alert('분류를 입력하세요')
-      if (money === 0) return alert('금액은 0일 수 없습니다')
+      if (!selectedCategory.value)
+        return Swal.fire({
+          icon: 'warning',
+          title: '카테고리를 정하세요.',
+          timer: 2000,
+          showConfirmButton: false,
+          confirmButtonColor: '#429f50',
+          customClass: {
+            title: 'swal-title',
+            confirmButton: 'swal-confirm',
+          },
+        })
+      if (!cashflowName.value)
+        return Swal.fire({
+          icon: 'warning',
+          title: '분류를 정하세요.',
+          timer: 2000,
+          showConfirmButton: false,
+          confirmButtonColor: '#429f50',
+          customClass: {
+            title: 'swal-title',
+            confirmButton: 'swal-confirm',
+          },
+        })
+      if (money <= 0)
+        return Swal.fire({
+          icon: 'warning',
+          title: '0 이하의 수는 넣을 수 없습니다.',
+          timer: 2000,
+          showConfirmButton: false,
+          confirmButtonColor: '#429f50',
+          customClass: {
+            title: 'swal-title',
+            confirmButton: 'swal-confirm',
+          },
+        })
 
       const newCashflow = {
         cashflowType: selectedType.value === 'outcome' ? false : true,
