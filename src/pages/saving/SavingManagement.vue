@@ -77,7 +77,10 @@ console.log('userId:', userStore.userId)
 
             <!-- 게이지 바 -->
             <div class="progress rounded-pill mb-2" style="height: 10px">
-              <div class="progress-bar bg-green" :style="{ width: saving.percent + '%' }"></div>
+              <div class="progress-bar"
+                :class="saving.percent < 100 ? 'bg-green' : 'bg-orange'" 
+                :style="{ width: saving.percent + '%' }">
+              </div>
             </div>
             <div class="custom-light d-flex justify-content-between" style="font-size: 0.8rem">
               <div>
@@ -88,7 +91,7 @@ console.log('userId:', userStore.userId)
               </div>
               <div>
                 {{ saving.percent }}%<br /><small class="d-block text-center opacity-75"
-                  >진행</small
+                  >{{ saving.percent < 100 ? "진행" : "완료" }}</small
                 >
               </div>
               <div>
@@ -137,6 +140,9 @@ console.log('userId:', userStore.userId)
 }
 .bg-green {
   background-color: #61905a !important;
+}
+.bg-orange {
+  background-color: #eb8500 !important;
 }
 .custom-bold {
   font-family: 'MYfontBold';
