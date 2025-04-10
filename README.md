@@ -10,14 +10,14 @@
 </div>
 
 
-## Team Introduction
+## Team Introduction 🧑‍🤝‍🧑
 
 |    박준영    |     박예빈     |    이다연    |   이학준   |                                                              
 | :------------: | :-------: | :------------: | :------------: | 
 |   <img width="100px" src="" alt="프로필"/>   |  <img width="100px" src="https://github.com/user-attachments/assets/bb3613ac-f165-43f3-85be-ff630a0ef83b"/>    |    <img width="100px" src="" alt="프로필"/>   |  <img width="100px" src="" alt="프로필"/>  |
 |   [@Tarae0419](https://github.com/Tarae0419)   |    [@yebinnnnn](https://github.com/yebinnnnn)  | [@Leeday11](https://github.com/Leeday11) |  [@dlgkrwns213](https://github.com/dlgkrwns213) |
 
-## About Project
+## About Project 🔍
 **KB IT's your Life 6기** 전공 11회차 1조의 프론트엔드 프로젝트입니다. <br/>
 **Vue3**를 이용해 **Js, bootstrap5**으로 개발한 모바일 퍼스트 웹 사이트 스켈레톤 프로젝트 입니다.  <br/>
 
@@ -68,7 +68,7 @@ npm run build
 ![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
 
 ---
-## 화면 구성
+## 화면 구성 📺
 |   |   |   |   |   |
 | :--: | :--: |:--: |:--: | :--: |
 | <img width="150px" src="https://github.com/user-attachments/assets/0903f7c8-c6ab-4310-b8b5-72a9da4117a4"> | <img width="150px" src="https://github.com/user-attachments/assets/25e979aa-c2bc-466a-80dd-56e1c85a7504"> | <img width="150px" src="https://github.com/user-attachments/assets/66a32cc1-2080-4b3c-a4c1-d14ff6c79072"> | <img width="150px" src="https://github.com/user-attachments/assets/cee76c45-f91f-413f-934c-07b53272d7a8"> |  <img width="150px" src="https://github.com/user-attachments/assets/058bcf38-b0a1-4333-a7ee-d5ab18c3add7"> |  
@@ -78,23 +78,23 @@ npm run build
 
 
 ---
-## 주요 기능
+## 주요 기능 🖋️
 
-### 기본적인 가계부 기능, 수입 지출, 달력별로 확인 가능
+### 기본적인 가계부 기능, 수입 지출, 달력별로 확인 가능 📆
 - 나의 지출, 수입을 추가하고 메인화면에서 확인할 수 있어요
 - 달력 아이콘을 누르면 달력에서도 일별로 수입 지출을 확인할 수 있어요
 - 차트 페이지를 통해 카테고리별 통계와 지출 top10 을 확인하세요 
 
-### 나만의 예산관리
+### 나만의 예산관리 💰
 - 이달의 내 예산을 등록하고 얼마나 썼는지 확인할 수 있어요.
 - 고정 지출은 예산 지출에서 제외시킬 수 있어요
 - 예산이 떨어질수록 원이 줄어들고, 클로버의 잎이 떨어져요!
 
-### 나만의 저축관리
+### 나만의 저축관리 🐖
 - 나만의 목표를 설정하고 며칠에 걸쳐서, 얼만큼 반복해 저축할지 저장하세요!
 - 목표를 얼마나 달성했는지 볼 수 있고, 체크할 수 있어요!
 
-### 디렉토리 구조
+### 디렉토리 구조 📁
 ```bash
 \---src
     |   App.vue
