@@ -257,7 +257,7 @@ label {
 .register {
   display: flex;
   justify-content: center;
-  margin-top: 35px;
+  margin-top: 25px;
 }
 .register-btn {
   width: 270px;
