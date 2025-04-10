@@ -13,7 +13,7 @@ const router = useRouter()
 
 // 저축 값
 const allUserSaving = ref([])
-const allUserSavingDates = ref(new Set());
+const allUserSavingDates = ref(new Set())
 
 onMounted(async () => {
   try {
@@ -22,17 +22,15 @@ onMounted(async () => {
     // 동시 실행
     const [res, resSave] = await Promise.all([
       axios.get(`http://localhost:3000/cashflows?userId=${userId}`),
-      axios.get(`http://localhost:3000/saving?userId=${userId}`)
-    ]);
+      axios.get(`http://localhost:3000/saving?userId=${userId}`),
+    ])
 
-    allCashflowData.value = res.data;
-    allUserSaving.value = resSave.data;
+    allCashflowData.value = res.data
+    allUserSaving.value = resSave.data
 
     // 달력 데이터 뽑기
     allUserSavingDates.value = new Set(
-      allUserSaving.value.flatMap(data =>
-        data.schedule.map(dateData => dateData.date)
-      )
+      allUserSaving.value.flatMap((data) => data.schedule.map((dateData) => dateData.date)),
     )
 
     console.log(allUserSavingDates.value)
@@ -41,9 +39,8 @@ onMounted(async () => {
     const y = date.getFullYear()
     const m = String(date.getMonth() + 1).padStart(2, '0')
     const d = String(date.getDate()).padStart(2, '0')
-    const dateKey = `${y}-${m}-${d}`;
-    cashflows.value = monthlyData.value.filter(data => data.date.startsWith(dateKey));
-    
+    const dateKey = `${y}-${m}-${d}`
+    cashflows.value = monthlyData.value.filter((data) => data.date.startsWith(dateKey))
   } catch (error) {
     console.error('데이터 불러오기 실패', error)
   }
@@ -106,7 +103,6 @@ const goToDetail = (id) => {
   selectedId.value = id
   showModal.value = true
 }
-
 
 const deleteCashflow = async (id) => {
   try {
@@ -176,7 +172,11 @@ const attributes = computed(() => {
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, month, day)
     const dateKey = formatDateLocal(date)
-    mapByDateSum[dateKey] = { income: 0, outcome: 0, isSaved: allUserSavingDates.value.has(dateKey) }
+    mapByDateSum[dateKey] = {
+      income: 0,
+      outcome: 0,
+      isSaved: allUserSavingDates.value.has(dateKey),
+    }
   }
 
   for (const data of monthlyData.value) {
@@ -188,14 +188,12 @@ const attributes = computed(() => {
     }
   }
 
-
-
   return Object.entries(mapByDateSum).map(([date, items], i) => {
     return {
       key: `date-${i}`,
       dates: date,
       ...(items.isSaved && {
-        dot: [{ class: 'saved-dot' }] // isSaved가 true일 때만 dot 추가
+        dot: [{ class: 'saved-dot' }], // isSaved가 true일 때만 dot 추가
       }),
       content: {
         base: {
@@ -204,16 +202,12 @@ const attributes = computed(() => {
       },
     }
   })
-
 })
-
 
 // 숫자 색상 클래스 반환
 const getColorClass = (value) => {
   return value > 0 ? 'positive' : value < 0 ? 'negative' : 'zero'
 }
-
-
 </script>
 
 <template>
@@ -224,68 +218,67 @@ const getColorClass = (value) => {
   </div>
   <div class="container">
     <div class="calendar-wrapper">
-    <!-- FullCalendar -->
-    <v-calendar
-      is-expanded
-      :attributes="attributes"
-      :max-date="maxDate"
-      @update:pages="onPagesUpdate"
-    >
-      <!-- 날짜 안에 content (숫자) 표시 -->
-      <template #day-content="{ day, attributes }">
-        <div
-          class="day-content"
-          :class="{
-            selected:
-              innerSelectedDate && formatDateLocal(innerSelectedDate) === formatDateLocal(day.date),
-            disabled: day.date > maxDate,
-          }"
-          @click="onDayClick(day)"
-        >
-          <span>{{ day.day }}</span>
-          <template v-if="attributes[0]?.content?.base?.color">
-            <span
-              v-for="(num, index) in attributes[0].content.base.color"
-              :key="index"
-              :class="getColorClass(num)"
-            >
-              {{ num }}
-            </span>
-          </template>
-          
-        </div>
-        
-      </template>
-    </v-calendar>
-
-    <!-- 월 수입/지출/수익 요약 -->
-    <div class="month-data">
-      월 수입: <span style="color: #61905a">{{ '₩' + monthlyIncome.toLocaleString('ko-KR') }}</span
-      ><br />
-      월 지출: <span style="color: #e35050">{{ '₩' + monthlyOutcome.toLocaleString('ko-KR') }}</span
-      ><br />
-      월 수익:
-      <span
-        :style="{
-          color:
-            monthlyIncome - monthlyOutcome > 0
-              ? '#61905A'
-              : monthlyIncome - monthlyOutcome < 0
-                ? '#E35050'
-                : '#000000',
-        }"
+      <!-- FullCalendar -->
+      <v-calendar
+        is-expanded
+        :attributes="attributes"
+        :max-date="maxDate"
+        @update:pages="onPagesUpdate"
       >
-        {{ '₩' + (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') }}
-      </span>
+        <!-- 날짜 안에 content (숫자) 표시 -->
+        <template #day-content="{ day, attributes }">
+          <div
+            class="day-content"
+            :class="{
+              selected:
+                innerSelectedDate &&
+                formatDateLocal(innerSelectedDate) === formatDateLocal(day.date),
+              disabled: day.date > maxDate,
+            }"
+            @click="onDayClick(day)"
+          >
+            <span>{{ day.day }}</span>
+            <template v-if="attributes[0]?.content?.base?.color">
+              <span
+                v-for="(num, index) in attributes[0].content.base.color"
+                :key="index"
+                :class="getColorClass(num)"
+              >
+                {{ num }}
+              </span>
+            </template>
+          </div>
+        </template>
+      </v-calendar>
+
+      <!-- 월 수입/지출/수익 요약 -->
+      <div class="month-data">
+        월 수입:
+        <span style="color: #61905a">{{ '₩' + monthlyIncome.toLocaleString('ko-KR') }}</span
+        ><br />
+        월 지출:
+        <span style="color: #e35050">{{ '₩' + monthlyOutcome.toLocaleString('ko-KR') }}</span
+        ><br />
+        월 수익:
+        <span
+          :style="{
+            color:
+              monthlyIncome - monthlyOutcome > 0
+                ? '#61905A'
+                : monthlyIncome - monthlyOutcome < 0
+                  ? '#E35050'
+                  : '#000000',
+          }"
+        >
+          {{ '₩' + (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') }}
+        </span>
+      </div>
     </div>
-  </div>
     <!-- 📋 선택된 날짜의 상세 내역 -->
     <div class="event-panel">
       <h6>
         선택 날짜:
-        <span class="selected-date">
-          {{ formatDateWithWeekday(innerSelectedDate) }}요일
-        </span>
+        <span class="selected-date"> {{ formatDateWithWeekday(innerSelectedDate) }}요일 </span>
       </h6>
 
       <div class="expense-list" v-if="cashflows.length">
@@ -312,16 +305,12 @@ const getColorClass = (value) => {
           </div>
         </div>
       </div>
-    
-    <p v-else class="no-event">기록이 없습니다.</p>
 
-    <TransactionDetailModal
-      v-if="showModal"
-      :id="selectedId"
-      @close="showModal = false"
-    />
+      <p v-else class="no-event">기록이 없습니다.</p>
+
+      <TransactionDetailModal v-if="showModal" :id="selectedId" @close="showModal = false" />
+    </div>
   </div>
-</div>
 </template>
 
 <style scoped>
@@ -389,7 +378,7 @@ const getColorClass = (value) => {
 
 /* 선택된 날짜 (초록색 네모 테두리) */
 .day-content.selected {
-  border: 2px solid #61905A !important; /* 초록색 테두리 */
+  border: 2px solid #61905a !important; /* 초록색 테두리 */
 }
 
 /* 지정 불가 날짜 설정 */
@@ -418,12 +407,12 @@ const getColorClass = (value) => {
   position: relative;
   max-width: 360px;
   margin: 0 auto;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .month-data {
   position: absolute;
-  top: 450px;
+  top: 440px;
   left: 45%;
   right: 0;
   bottom: 0;
@@ -543,8 +532,8 @@ const getColorClass = (value) => {
 .amount {
   margin-left: auto;
 }
-.no-event{
+.no-event {
   margin: 2rem;
-  font-family: "Myfont";
+  font-family: 'Myfont';
 }
 </style>
