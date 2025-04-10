@@ -13,6 +13,13 @@
       "user": "ye2000bin",
       "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
       "setAmount": 0
+    },
+    {
+      "id": "c3f6",
+      "username": "이다연",
+      "user": "leeday11",
+      "password": "03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4",
+      "setAmount": 0
     }
   ],
   "cashflows": [
@@ -124,6 +131,116 @@
       "cashflowValue": 20000,
       "date": "2025-04-09 WED",
       "category": "주거",
+      "includeInBudget": false
+    },
+    {
+      "id": "33af",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "알고리즘 교재",
+      "cashflowValue": 18000,
+      "date": "2025-04-01 TUE",
+      "category": "도서",
+      "includeInBudget": true
+    },
+    {
+      "id": "b9cb",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "매머드 커피",
+      "cashflowValue": 1600,
+      "date": "2025-04-02 WED",
+      "category": "음료",
+      "includeInBudget": true
+    },
+    {
+      "id": "4339",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "포케",
+      "cashflowValue": 10900,
+      "date": "2025-04-02 WED",
+      "category": "식사",
+      "includeInBudget": true
+    },
+    {
+      "id": "8cbd",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "월세",
+      "cashflowValue": 500000,
+      "date": "2025-04-10 THU",
+      "category": "주거",
+      "includeInBudget": false
+    },
+    {
+      "id": "2491",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "셔츠",
+      "cashflowValue": 41900,
+      "date": "2025-04-05 SAT",
+      "category": "의류",
+      "includeInBudget": true
+    },
+    {
+      "id": "9595",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "매머드커피",
+      "cashflowValue": 1600,
+      "date": "2025-04-03 THU",
+      "category": "음료",
+      "includeInBudget": true
+    },
+    {
+      "id": "6ef2",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "컴포즈커피",
+      "cashflowValue": 4800,
+      "date": "2025-04-10 THU",
+      "category": "음료",
+      "includeInBudget": true
+    },
+    {
+      "id": "9fde",
+      "cashflowType": false,
+      "userId": "c3f6",
+      "cashflowName": "방울토마토",
+      "cashflowValue": 5900,
+      "date": "2025-04-04 FRI",
+      "category": "쇼핑",
+      "includeInBudget": true
+    },
+    {
+      "id": "88d5",
+      "cashflowType": true,
+      "userId": "c3f6",
+      "cashflowName": "알바비",
+      "cashflowValue": 600000,
+      "date": "2025-04-03 THU",
+      "category": "급여",
+      "includeInBudget": true
+    },
+    {
+      "id": "e7e5",
+      "cashflowType": true,
+      "userId": "c3f6",
+      "cashflowName": "적금 이자",
+      "cashflowValue": 1850,
+      "date": "2025-04-04 FRI",
+      "category": "이자",
+      "includeInBudget": true
+    },
+    {
+      "id": "578f",
+      "cashflowType": true,
+      "userId": "c3f6",
+      "cashflowName": "용돈",
+      "cashflowValue": 100000,
+      "date": "2025-04-06 SUN",
+      "category": "현금 수입",
       "includeInBudget": true
     }
   ],
@@ -202,6 +319,256 @@
       "saved": 300000,
       "percent": 60,
       "userId": "65dc"
+    },
+    {
+      "id": "e080",
+      "name": "노트북 저축",
+      "targetAmount": 2500000,
+      "startDate": "2025-04-10",
+      "endDate": "2027-04-10",
+      "frequency": "매달",
+      "repeatCount": 25,
+      "perAmount": 100000,
+      "schedule": [
+        {
+          "date": "2025-04-10",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-05-10",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-06-10",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-07-10",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-08-10",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-09-10",
+          "amount": 100000,
+          "done": true
+        },
+        {
+          "date": "2025-10-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2025-11-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2025-12-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-01-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-02-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-03-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-04-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-05-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-06-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-07-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-08-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-09-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-10-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-11-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2026-12-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2027-01-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2027-02-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2027-03-10",
+          "amount": 100000,
+          "done": false
+        },
+        {
+          "date": "2027-04-10",
+          "amount": 100000,
+          "done": false
+        }
+      ],
+      "saved": 600000,
+      "percent": 24,
+      "userId": "c3f6"
+    },
+    {
+      "id": "081c",
+      "name": "8월 여행 대비",
+      "targetAmount": 500000,
+      "startDate": "2025-04-10",
+      "endDate": "2025-08-14",
+      "frequency": "매주",
+      "repeatCount": 19,
+      "perAmount": 26315,
+      "schedule": [
+        {
+          "date": "2025-04-10",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-04-17",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-04-24",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-05-01",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-05-08",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-05-15",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-05-22",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-05-29",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-06-05",
+          "amount": 26315,
+          "done": true
+        },
+        {
+          "date": "2025-06-12",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-06-19",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-06-26",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-07-03",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-07-10",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-07-17",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-07-24",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-07-31",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-08-07",
+          "amount": 26315,
+          "done": false
+        },
+        {
+          "date": "2025-08-14",
+          "amount": 26315,
+          "done": false
+        }
+      ],
+      "saved": 236835,
+      "percent": 47,
+      "userId": "c3f6"
     }
   ]
 }
