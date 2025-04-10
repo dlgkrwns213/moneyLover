@@ -9,7 +9,13 @@
         </div>
         <div class="input-row">
           <label for="input-pw">비밀번호:</label>
-          <input type="password" id="input-pw" class="input" v-model="pw" />
+          <input
+            type="password"
+            id="input-pw"
+            class="input"
+            v-model="pw"
+            @keydown.enter="tryLogin"
+          />
         </div>
       </form>
       <div class="login-btn">

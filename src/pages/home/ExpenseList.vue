@@ -78,13 +78,15 @@ const goToDetail = (id) => {
             <img :src="getIconPath(item.category)" alt="카테고리 아이콘" class="category-icon" />
           </div>
           <div class="info">
-            <div class="title">{{ item.cashflowName }}</div>
-            <div class="category">{{ item.category || '카테고리 없음' }}</div>
+            <div class="title">{{ item.category || '카테고리 없음' }}</div>
+            <div class="category">{{ item.cashflowName }}</div>
           </div>
           <div class="value">
-        <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
-          {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString() }}<span class="won"> 원</span>
-        </span></div>
+            <span class="amount" :class="item.cashflowType ? 'income' : 'expense'">
+              {{ item.cashflowType ? '+' : '-' }}{{ item.cashflowValue.toLocaleString()
+              }}<span class="won"> 원</span>
+            </span>
+          </div>
         </div>
       </div>
 
@@ -136,7 +138,6 @@ const goToDetail = (id) => {
 
 .amount.expense {
   color: #cc4444;
-
 }
 
 .expense-content {
@@ -165,18 +166,18 @@ const goToDetail = (id) => {
 }
 
 .title {
-  font-family: "MyfontBold";
+  font-family: 'MyfontBold';
 }
 
 .category {
   font-size: 11px;
-  font-family: "Myfont";
+  font-family: 'Myfont';
   color: #61905a;
   padding-left: 1px;
 }
 
 .value {
-  font-family: "MyfontBold";
+  font-family: 'MyfontBold';
   color: #333;
 }
 .amount {
