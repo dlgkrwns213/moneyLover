@@ -88,7 +88,11 @@ const deleteSaving = async () => {
 
         <!-- 게이지바 -->
         <div class="progress rounded-pill" style="height: 10px;">
-          <div class="progress-bar bg-green" :style="{ width: percent + '%' }"></div>
+          <div 
+          class="progress-bar"
+          :class="percent < 100 ? 'bg-green' : 'bg-orange'"
+          :style="{width: percent + '%'}">
+        </div>
         </div>
 
         <div class="custom-light d-flex justify-content-between" style="font-size: 0.8rem">
@@ -99,11 +103,13 @@ const deleteSaving = async () => {
       </div>
 
       <!-- 스케줄 리스트 -->
-      <div class="d-flex flex-column gap-2 overflow-auto pb-5" style="max-height: 70vh;">
+      <div class="d-flex flex-column gap-2 overflow-auto pb-5" style="max-height: 60vh;">
         <div
           v-for="(item, index) in schedule"
           :key="index"
           class="d-flex justify-content-between align-items-center box border border-green px-3 py-3 mb-2 rounded-4 shadow-sm"
+          @click="toggleCheck(index)"
+
         >
           <!-- 날짜 -->
           <div class="custom-bold small">{{ item.date }}</div>
@@ -116,7 +122,6 @@ const deleteSaving = async () => {
             <img
               :src="item.done ? checkGreen : checkGray"
               class="icon-check"
-              @click="toggleCheck(index)"
             />
           </div>
         </div>
@@ -182,6 +187,10 @@ const deleteSaving = async () => {
 
 .bg-green {
   background-color: #61905A !important;
+}
+
+.bg-orange {
+  background-color: #eb8500 !important;
 }
 
 .border-green {

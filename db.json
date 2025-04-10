@@ -569,6 +569,71 @@
       "saved": 236835,
       "percent": 47,
       "userId": "c3f6"
+    },
+    {
+      "id": "15cf",
+      "name": "10번",
+      "targetAmount": 500000,
+      "startDate": "2025-04-10",
+      "endDate": "2025-04-19",
+      "frequency": "매일",
+      "repeatCount": 10,
+      "perAmount": 50000,
+      "schedule": [
+        {
+          "date": "2025-04-10",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-12",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-13",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-14",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-15",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-16",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-17",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-18",
+          "amount": 50000,
+          "done": true
+        },
+        {
+          "date": "2025-04-19",
+          "amount": 50000,
+          "done": true
+        }
+      ],
+      "saved": 500000,
+      "percent": 100,
+      "userId": "1"
     }
   ]
 }
