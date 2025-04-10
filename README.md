@@ -109,138 +109,15 @@ npm run build
     |   |
     |   \---images
     |       +---all
-    |       |       bonus.png
-    |       |       book.png
-    |       |       calendar.png
-    |       |       car.png
-    |       |       clothes.png
-    |       |       cosmetics.png
-    |       |       debt.png
-    |       |       delivery.png
-    |       |       drink.png
-    |       |       drinking.png
-    |       |       entertainment.png
-    |       |       etc_income.png
-    |       |       etc_outcome.png
-    |       |       exercise.png
-    |       |       house.png
-    |       |       interest.png
-    |       |       in_cash.png
-    |       |       loan.png
-    |       |       logo.png
-    |       |       maintenance_cost.png
-    |       |       mature.png
-    |       |       meal.png
-    |       |       medical.png
-    |       |       necessities.png
-    |       |       out_cash.png
-    |       |       pet.png
-    |       |       phone_bill.png
-    |       |       present.png
-    |       |       public_transport.png
-    |       |       salary.png
-    |       |       shopping.png
-    |       |       side_job.png
-    |       |       study.png
-    |       |       toggle_after.jpg
-    |       |       toggle_before.jpg
     |       |
     |       +---clover
-    |       |       clover_0.png
-    |       |       clover_25.png
-    |       |       clover_50.png
-    |       |       clover_75.png
-    |       |       clover_default.png
-    |       |       clover_setting.png
-    |       |
     |       +---income
-    |       |       bonus.png
-    |       |       debt.png
-    |       |       etc_income.png
-    |       |       interest.png
-    |       |       in_cash.png
-    |       |       mature.png
-    |       |       salary.png
-    |       |       side_job.png
-    |       |
     |       +---keyboard
-    |       |       button_0.png
-    |       |       button_1.png
-    |       |       button_2.png
-    |       |       button_3.png
-    |       |       button_4.png
-    |       |       button_5.png
-    |       |       button_6.png
-    |       |       button_7.png
-    |       |       button_8.png
-    |       |       button_9.png
-    |       |       button_back.png
-    |       |       button_cdr.png
-    |       |       button_check.png
-    |       |       button_di.png
-    |       |       button_dot.png
-    |       |       button_equal.png
-    |       |       button_mi.png
-    |       |       button_mu.png
-    |       |       button_pl.png
-    |       |
     |       +---navigator
-    |       |       footer_chart.png
-    |       |       footer_color_chart.png
-    |       |       footer_color_home.png
-    |       |       footer_color_saving.png
-    |       |       footer_color_setting.png
-    |       |       footer_home.png
-    |       |       footer_plus.png
-    |       |       footer_saving.png
-    |       |       footer_setting.png
-    |       |
     |       +---outcome
-    |       |       book.png
-    |       |       car.png
-    |       |       clothes.png
-    |       |       cosmetics.png
-    |       |       delivery.png
-    |       |       drink.png
-    |       |       drinking.png
-    |       |       entertainment.png
-    |       |       etc.png
-    |       |       etc_outcome.png
-    |       |       exercise.png
-    |       |       house.png
-    |       |       loan.png
-    |       |       maintenance_cost.png
-    |       |       meal.png
-    |       |       medical.png
-    |       |       necessities.png
-    |       |       out_cash.png
-    |       |       pet.png
-    |       |       phone_bill.png
-    |       |       present.png
-    |       |       public-transport.png
-    |       |       shopping.png
-    |       |       study.png
-    |       |
     |       +---saving
-    |       |       add_saving.png
-    |       |       back.png
-    |       |       check_gray.png
-    |       |       check_green.png
-    |       |       close.png
-    |       |       delete.png
-    |       |       edit.png
-    |       |       piggy.png
-    |       |       saving_coin.png
-    |       |       saving_empty.png
-    |       |
     |       +---settings
-    |       |       Login_button.png
-    |       |
     |       \---user
-    |               user_icon_1.png
-    |               user_icon_2.png
-    |               user_icon_3.png
-    |               user_icon_4.png
     |
     +---constants
     |       translate.js
