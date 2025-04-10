@@ -37,20 +37,37 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useUserStore } from '@/stores/user'
 import axios from 'axios'
 import ChangePassword from '../login/ChangePassword.vue'
+import { useUserStore } from '@/stores/user'
 
 const router = useRouter()
 const userStore = useUserStore()
 
+const iconImages = import.meta.glob('@/assets/images/user/*.png', {
+  eager: true,
+  import: 'default',
+})
 const showPwModal = ref(false)
 const username = ref('')
-const icon = ref('/src/assets/images/user/user_icon_1.png')
+const icon = ref('')
 const fileInput = ref(null)
 
-const triggerUpload = () => {
-  fileInput.value.click()
+const defaultIconKey = '/src/assets/images/user/user_icon_1.png'
+icon.value = iconImages[defaultIconKey] || ''
+
+const triggerUpload = () => fileInput.value?.click()
+
+const getUserData = async () => {
+  try {
+    const res = await axios.get(`http://localhost:3000/users?id=${userStore.userId}`)
+    const user = res.data[0]
+    username.value = user.username
+    icon.value = user.icon || icon.value
+    return user
+  } catch (error) {
+    console.error('유저 정보 조회 실패:', error)
+  }
 }
 
 const handleFileChange = async (e) => {
@@ -60,22 +77,19 @@ const handleFileChange = async (e) => {
   const reader = new FileReader()
   reader.onload = async (event) => {
     const base64 = event.target.result
-
-    try {
-      const res = await axios.get(`http://localhost:3000/users?id=${userStore.userId}`)
-      const user = res.data[0]
-
-      await axios.put(`http://localhost:3000/users/${user.id}`, {
-        ...user,
-        icon: base64,
-      })
-
-      icon.value = base64
-    } catch (err) {
-      console.error('아이콘 저장 실패:', err)
+    const user = await getUserData()
+    if (user) {
+      try {
+        await axios.put(`http://localhost:3000/users/${user.id}`, {
+          ...user,
+          icon: base64,
+        })
+        icon.value = base64
+      } catch (err) {
+        console.error('아이콘 저장 실패:', err)
+      }
     }
   }
-
   reader.readAsDataURL(file)
 }
 
@@ -84,15 +98,8 @@ const handleLogout = () => {
   router.push('/signin')
 }
 
-onMounted(async () => {
-  try {
-    const res = await axios.get(`http://localhost:3000/users?id=${userStore.userId}`)
-    const user = res.data[0]
-    username.value = user.username
-    icon.value = user.icon || icon.value
-  } catch (error) {
-    console.error('유저 정보 조회 실패:', error)
-  }
+onMounted(() => {
+  getUserData()
 })
 </script>
 
