@@ -24,6 +24,9 @@
       <div class="register">
         <button class="register-btn" @click="handleRegister">등록</button>
       </div>
+      <div class="back">
+        <RouterLink to="/signin">뒤로가기</RouterLink>
+      </div>
     </div>
   </div>
 </template>
@@ -257,12 +260,27 @@ label {
   margin-top: 35px;
 }
 .register-btn {
-  width: 56px;
-  height: 33px;
+  width: 270px;
+  height: 35px;
   border: 1px solid #61905a;
   border-radius: 12px;
   font-size: 16px;
   font-family: 'MyFont';
   background-color: white;
+}
+.back {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 13px;
+}
+.back a {
+  color: #909090;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-size: 12px;
+  font-family: 'MyFont';
+  cursor: pointer;
 }
 </style>
