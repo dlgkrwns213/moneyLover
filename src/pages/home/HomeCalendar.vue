@@ -536,4 +536,13 @@ const getColorClass = (value) => {
   margin: 2rem;
   font-family: 'Myfont';
 }
+:deep(.vc-dots) {
+  position: absolute;
+  bottom: 11px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+:deep(.vc-dot) {
+  background-color: #ffc609;
+}
 </style>

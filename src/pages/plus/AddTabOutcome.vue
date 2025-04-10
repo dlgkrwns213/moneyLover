@@ -6,20 +6,37 @@ import { TRANSLATIONS } from '@/constants/translate.js'
 const emit = defineEmits(['update-category'])
 
 const outcomeKeys = [
-  'book', 'car', 'clothes', 'cosmetics', 'delivery', 'drink', 'drinking',
-  'entertainment', 'exercise', 'house', 'loan', 'maintenance_cost', 'meal',
-  'medical', 'necessities', 'out_cash', 'pet', 'phone_bill', 'present',
-  'public_transport', 'shopping', 'study', 'etc_outcome',
+  'book',
+  'car',
+  'clothes',
+  'cosmetics',
+  'delivery',
+  'drink',
+  'drinking',
+  'entertainment',
+  'exercise',
+  'house',
+  'loan',
+  'maintenance_cost',
+  'meal',
+  'medical',
+  'necessities',
+  'out_cash',
+  'pet',
+  'phone_bill',
+  'present',
+  'public_transport',
+  'shopping',
+  'study',
+  'etc_outcome',
 ]
 
-const outcomeItems = computed(() =>
-  outcomeKeys.map((key) => ({ key, text: TRANSLATIONS[key] }))
-)
+const outcomeItems = computed(() => outcomeKeys.map((key) => ({ key, text: TRANSLATIONS[key] })))
 
 const selectedKey = ref(null)
 
 const selectCard = (key) => {
-  selectedKey.value = key;
+  selectedKey.value = key
   emit('update-category', {
     type: 'outcome',
     category: TRANSLATIONS[key],
