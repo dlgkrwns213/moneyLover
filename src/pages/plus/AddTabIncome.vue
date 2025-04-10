@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, defineEmits } from 'vue'
+import { ref, computed } from 'vue'
 import AddButton from './AddButton.vue'
 import { TRANSLATIONS } from '@/constants/translate.js'
 
