@@ -52,7 +52,17 @@ onMounted(async () => {
 
 const changePassword = async () => {
   if (!currentPassword.value || !newPassword.value || !checkPassword.value) {
-    alert('모든 항목을 입력해 주세요.')
+    Swal.fire({
+      icon: 'warning',
+      title: '모든 항목을 입력해 주세요.',
+      timer: 1000,
+      showConfirmButton: false,
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
