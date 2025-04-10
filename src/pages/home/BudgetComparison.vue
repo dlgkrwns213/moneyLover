@@ -127,6 +127,8 @@ const chartOptions = {
       <i class="bi bi-search"></i>
     </span>
   </div>
+
+  <!-- 변경 창 부분 -->
   <div class="page-wrapper" @click="goToBudgetSettings">
     <!-- v-id 에 true false 로 budget 설정 여부를 분별하여 다른 창을 띄운다. -->
     <div v-if="budget" class="donut-row">
@@ -139,17 +141,17 @@ const chartOptions = {
       <!-- 오른쪽: 텍스트 -->
       <div class="info">
         <div class="line">
-          <span class="label">예산</span>
-          <span class="value">{{ budget.toLocaleString() }}</span>
+          <span class="label">이번 달 예산은</span>
+          <span class="value">{{ budget.toLocaleString() + '원' }}</span>
         </div>
         <div class="line">
-          <span class="label">남음</span>
+          <span class="label">남아 있는 돈은</span>
           <span class="value" :class="{ 'over-budget': percent < 0 }">{{
-            remain < 0 ? '예산초과!' : remain.toLocaleString()
+            remain < 0 ? '예산초과!' : remain.toLocaleString() + '원'
           }}</span>
         </div>
         <div class="line">
-          <span class="label">%</span>
+          <span class="label">아껴 쓴 정도는</span>
           <span class="value" :class="{ 'over-budget': percent < 0 }">{{
             percent < 0 ? '예산초과!' : percent.toLocaleString() + '%'
           }}</span>
@@ -183,9 +185,12 @@ const chartOptions = {
   background-color: #ffffff;
   /* border: 1px solid #61905a; */
   border-radius: 12px;
-  width: 360px;
-  height: 200px;
+  width: 330px;
+  height: 270px;
+  flex-direction: column;
   /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.05); */
+  padding-top: 5px;
+  gap: 10px;
 }
 .other-donut-row {
   display: flex;
@@ -215,32 +220,21 @@ const chartOptions = {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 150px;
-  height: 110px;
+  width: 130px;
+  height: 130px;
   flex-shrink: 0;
   cursor: pointer;
-  margin-left: 20px;
+  margin-left: 10px 0;
+  margin-top: 10px;
 }
-
-/* .donut-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-170%, -50%);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: contain;
-  z-index: 1;
-} */
 
 .donut-image {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: contain;
   z-index: 1;
@@ -250,22 +244,28 @@ const chartOptions = {
   display: flex;
   flex-direction: column;
   justify-content: left;
+  align-items: center;
   margin-right: 0;
   font-family: 'MyFont';
   flex: 1;
+  width: 100%;
 }
 
 .line {
   display: flex;
   justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  margin-bottom: -7px;
 }
 
 .label {
-  padding: 10px;
+  padding: 2px;
   font-size: 16px;
   text-align: left;
   color: #444;
   flex: 1;
+  letter-spacing: -0.05em;
 }
 
 .over-budget {
@@ -279,7 +279,7 @@ const chartOptions = {
   text-align: right;
   flex: 1;
   color: #61905a;
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
 }
 .empty-budget {
   cursor: pointer;
