@@ -1,9 +1,14 @@
 <template>
   <div class="main-page">
-    <div class="tab-buttons">
-      <span :class="['tab', { active: tab === 'expense' }]" @click="tab = 'expense'">지출</span>
-      <span :class="['tab', { active: tab === 'income' }]" @click="tab = 'income'">수입</span>
-    </div>
+    <header class="chart-header">
+      <div class="fixed-header">
+        <div class="header-title">4월</div>
+        <div class="tab-buttons">
+          <span :class="['tab', { active: tab === 'expense' }]" @click="tab = 'expense'">지출</span>
+          <span :class="['tab', { active: tab === 'income' }]" @click="tab = 'income'">수입</span>
+        </div>
+      </div>
+    </header>
 
     <div class="tab-content">
       <Expense v-if="tab === 'expense'" />
@@ -26,22 +31,43 @@ const tab = ref('expense')
   max-width: 360px;
   margin: auto;
   padding-top: 50px;
+  padding-top: 110px;
 }
-.tab-buttons {
-  max-width: 360px;
-  margin: auto;
+.chart-header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  display: flex;
   background-color: #f6f6f6;
-  padding: 15px 10px;
   z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.fixed-header {
+  width: 100%;
+  max-width: 360px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.header-title {
+  font-size: 18px;
+  font-weight: bold;
+  font-family: 'MyFontBold';
+  margin-bottom: 26px;
+}
+
+.tab-buttons {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
   font-weight: bold;
   font-family: 'MyFontBold';
 }
-
 .tab {
   flex: 1;
   text-align: center;

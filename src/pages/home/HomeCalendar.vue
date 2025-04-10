@@ -4,6 +4,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue'
 import { useUserStore } from '@/stores/user'
 import { TRANSLATIONS } from '@/constants/translate'
 import { useRouter } from 'vue-router'
+import TransactionDetailModal from './TransactionDetailModal.vue'
 
 // ✅ 사용자 정보 및 데이터 로드
 const userStore = useUserStore()
@@ -12,9 +13,16 @@ const router = useRouter()
 
 onMounted(async () => {
   try {
-    const userId = userStore.userId || '1' || 'unknown'
+    const userId = userStore.userId || 'unknown'
     const res = await axios.get(`http://localhost:3000/cashflows?userId=${userId}`)
     allCashflowData.value = res.data
+
+    const date = new Date()
+    const y = date.getFullYear()
+    const m = String(date.getMonth() + 1).padStart(2, '0')
+    const d = String(date.getDate()).padStart(2, '0')
+    const dateKey = `${y}-${m}-${d}`;
+    cashflows.value = monthlyData.value.filter(data => data.date.startsWith(dateKey));
   } catch (error) {
     console.error('데이터 불러오기 실패', error)
   }
@@ -71,9 +79,14 @@ const getIconPath = (koreanCategory) => {
   return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
 }
 
+const showModal = ref(false)
+const selectedId = ref(null)
+
 const goToDetail = (id) => {
-  router.push(`/transaction/${id}`)
+  selectedId.value = id
+  showModal.value = true
 }
+
 
 const deleteCashflow = async (id) => {
   try {
@@ -268,11 +281,16 @@ const getColorClass = (value) => {
           </div>
         </div>
       </div>
+    
+    <p v-else class="no-event">기록이 없습니다.</p>
 
-      <p v-else class="no-event">~ 기록이 없습니다 ~</p>
-    </div>
-
+    <TransactionDetailModal
+      v-if="showModal"
+      :id="selectedId"
+      @close="showModal = false"
+    />
   </div>
+</div>
 </template>
 
 <style scoped>
@@ -284,6 +302,8 @@ const getColorClass = (value) => {
   border: none;
   padding: 0;
   background-color: #f6f6f6;
+
+  z-index: 1000;
 }
 
 .back-button:hover {
@@ -364,6 +384,8 @@ const getColorClass = (value) => {
 
 .month-data {
   position: absolute;
+  top: 450px;
+  left: 45%;
   right: 0;
   bottom: 0;
   transform: translate(-10px, -10px);

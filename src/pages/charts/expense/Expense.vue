@@ -54,7 +54,7 @@ onMounted(async () => {
 .expense-wrap {
   width: 100%;
   background-color: #f6f6f6;
-  padding: 25px;
+  padding: 0 25px 25px 25px;
 }
 .expense-ranking {
   border: 1px solid white;
