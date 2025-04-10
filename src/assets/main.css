@@ -8,17 +8,17 @@ body {
 .swal2-container {
   z-index: 10001 !important;
 }
-.swal-popup {
+.swal2-popup {
   font-size: 14px !important;
   font-family: 'MyFontBold' !important;
 }
 
-.swal-title {
+.swal2-title {
   font-size: 18px !important;
   font-family: 'MyFontBold' !important;
 }
 
-.swal-confirm {
+.swal2-confirm {
   font-size: 14px !important;
   font-family: 'MyFontBold' !important;
 }
