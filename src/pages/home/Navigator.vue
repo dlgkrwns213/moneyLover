@@ -92,6 +92,7 @@ const getTextClass = (path) => (isActive(path) ? 'text-bold' : '')
 .nav-item:hover img {
   transform: scale(1.1);
   transition: transform 0.2s ease;
+  cursor: pointer;
 }
 
 .nav-item img {
