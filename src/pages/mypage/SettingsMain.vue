@@ -102,12 +102,14 @@ onMounted(async () => {
   height: 100vh;
   display: flex;
   margin: auto;
+  justify-content: center;
 }
 .setting-header {
   display: flex;
   justify-content: center;
   position: fixed;
   top: 15px;
+  padding: 0;
   left: 0;
   width: 100%;
   z-index: 1000;

@@ -29,7 +29,7 @@ const tab = ref('expense')
 .main-page {
   width: 100%;
   max-width: 360px;
-  max-height: 832px;
+  height: 100vh;
   margin: auto;
   padding-top: 110px;
 }
