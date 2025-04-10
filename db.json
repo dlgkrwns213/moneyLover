@@ -258,12 +258,12 @@
         {
           "date": "2025-04-09",
           "amount": 25000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-10",
           "amount": 25000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-11",
@@ -273,11 +273,11 @@
         {
           "date": "2025-04-12",
           "amount": 25000,
-          "done": false
+          "done": true
         }
       ],
-      "saved": 50000,
-      "percent": 50,
+      "saved": 25000,
+      "percent": 25,
       "userId": "1"
     },
     {
