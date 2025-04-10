@@ -30,7 +30,6 @@ const close = () => {
   const currentPath = router.currentRoute.value.path
   if (reload.value && currentPath !== '/home/calendar') {
     location.reload();
-    console.log('re')
   }
   emit('close')
 }
@@ -54,7 +53,6 @@ const toggleBudget = async () => {
     includeInBudget: includeInBudget.value,
   })
   reload.value = !reload.value;
-  console.log(reload.value)
 }
 
 const deleteItem = async () => {

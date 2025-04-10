@@ -66,7 +66,6 @@ function onDayClick(day) {
   const dateKey = `${y}-${m}-${d}`
 
   cashflows.value = monthlyData.value.filter((data) => data.date.startsWith(dateKey))
-  console.log(cashflows.value)
 }
 
 const getCategorykey = (koreanCategory) => {
