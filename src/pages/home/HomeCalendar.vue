@@ -229,9 +229,9 @@ const getColorClass = (value) => {
 
     <!-- 월 수입/지출/수익 요약 -->
     <div class="month-data">
-      월 수입: <span style="color: #61905a">{{ monthlyIncome.toLocaleString('ko-KR') + '₩' }}</span
+      월 수입: <span style="color: #61905a">{{ '₩' + monthlyIncome.toLocaleString('ko-KR') }}</span
       ><br />
-      월 지출: <span style="color: #e35050">{{ monthlyOutcome.toLocaleString('ko-KR') + '₩' }}</span
+      월 지출: <span style="color: #e35050">{{ '₩' + monthlyOutcome.toLocaleString('ko-KR') }}</span
       ><br />
       월 수익:
       <span
@@ -244,7 +244,7 @@ const getColorClass = (value) => {
                 : '#000000',
         }"
       >
-        {{ (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') + '₩' }}
+        {{ '₩' + (monthlyIncome - monthlyOutcome).toLocaleString('ko-KR') }}
       </span>
     </div>
   </div>

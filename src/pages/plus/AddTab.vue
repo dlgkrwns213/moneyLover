@@ -93,7 +93,7 @@ const formattedValue = computed(() => {
   if (num === '') return ''
 
   if (!/[+\-x%]/.test(num)) {
-    return parseInt(num).toLocaleString() + ' ₩'
+    return '₩ ' + parseInt(num).toLocaleString()
   }
 
   let result = ''
