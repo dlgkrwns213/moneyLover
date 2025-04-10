@@ -3,10 +3,7 @@
     <div class="list-group-item">
       <div class="item-row">
         <div class="icon">
-          <img
-            :src="`/src/assets/images/outcome/${getCategoryKeyFromLabel(category)}.png`"
-            style="width: 100%"
-          />
+          <img :src="getImageSrc(category)" style="width: 100%" />
         </div>
         <div class="content">
           <div class="dataDetail">
@@ -31,44 +28,9 @@
     </div>
   </li>
 </template>
+
 <script setup>
 import { TRANSLATIONS } from '@/constants/translate'
-
-const bgc = [
-  '#ff6b6b', //다홍색
-  '#feca57', //노란색
-  '#1dd1a1', //초록색
-  '#54a0ff', //짙은 하늘색
-  '#d395d0', //라벤더색
-  '#ff9999', //분홍색
-  
-  '#1F77B4', // 파랑
-  '#FF9896', // 연분홍
-  '#9EDAE5', // 하늘청록
-  '#FF7F0E', // 주황
-  '#2CA02C', // 초록
-  '#D62728', // 빨강
-  '#9467BD', // 보라
-  '#8C564B', // 갈색
-
-  '#7F7F7F', // 회색
-  '#BCBD22', // 연두
-  '#17BECF', // 청록
-
-  '#AEC7E8', // 연파랑
-  '#FFBB78', // 연주황
-  '#98DF8A', // 연초록
-
-  '#C5B0D5', // 연보라
-  '#C49C94', // 살색
-  '#F7B6D2', // 연핑크
-  '#C7C7C7', // 연회색
-
-  '#393B79', // 짙은 남색
-  '#637939', // 짙은 올리브
-  '#8C6D31', // 짙은 황토
-  '#843C39', // 진한 적갈색
-]
 
 defineProps({
   index: Number,
@@ -78,7 +40,37 @@ defineProps({
   count: Number,
 })
 
-// 천단위 쉼표 함수
+const bgc = [
+  '#ff6b6b',
+  '#feca57',
+  '#1dd1a1',
+  '#54a0ff',
+  '#d395d0',
+  '#ff9999',
+  '#1F77B4',
+  '#FF9896',
+  '#9EDAE5',
+  '#FF7F0E',
+  '#2CA02C',
+  '#D62728',
+  '#9467BD',
+  '#8C564B',
+  '#7F7F7F',
+  '#BCBD22',
+  '#17BECF',
+  '#AEC7E8',
+  '#FFBB78',
+  '#98DF8A',
+  '#C5B0D5',
+  '#C49C94',
+  '#F7B6D2',
+  '#C7C7C7',
+  '#393B79',
+  '#637939',
+  '#8C6D31',
+  '#843C39',
+]
+
 function formatMoney(value) {
   if (!value) return '0'
   return new Intl.NumberFormat('ko-KR').format(value)
@@ -89,10 +81,21 @@ function getCategoryKeyFromLabel(label) {
     acc[value] = key
     return acc
   }, {})
+  return reversed[label] || 'etc'
+}
 
-  return reversed[label] || 'etc' // 못 찾으면 'etc'로 처리
+const icons = import.meta.glob('@/assets/images/outcome/*.png', {
+  eager: true,
+  import: 'default',
+})
+
+const getImageSrc = (category) => {
+  const key = getCategoryKeyFromLabel(category)
+  const path = `/src/assets/images/outcome/${key}.png`
+  return icons[path] || icons['/src/assets/images/outcome/etc.png']
 }
 </script>
+
 <style scoped>
 li {
   border-bottom: 1px solid #e0e0e0;
@@ -141,7 +144,6 @@ li:last-child {
   margin-top: 6px;
   overflow: hidden;
 }
-
 .gauge-fill {
   height: 100%;
   background-color: #4caf50;
