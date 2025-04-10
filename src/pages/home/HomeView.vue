@@ -132,6 +132,7 @@ const formatCurrency = (value) => '₩' + value.toLocaleString('ko-KR')
   margin: 0 auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
+  padding-bottom: 80px;
 }
 /* .scrollable-list::-webkit-scrollbar {
   display: none;
