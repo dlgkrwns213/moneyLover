@@ -1,13 +1,20 @@
 <template>
   <div class="container">
-    <!-- Header -->
     <header class="setting-header">
       <h4 class="custom-bold">설정</h4>
     </header>
     <div class="setting-wrap">
       <div class="detail-wrap">
-        <div class="icon">
-          <img src="/src/assets/images/user/user_icon_1.png" alt="user_img" />
+        <!-- 아이콘 클릭시 input file 실행 -->
+        <div class="icon" @click="triggerUpload">
+          <img :src="icon" alt="user_img" />
+          <input
+            type="file"
+            ref="fileInput"
+            accept=".png, .jpg, .jpeg, .gif"
+            @change="handleFileChange"
+            style="display: none"
+          />
         </div>
         <div class="username-wrap">
           <span>이름</span>
@@ -16,24 +23,61 @@
       </div>
       <div class="settings-list">
         <ul class="list-row">
-          <li><span class="settings-text" @click="showModal = true">비밀번호 변경</span></li>
+          <li><span class="settings-text" @click="showPwModal = true">비밀번호 변경</span></li>
           <li><span class="settings-text" @click="handleLogout">로그아웃</span></li>
         </ul>
       </div>
     </div>
-    <ChangePassword v-if="showModal" @close="showModal = false" />
+
+    <!-- 비밀번호 변경 모달 -->
+    <ChangePassword v-if="showPwModal" @close="showPwModal = false" />
   </div>
 </template>
+
 <script setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import axios from 'axios'
 import ChangePassword from '../login/ChangePassword.vue'
+
 const router = useRouter()
 const userStore = useUserStore()
-const showModal = ref(false)
+
+const showPwModal = ref(false)
 const username = ref('')
+const icon = ref('/src/assets/images/user/user_icon_1.png')
+const fileInput = ref(null)
+
+const triggerUpload = () => {
+  fileInput.value.click()
+}
+
+const handleFileChange = async (e) => {
+  const file = e.target.files[0]
+  if (!file) return
+
+  const reader = new FileReader()
+  reader.onload = async (event) => {
+    const base64 = event.target.result
+
+    try {
+      const res = await axios.get(`http://localhost:3000/users?id=${userStore.userId}`)
+      const user = res.data[0]
+
+      await axios.put(`http://localhost:3000/users/${user.id}`, {
+        ...user,
+        icon: base64,
+      })
+
+      icon.value = base64
+    } catch (err) {
+      console.error('아이콘 저장 실패:', err)
+    }
+  }
+
+  reader.readAsDataURL(file)
+}
 
 const handleLogout = () => {
   userStore.logout()
@@ -41,11 +85,11 @@ const handleLogout = () => {
 }
 
 onMounted(async () => {
-  const url = `http://localhost:3000/users?id=${userStore.userId}`
   try {
-    const res = await axios.get(url)
+    const res = await axios.get(`http://localhost:3000/users?id=${userStore.userId}`)
     const user = res.data[0]
     username.value = user.username
+    icon.value = user.icon || icon.value
   } catch (error) {
     console.error('유저 정보 조회 실패:', error)
   }
@@ -88,6 +132,7 @@ img {
   align-items: center;
   width: 80px;
   height: 80px;
+  cursor: pointer;
 }
 .icon {
   display: flex;
