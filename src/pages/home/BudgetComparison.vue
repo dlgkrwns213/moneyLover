@@ -121,7 +121,7 @@ const chartOptions = {
     </span>
     <!-- <span class="menu-budgetsetting">moneyLover</span> -->
     <span class="menu-logo">
-    <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
+      <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
     </span>
     <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
@@ -144,11 +144,15 @@ const chartOptions = {
         </div>
         <div class="line">
           <span class="label">남음</span>
-          <span class="value">{{ remain < 0 ? '예산초과!' : remain.toLocaleString() }}</span>
+          <span class="value" :class="{ 'over-budget': percent < 0 }">{{
+            remain < 0 ? '예산초과!' : remain.toLocaleString()
+          }}</span>
         </div>
         <div class="line">
           <span class="label">%</span>
-          <span class="value">{{ percent < 0 ? '예산초과!' : percent.toLocaleString() }}%</span>
+          <span class="value" :class="{ 'over-budget': percent < 0 }">{{
+            percent < 0 ? '예산초과!' : percent.toLocaleString() + '%'
+          }}</span>
         </div>
       </div>
     </div>
@@ -264,6 +268,12 @@ const chartOptions = {
   flex: 1;
 }
 
+.over-budget {
+  font-size: 15px;
+  color: #d9534f;
+  font-weight: bold;
+}
+
 .value {
   padding: 10px;
   text-align: right;
@@ -342,7 +352,7 @@ const chartOptions = {
 }
 
 .logo-img {
-  height: 26px; 
+  height: 26px;
   object-fit: contain;
 }
 </style>
