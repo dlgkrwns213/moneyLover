@@ -91,7 +91,7 @@ console.log('userId:', userStore.userId)
               </div>
               <div>
                 {{ saving.percent }}%<br /><small class="d-block text-center opacity-75"
-                  >진행</small
+                  >{{ saving.percent < 100 ? "진행" : "완료" }}</small
                 >
               </div>
               <div>

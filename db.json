@@ -258,12 +258,12 @@
         {
           "date": "2025-04-09",
           "amount": 25000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-10",
           "amount": 25000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-11",
@@ -273,11 +273,11 @@
         {
           "date": "2025-04-12",
           "amount": 25000,
-          "done": false
+          "done": true
         }
       ],
-      "saved": 50000,
-      "percent": 50,
+      "saved": 25000,
+      "percent": 25,
       "userId": "1"
     },
     {
@@ -583,32 +583,32 @@
         {
           "date": "2025-04-10",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-11",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-12",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-13",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-14",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-15",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-16",
@@ -618,21 +618,21 @@
         {
           "date": "2025-04-17",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-18",
           "amount": 50000,
-          "done": true
+          "done": false
         },
         {
           "date": "2025-04-19",
           "amount": 50000,
-          "done": true
+          "done": false
         }
       ],
-      "saved": 500000,
-      "percent": 100,
+      "saved": 50000,
+      "percent": 10,
       "userId": "1"
     }
   ]
