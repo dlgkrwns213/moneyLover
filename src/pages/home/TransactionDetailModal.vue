@@ -30,8 +30,7 @@ const reload = ref(false)
 const close = () => {
   const currentPath = router.currentRoute.value.path
   if (reload.value && currentPath !== '/home/calendar') {
-    location.reload()
-    console.log('re')
+    location.reload();
   }
   emit('close')
 }
@@ -54,8 +53,7 @@ const toggleBudget = async () => {
   await axios.patch(`http://localhost:3000/cashflows/${transaction.value.id}`, {
     includeInBudget: includeInBudget.value,
   })
-  reload.value = !reload.value
-  console.log(reload.value)
+  reload.value = !reload.value;
 }
 
 const deleteItem = async () => {
