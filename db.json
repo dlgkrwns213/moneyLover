@@ -242,6 +242,16 @@
       "date": "2025-04-06 SUN",
       "category": "현금 수입",
       "includeInBudget": true
+    },
+    {
+      "id": "de07",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "55",
+      "cashflowValue": 222244445006665,
+      "date": "2025-04-10 THU",
+      "category": "의료",
+      "includeInBudget": true
     }
   ],
   "saving": [

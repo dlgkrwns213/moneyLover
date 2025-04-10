@@ -181,7 +181,7 @@ function calculateButtonClick(content) {
       if (!cashflowName.value)
         return Swal.fire({
           icon: 'warning',
-          title: '분류를 정하세요.',
+          title: '상세 정보를 입력하세요.',
           timer: 2000,
           showConfirmButton: false,
           confirmButtonColor: '#429f50',
