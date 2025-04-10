@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 
+import backIcon from '@/assets/images/saving/back.png'
 import { TRANSLATIONS } from '@/constants/translate'
 
 const props = defineProps({
@@ -51,7 +52,7 @@ const deleteItem = async () => {
 <template>
   <div class="modal-overlay" @click.self="close">
   <div class="modal-content">
-  <div class="container-fluid bg-light-gray min-vh-100 px-3 py-3">
+  <div class="container-fluid bg-light-gray min-vh-80 px-3 py-3">
     <!-- 상단 헤더 -->
     <div class="d-flex justify-content-between align-items-center mb-3">
       <img :src="backIcon" alt="뒤로가기" class="icon-back" @click="close" />
@@ -223,5 +224,9 @@ input:checked + .slider {
 input:checked + .slider:before {
   transform: translateX(20px);
   background-image: url('@/assets/images/all/toggle_after.jpg');
+}
+
+.min-vh-80 {
+  min-height: 60vh;
 }
 </style>
