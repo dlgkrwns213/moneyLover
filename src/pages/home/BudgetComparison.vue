@@ -269,7 +269,7 @@ const chartOptions = {
 }
 
 .over-budget {
-  font-size: 15px;
+  font-size: 13px;
   color: #d9534f;
   font-weight: bold;
 }
