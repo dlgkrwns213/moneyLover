@@ -4,7 +4,8 @@
 
 <div align="center">
 
-![image](https://github.com/user-attachments/assets/32419be3-ca81-4890-9248-7c905e6fb0ac)
+<img width="300px" src="https://github.com/user-attachments/assets/8d6c6eab-6f4c-4890-9764-680305062d4d">
+
 
 
 </div>
