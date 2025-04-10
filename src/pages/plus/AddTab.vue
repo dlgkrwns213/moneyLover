@@ -282,7 +282,7 @@ function calculateButtonClick(content) {
           v-model="cashflowName"
           type="text"
           class="input-cashflow-name"
-          placeholder="분류를 입력하세요."
+          placeholder="상세정보를 입력하세요."
         />
         <div class="money">{{ formattedValue }}</div>
       </div>
@@ -310,7 +310,7 @@ function calculateButtonClick(content) {
 .add-page-wrapper {
   background-color: white;
   min-height: 100vh; /* ⬅️ 뷰포트 전체 높이만큼 차지하게 하기 */
-  font-family: 'MyFontBold';
+  font-family: 'MyFont';
 }
 
 .header {
@@ -361,13 +361,14 @@ function calculateButtonClick(content) {
 }
 
 .tab:hover {
-  color: rgb(0, 204, 0);
+  color: #61905a;
 }
 
 .tab.active {
   color: #61905a; /* 초록색 */
-  border-bottom: 5px solid #497552;
+  border-bottom: 2.5px solid #497552;
 }
+
 .footer-calculate {
   position: fixed;
   bottom: 0px;
@@ -395,6 +396,9 @@ function calculateButtonClick(content) {
   border-radius: 10px;
   text-align: left;
   padding: 0 15px;
+  font-size: 12px;
+  border: 1.5px solid #61905a;
+  letter-spacing: -0.05em;
 }
 
 .money {

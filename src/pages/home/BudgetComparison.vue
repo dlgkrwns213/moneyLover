@@ -121,8 +121,8 @@ const chartOptions = {
     </span>
     <!-- <span class="menu-budgetsetting">moneyLover</span> -->
     <span class="menu-logo">
-  <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
-</span>
+    <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
+    </span>
     <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
@@ -212,9 +212,10 @@ const chartOptions = {
   justify-content: center;
   align-items: center;
   width: 150px;
-  height: 100px;
+  height: 110px;
   flex-shrink: 0;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 /* .donut-image {
@@ -258,6 +259,7 @@ const chartOptions = {
 .label {
   padding: 10px;
   font-size: 16px;
+  text-align: left;
   color: #444;
   flex: 1;
 }
@@ -267,6 +269,7 @@ const chartOptions = {
   text-align: right;
   flex: 1;
   color: #61905a;
+  margin-right: 1rem;
 }
 .empty-budget {
   cursor: pointer;
@@ -291,7 +294,6 @@ const chartOptions = {
   background-color: #f6f6f6;
   border-bottom: 1px solid #f6f6f6;
   margin: 0 auto;
-  font-family: 'MyFontbold';
 }
 
 .icon {

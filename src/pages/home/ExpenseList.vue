@@ -90,9 +90,9 @@ const goToDetail = (id) => {
 .expense-list {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: 320px;
-  font-family: 'MyFontBold';
+  font-family: 'MyFont';
 }
 
 .expense-item {
@@ -108,10 +108,9 @@ const goToDetail = (id) => {
   display: flex;
   /* justify-content: space-between; */
   align-items: left;
-  font-size: 12px;
+  font-size: 13px;
   color: black;
-  padding: 4px 6px;
-  margin-bottom: 4px;
+  padding: 2px 4px;
 }
 .category-icon {
   width: 24px;
@@ -125,13 +124,15 @@ const goToDetail = (id) => {
 }
 
 .amount.expense {
-  color: #e04141;
+  color: #cc4444;
+
 }
 
 .expense-content {
   display: flex;
   align-items: center;
-  margin-top: 8px;
+  margin: 5px 0;
+  margin-right: 5px;
 }
 
 .icon {
@@ -167,7 +168,6 @@ const goToDetail = (id) => {
   font-family: "MyfontBold";
   color: #333;
 }
-
 .amount {
   margin-left: auto;
 }
@@ -177,5 +177,4 @@ const goToDetail = (id) => {
 * {
   letter-spacing: -0.05em;
 }
-
 </style>
