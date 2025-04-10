@@ -13,7 +13,7 @@ function handlePlusClick() {
 const isActive = (path) => route.path === path
 
 const getIconSrc = (path, baseName) => {
-  const basePath = '/src/assets/images/navigator/'
+  const basePath = 'src/assets/images/navigator/'
   return new URL(
     isActive(path)
       ? `${basePath}footer_color_${baseName}.png`
