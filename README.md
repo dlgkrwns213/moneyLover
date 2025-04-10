@@ -15,7 +15,7 @@
 
 |    박준영    |     박예빈     |    이다연    |   이학준   |                                                              
 | :------------: | :-------: | :------------: | :------------: | 
-|   <img width="100px" src="" alt="프로필"/>   |  <img width="100px" src="https://github.com/user-attachments/assets/bb3613ac-f165-43f3-85be-ff630a0ef83b"/>    |    <img width="100px" src="" alt="프로필"/>   |  <img width="100px" src="" alt="프로필"/>  |
+|   <img width="100px" src="" alt="프로필"/>   |  <img width="100px" src="https://github.com/user-attachments/assets/bb3613ac-f165-43f3-85be-ff630a0ef83b"/>    |    <img width="100px" src="https://github.com/user-attachments/assets/53d19965-c1b0-405e-864a-1e696db7c16f" alt="프로필"/>   |  <img width="100px" src="" alt="프로필"/>  |
 |   [@Tarae0419](https://github.com/Tarae0419)   |    [@yebinnnnn](https://github.com/yebinnnnn)  | [@Leeday11](https://github.com/Leeday11) |  [@dlgkrwns213](https://github.com/dlgkrwns213) |
 
 ## About Project 🔍
