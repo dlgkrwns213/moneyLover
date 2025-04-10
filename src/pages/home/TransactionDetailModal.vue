@@ -125,11 +125,11 @@ const deleteItem = async () => {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
-  display: flex;
+  backdrop-filter: blur(4px); /* 배경 흐림 효과 */
+  background-color: rgba(255, 255, 255, 0.1); /* 흐림 효과와 잘 어울리는 투명한 배경 */  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 1000;
+  z-index: 9999;
 }
 
 .modal-content {
@@ -140,6 +140,8 @@ const deleteItem = async () => {
   max-height: 90vh;
   overflow-y: auto;
   padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
 }
 .bg-light-gray {
   background-color: #f6f6f6;

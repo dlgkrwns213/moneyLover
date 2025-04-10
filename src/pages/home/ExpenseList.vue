@@ -4,6 +4,7 @@ import axios from 'axios'
 import { TRANSLATIONS } from '@/constants/translate'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import TransactionDetailModal from './TransactionDetailModal.vue'
 
 const cashflows = ref([])
 const userStore = useUserStore()
@@ -52,8 +53,12 @@ const getIconPath = (koreanCategory) => {
 }
 
 const router = useRouter()
+const showModal = ref(false)
+const selectedId = ref(null)
+
 const goToDetail = (id) => {
-  router.push(`/transaction/${id}`)
+  selectedId.value = id
+  showModal.value = true
 }
 </script>
 
@@ -82,6 +87,12 @@ const goToDetail = (id) => {
         </span></div>
         </div>
       </div>
+
+      <TransactionDetailModal
+        v-if="showModal"
+        :id="selectedId"
+        @close="showModal = false"
+      />
     </div>
   </div>
 </template>
