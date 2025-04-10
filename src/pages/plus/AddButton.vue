@@ -68,7 +68,7 @@ onMounted(async () => {
 }
 
 .card-picture.selected {
-  border: 1.5px solid #61905A;
+  border: 2px solid #61905A;
 }
 
 .card-text {

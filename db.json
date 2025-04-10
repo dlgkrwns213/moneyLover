@@ -44,7 +44,7 @@
       "cashflowValue": 36000,
       "date": "2025-04-08 TUE",
       "category": "술",
-      "includeInBudget": true
+      "includeInBudget": false
     },
     {
       "id": "7a66",
@@ -124,7 +124,7 @@
       "cashflowValue": 20000,
       "date": "2025-04-09 WED",
       "category": "주거",
-      "includeInBudget": false
+      "includeInBudget": true
     }
   ],
   "saving": [
