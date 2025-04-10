@@ -294,6 +294,8 @@ const getColorClass = (value) => {
   border: none;
   padding: 0;
   background-color: #f6f6f6;
+
+  z-index: 1000;
 }
 
 .back-button:hover {
