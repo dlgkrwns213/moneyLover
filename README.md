@@ -153,7 +153,6 @@ npm run build
     |   |       AmoutDropdownFilter.vue
     |   |       BudgetComparison.vue
     |   |       BudgetSettings.vue
-    |   |       CalendarIcon.vue
     |   |       DateRangeFilter.vue
     |   |       DropdwonFilter.vue
     |   |       ExpenseList.vue
