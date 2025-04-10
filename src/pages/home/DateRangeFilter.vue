@@ -7,7 +7,13 @@
     <div
       v-if="menuVisible"
       class="border rounded shadow p-3 bg-white position-absolute"
-      style="z-index: 1000; width: 260px; top: 100%; transform: translateX(-80%); margin-top: 5px"
+      :style="{
+        zIndex: 1000,
+        width: '260px',
+        top: '100%',
+        transform: transformX,
+        marginTop: '5px',
+      }"
     >
       <div class="mb-2">
         <label class="form-label">시작 날짜</label>
@@ -39,6 +45,12 @@ const menuVisible = ref(false)
 const menuRef = ref(null)
 const startDate = ref(props.modelValue?.start || '')
 const endDate = ref(props.modelValue?.end || '')
+const transformX = computed(() => {
+  if (startDate.value || endDate.value) {
+    return 'translateX(0%)'
+  }
+  return 'translateX(-80%)'
+})
 
 function toggleMenu() {
   menuVisible.value = !menuVisible.value
