@@ -384,7 +384,7 @@ const getColorClass = (value) => {
 
 .month-data {
   position: absolute;
-  top: 450px;
+  top: 410px;
   left: 45%;
   right: 0;
   bottom: 0;
