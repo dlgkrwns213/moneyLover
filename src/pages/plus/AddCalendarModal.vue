@@ -5,11 +5,11 @@ const props = defineProps({
   selectedDate: {
     type: Date,
     required: true,
-  }
+  },
 })
 
 const emit = defineEmits(['close', 'date-selected'])
-const innerSelectedDate = ref(props.selectedDate);
+const innerSelectedDate = ref(props.selectedDate)
 
 function emitSelectedDateAndClose() {
   emit('date-selected', innerSelectedDate.value)
@@ -18,7 +18,7 @@ function emitSelectedDateAndClose() {
 
 function emitClose() {
   emit('date-selected', props.selectedDate)
-  emit('close');
+  emit('close')
 }
 
 const today = new Date()
@@ -50,20 +50,19 @@ function onDayClick(day) {
   <div class="modal-backdrop" @click.self="emit('close')">
     <div class="modal-content">
       <h2>
-  <img src="@/assets/images/income/salary.png" alt="달력 아이콘" class="calendar-icon" />
-  입력할 날짜를 선택하세요.
-</h2>
+        <img src="@/assets/images/income/salary.png" alt="달력 아이콘" class="calendar-icon" />
+        입력할 날짜를 선택하세요.
+      </h2>
       <div class="container">
-        <v-calendar
-          v-model="innerSelectedDate"
-          :max-date="maxDate"
-        >
+        <v-calendar v-model="innerSelectedDate" :max-date="maxDate">
           <template #day-content="{ day }">
             <div
               class="day-content"
               :class="{
-                selected: innerSelectedDate && formatDateLocal(innerSelectedDate) === formatDateLocal(day.date),
-                disabled: day.date > maxDate
+                selected:
+                  innerSelectedDate &&
+                  formatDateLocal(innerSelectedDate) === formatDateLocal(day.date),
+                disabled: day.date > maxDate,
               }"
               @click="onDayClick(day)"
             >
@@ -73,10 +72,9 @@ function onDayClick(day) {
         </v-calendar>
 
         <div class="event-panel">
-          <h5>선택 날짜: 
-            <span class="selected-date">
-              {{ formatDateWithWeekday(innerSelectedDate)}}요일
-            </span>
+          <h5>
+            선택 날짜:
+            <span class="selected-date"> {{ formatDateWithWeekday(innerSelectedDate) }}요일 </span>
           </h5>
         </div>
       </div>
@@ -92,10 +90,14 @@ function onDayClick(day) {
 <style scoped>
 .modal-backdrop {
   position: fixed;
-  top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  display: flex; justify-content: center; align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 999;
 }
 
@@ -115,9 +117,9 @@ function onDayClick(day) {
   background: #f4f6f9;
   border-radius: 12px;
 }
-.modal-content h2{
+.modal-content h2 {
   font-size: 16px;
-  font-family: "MyfontBold";
+  font-family: 'MyfontBold';
 }
 .calendar-icon {
   width: 22px;
@@ -126,7 +128,7 @@ function onDayClick(day) {
   margin-left: 10px;
   margin-right: 3px;
 }
-.event-panel h5{
+.event-panel h5 {
   margin-top: 10px;
   font-size: 16px;
 }
@@ -153,7 +155,7 @@ function onDayClick(day) {
 }
 
 .day-content.selected {
-  border: 2px solid #61905A !important;
+  border: 2px solid #61905a !important;
   font-weight: bold;
 }
 
@@ -178,13 +180,15 @@ function onDayClick(day) {
   background-color: white;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 /* 확인 버튼 */
 .confirm-btn {
-  border: 1px solid #61905A !important; /* 초록색 border */
-  color: #61905A;
+  border: 1px solid #61905a !important; /* 초록색 border */
+  color: #61905a;
 }
 .confirm-btn:hover {
   background-color: #e8f5e9;
