@@ -233,6 +233,36 @@
       "date": "2025-04-06 SUN",
       "category": "현금 수입",
       "includeInBudget": true
+    },
+    {
+      "id": "73e6",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "소주 ",
+      "cashflowValue": 36666,
+      "date": "2025-04-03 THU",
+      "category": "술",
+      "includeInBudget": true
+    },
+    {
+      "id": "d41f",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "ㅓㅓㅓㅓㅓㅓ",
+      "cashflowValue": 22222,
+      "date": "2025-04-10 THU",
+      "category": "대출",
+      "includeInBudget": true
+    },
+    {
+      "id": "26fc",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "ㅓㅓㅓㅓ",
+      "cashflowValue": 222222,
+      "date": "2025-04-07 MON",
+      "category": "음료",
+      "includeInBudget": true
     }
   ],
   "saving": [
