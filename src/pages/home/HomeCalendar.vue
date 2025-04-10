@@ -11,11 +11,31 @@ const userStore = useUserStore()
 const allCashflowData = ref([])
 const router = useRouter()
 
+// 저축 값
+const allUserSaving = ref([])
+const allUserSavingDates = ref(new Set());
+
 onMounted(async () => {
   try {
     const userId = userStore.userId || 'unknown'
-    const res = await axios.get(`http://localhost:3000/cashflows?userId=${userId}`)
-    allCashflowData.value = res.data
+
+    // 동시 실행
+    const [res, resSave] = await Promise.all([
+      axios.get(`http://localhost:3000/cashflows?userId=${userId}`),
+      axios.get(`http://localhost:3000/saving?userId=${userId}`)
+    ]);
+
+    allCashflowData.value = res.data;
+    allUserSaving.value = resSave.data;
+
+    // 달력 데이터 뽑기
+    allUserSavingDates.value = new Set(
+      allUserSaving.value.flatMap(data =>
+        data.schedule.map(dateData => dateData.date)
+      )
+    )
+
+    console.log(allUserSavingDates.value)
 
     const date = new Date()
     const y = date.getFullYear()
@@ -23,6 +43,7 @@ onMounted(async () => {
     const d = String(date.getDate()).padStart(2, '0')
     const dateKey = `${y}-${m}-${d}`;
     cashflows.value = monthlyData.value.filter(data => data.date.startsWith(dateKey));
+    
   } catch (error) {
     console.error('데이터 불러오기 실패', error)
   }
@@ -155,7 +176,7 @@ const attributes = computed(() => {
   for (let day = 1; day <= daysInMonth; day++) {
     const date = new Date(year, month, day)
     const dateKey = formatDateLocal(date)
-    mapByDateSum[dateKey] = { income: 0, outcome: 0 }
+    mapByDateSum[dateKey] = { income: 0, outcome: 0, isSaved: allUserSavingDates.value.has(dateKey) }
   }
 
   for (const data of monthlyData.value) {
@@ -167,21 +188,32 @@ const attributes = computed(() => {
     }
   }
 
-  return Object.entries(mapByDateSum).map(([date, items], i) => ({
-    key: `date-${i}`,
-    dates: date,
-    content: {
-      base: {
-        color: [items.income, -items.outcome],
+
+
+  return Object.entries(mapByDateSum).map(([date, items], i) => {
+    return {
+      key: `date-${i}`,
+      dates: date,
+      ...(items.isSaved && {
+        dot: [{ class: 'saved-dot' }] // isSaved가 true일 때만 dot 추가
+      }),
+      content: {
+        base: {
+          color: [items.income, -items.outcome],
+        },
       },
-    },
-  }))
+    }
+  })
+
 })
+
 
 // 숫자 색상 클래스 반환
 const getColorClass = (value) => {
   return value > 0 ? 'positive' : value < 0 ? 'negative' : 'zero'
 }
+
+
 </script>
 
 <template>
@@ -293,6 +325,13 @@ const getColorClass = (value) => {
 </template>
 
 <style scoped>
+.saved-dot {
+  background-color: red !important;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
 .back-button {
   position: absolute;
   top: 20px;
@@ -326,6 +365,7 @@ const getColorClass = (value) => {
 /* FullCalendar 날짜 스타일 */
 :deep(.vc-day) {
   position: relative;
+  padding-bottom: 6px;
   min-height: 68px; /* 날짜 크기 조정 */
 }
 
@@ -383,7 +423,7 @@ const getColorClass = (value) => {
 
 .month-data {
   position: absolute;
-  top: 410px;
+  top: 450px;
   left: 45%;
   right: 0;
   bottom: 0;

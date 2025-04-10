@@ -242,16 +242,6 @@
       "date": "2025-04-06 SUN",
       "category": "현금 수입",
       "includeInBudget": true
-    },
-    {
-      "id": "0f49",
-      "cashflowType": false,
-      "userId": "1",
-      "cashflowName": "kk",
-      "cashflowValue": 6,
-      "date": "2025-04-10 THU",
-      "category": "생필품",
-      "includeInBudget": true
     }
   ],
   "saving": [
@@ -581,68 +571,43 @@
       "userId": "c3f6"
     },
     {
-      "id": "15cf",
-      "name": "10번",
-      "targetAmount": 500000,
+      "id": "e182",
+      "name": "???",
+      "targetAmount": 505000,
       "startDate": "2025-04-10",
-      "endDate": "2025-04-19",
-      "frequency": "매일",
-      "repeatCount": 10,
-      "perAmount": 50000,
+      "endDate": "2025-05-08",
+      "frequency": "매주",
+      "repeatCount": 5,
+      "perAmount": 101000,
       "schedule": [
         {
           "date": "2025-04-10",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-11",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-12",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-13",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-14",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-15",
-          "amount": 50000,
-          "done": true
-        },
-        {
-          "date": "2025-04-16",
-          "amount": 50000,
-          "done": true
+          "amount": 101000,
+          "done": false
         },
         {
           "date": "2025-04-17",
-          "amount": 50000,
-          "done": true
+          "amount": 101000,
+          "done": false
         },
         {
-          "date": "2025-04-18",
-          "amount": 50000,
-          "done": true
+          "date": "2025-04-24",
+          "amount": 101000,
+          "done": false
         },
         {
-          "date": "2025-04-19",
-          "amount": 50000,
-          "done": true
+          "date": "2025-05-01",
+          "amount": 101000,
+          "done": false
+        },
+        {
+          "date": "2025-05-08",
+          "amount": 101000,
+          "done": false
         }
       ],
-      "saved": 500000,
-      "percent": 100,
+      "saved": 0,
+      "percent": 0,
       "userId": "1"
     }
   ]
