@@ -244,13 +244,13 @@
       "includeInBudget": true
     },
     {
-      "id": "de07",
+      "id": "0f49",
       "cashflowType": false,
       "userId": "1",
-      "cashflowName": "55",
-      "cashflowValue": 222244445006665,
+      "cashflowName": "kk",
+      "cashflowValue": 6,
       "date": "2025-04-10 THU",
-      "category": "의료",
+      "category": "생필품",
       "includeInBudget": true
     }
   ],

@@ -5,6 +5,11 @@ import axios from 'axios'
 import backIcon from '@/assets/images/saving/back.png'
 import { TRANSLATIONS } from '@/constants/translate'
 
+import { useRouter } from 'vue-router'
+import { faL } from '@fortawesome/free-solid-svg-icons'
+
+const router = useRouter()
+
 const props = defineProps({
   id: String
 })
@@ -20,7 +25,15 @@ onMounted(async () => {
   includeInBudget.value = res.data.includeInBudget
 })
 
-const close = () => emit('close')
+const reload = ref(false);
+const close = () => {
+  const currentPath = router.currentRoute.value.path
+  if (reload.value && currentPath !== '/home/calendar') {
+    location.reload();
+    console.log('re')
+  }
+  emit('close')
+}
 
 const getCategoryKey = (koreanCategory) => {
   const entry = Object.entries(TRANSLATIONS).find(([_, value]) => value === koreanCategory)
@@ -40,11 +53,14 @@ const toggleBudget = async () => {
   await axios.patch(`http://localhost:3000/cashflows/${transaction.value.id}`, {
     includeInBudget: includeInBudget.value,
   })
+  reload.value = !reload.value;
+  console.log(reload.value)
 }
 
 const deleteItem = async () => {
   if (!confirm('정말 삭제하시겠습니까?')) return
   await axios.delete(`http://localhost:3000/cashflows/${transaction.value.id}`)
+  location.reload();
   emit('close')
 }
 </script>
