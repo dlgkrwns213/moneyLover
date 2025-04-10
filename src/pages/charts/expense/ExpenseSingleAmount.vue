@@ -48,7 +48,7 @@ ul {
   margin: 0;
 }
 li {
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #61905a;
   padding-bottom: 5px;
   margin-bottom: 5px;
   list-style: none;
