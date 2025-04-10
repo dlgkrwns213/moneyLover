@@ -119,7 +119,10 @@ const chartOptions = {
     <span class="icon" @click="goToCalendar">
       <img src="@/assets/images/all/calendar.png" alt="달력 아이콘" class="icon-img" />
     </span>
-    <span class="menu-budgetsetting">예산설정</span>
+    <!-- <span class="menu-budgetsetting">moneyLover</span> -->
+    <span class="menu-logo">
+    <img src="@/assets/images/all/logo.png" alt="로고" class="logo-img" />
+    </span>
     <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
@@ -173,18 +176,19 @@ const chartOptions = {
   display: flex;
   align-items: center;
   /* padding: 16px; */
-  background-color: #f6f6f6;
-  border-radius: 16px;
+  background-color: #ffffff;
+  /* border: 1px solid #61905a; */
+  border-radius: 12px;
   width: 360px;
   height: 200px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  /* box-shadow: 0 0 5px rgba(0, 0, 0, 0.05); */
 }
 .other-donut-row {
   display: flex;
   align-items: center;
   /* padding: 16px; */
   background-color: rgb(255, 255, 255);
-  border-radius: 16px;
+  border-radius: 12px;
   width: 360px;
   height: 200px;
   box-shadow: 0 0 5px rgba(87, 87, 87, 0.05);
@@ -208,9 +212,10 @@ const chartOptions = {
   justify-content: center;
   align-items: center;
   width: 150px;
-  height: 100px;
+  height: 110px;
   flex-shrink: 0;
   cursor: pointer;
+  margin-left: 20px;
 }
 
 /* .donut-image {
@@ -254,7 +259,7 @@ const chartOptions = {
 .label {
   padding: 10px;
   font-size: 16px;
-  font-weight: bold;
+  text-align: left;
   color: #444;
   flex: 1;
 }
@@ -264,6 +269,7 @@ const chartOptions = {
   text-align: right;
   flex: 1;
   color: #61905a;
+  margin-right: 1rem;
 }
 .empty-budget {
   cursor: pointer;
@@ -288,7 +294,6 @@ const chartOptions = {
   background-color: #f6f6f6;
   border-bottom: 1px solid #f6f6f6;
   margin: 0 auto;
-  font-family: 'MyFontbold';
 }
 
 .icon {
@@ -326,5 +331,18 @@ const chartOptions = {
   font-size: 20px;
   color: #444;
   cursor: pointer;
+}
+
+.menu-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  flex: 1;
+}
+
+.logo-img {
+  height: 26px; 
+  object-fit: contain;
 }
 </style>

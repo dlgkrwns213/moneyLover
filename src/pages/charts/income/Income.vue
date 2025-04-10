@@ -57,6 +57,7 @@ onMounted(async () => {
   background-color: #f6f6f6;
   padding: 25px;
   margin-bottom: 50px;
+  padding: 0 25px 25px 25px;
 }
 .expense-ranking {
   border: 1px solid white;
@@ -79,11 +80,10 @@ onMounted(async () => {
 }
 .top-text {
   display: flex;
-  font-size: 15px;
-  font-weight: bold;
+  font-size: 12px;
   font-family: 'MyFontBold';
   justify-content: space-between;
-  padding: 0 10px;
+  padding: 10px 10px;
 }
 .no-data-container {
   display: flex;

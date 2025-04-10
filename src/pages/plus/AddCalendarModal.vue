@@ -49,8 +49,10 @@ function onDayClick(day) {
 <template>
   <div class="modal-backdrop" @click.self="emit('close')">
     <div class="modal-content">
-      <h2>📅 달력</h2>
-
+      <h2>
+  <img src="@/assets/images/income/salary.png" alt="달력 아이콘" class="calendar-icon" />
+  입력할 날짜를 선택하세요.
+</h2>
       <div class="container">
         <v-calendar
           v-model="innerSelectedDate"
@@ -73,7 +75,7 @@ function onDayClick(day) {
         <div class="event-panel">
           <h5>선택 날짜: 
             <span class="selected-date">
-              {{ formatDateWithWeekday(innerSelectedDate)}}
+              {{ formatDateWithWeekday(innerSelectedDate)}}요일
             </span>
           </h5>
         </div>
@@ -111,6 +113,22 @@ function onDayClick(day) {
   align-items: center;
   padding: 20px;
   background: #f4f6f9;
+  border-radius: 12px;
+}
+.modal-content h2{
+  font-size: 16px;
+  font-family: "MyfontBold";
+}
+.calendar-icon {
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+  margin-left: 10px;
+  margin-right: 3px;
+}
+.event-panel h5{
+  margin-top: 10px;
+  font-size: 16px;
 }
 
 :deep(.vc-day) {
@@ -135,7 +153,7 @@ function onDayClick(day) {
 }
 
 .day-content.selected {
-  border: 2px solid #4caf50 !important;
+  border: 2px solid #61905A !important;
   font-weight: bold;
 }
 
@@ -165,18 +183,18 @@ function onDayClick(day) {
 
 /* 확인 버튼 */
 .confirm-btn {
-  border: 2px solid #4caf50 !important; /* 초록색 border */
-  color: #4caf50;
+  border: 1px solid #61905A !important; /* 초록색 border */
+  color: #61905A;
 }
 .confirm-btn:hover {
   background-color: #e8f5e9;
-  color: #2e7d32;
+  color: #497552;
 }
 
 /* 닫기 버튼 */
 .close-btn {
-  border: 2px solid #f44336 !important; /* 빨간색 border */
-  color: #f44336;
+  border: 1px solid #e71313 !important; /* 빨간색 border */
+  color: #e01010;
 }
 .close-btn:hover {
   background-color: #ffebee;

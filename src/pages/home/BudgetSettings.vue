@@ -2,20 +2,35 @@
 import { reactive, ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useBudgetStore } from '@/stores/budget'
-import axios from 'axios'
 import '@/assets/main.css'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 const inputValue = ref(0)
 const budgetStore = useBudgetStore()
+const month = new Date().getMonth() + 1
 
 onMounted(() => {
   inputValue.value = budgetStore.budget
 })
 
 function saveBudget() {
-  budgetStore.setBudget(Number(inputValue.value))
-  router.push('/')
+  if (Number(inputValue.value) < 0) {
+    Swal.fire({
+      icon: 'warning',
+      title: '0보다 낮은 수는 설정할 수 없습니다',
+      timer: 2000,
+      showConfirmButton: false,
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
+  } else {
+    budgetStore.setBudget(Number(inputValue.value))
+    router.push('/')
+  }
 }
 
 const goToSearch = () => {
@@ -42,7 +57,7 @@ function goBack() {
     <span class="icon" @click="goBack">
       <i class="bi bi-x"></i>
     </span>
-    <span class="menu-budgetsetting">예산설정</span>
+    <span class="menu-budgetsetting">예산 설정</span>
     <span class="icon" @click="goToSearch">
       <i class="bi bi-search"></i>
     </span>
@@ -51,7 +66,7 @@ function goBack() {
   <div class="page-wrapper">
     <div class="donut-row">
       <div class="donut-column">
-        <div class="month">4월</div>
+        <!-- <div class="month">4월</div> -->
         <div class="donut-content">
           <div class="donut-container">
             <img class="donut-image" src="/src/assets/images/clover/clover_setting.png" />
@@ -60,7 +75,7 @@ function goBack() {
           <!-- 오른쪽: 텍스트 -->
           <div class="info">
             <div class="line">
-              <span class="label">예산 설정</span>
+              <span class="label">{{month}}월의 예산을 입력하세요.</span>
             </div>
             <div class="submit">
               <div class="input-group">
@@ -209,9 +224,9 @@ function goBack() {
 }
 
 .label {
-  padding: 10px;
-  font-weight: bold;
-  color: #444;
+  padding: 10px 10px 10px 3px;
+  font-size: 0.8rem;
+  color: #000000;
   flex: 1;
 }
 

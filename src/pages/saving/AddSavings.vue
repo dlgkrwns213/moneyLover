@@ -4,6 +4,7 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import dayjs from 'dayjs'
 import { useSavingStore } from '@/stores/saving'
+import Swal from 'sweetalert2'
 
 const router = useRouter()
 const savingStore = useSavingStore()
@@ -43,7 +44,7 @@ const generateSchedule = (start, freq, count, amount) => {
     schedule.push({
       date: currentDate.format('YYYY-MM-DD'),
       amount,
-      done: false
+      done: false,
     })
     currentDate = currentDate.add(1, unit)
   }
@@ -54,7 +55,17 @@ const generateSchedule = (start, freq, count, amount) => {
 // 저장 로직
 const saveData = async () => {
   if (!name.value || !targetAmount.value) {
-    alert('입력값을 확인해주세요!')
+    Swal.fire({
+      icon: 'warning',
+      title: '입력값을 확인해 주세요!',
+      timer: 1000,
+      showConfirmButton: false,
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
     return
   }
 
@@ -68,105 +79,150 @@ const saveData = async () => {
     perAmount: perAmount.value,
     schedule: generateSchedule(startDate, frequency.value, repeatCount.value, perAmount.value),
     saved: 0,
-    percent: 0
+    percent: 0,
   }
 
   try {
     const newId = await savingStore.addSaving(savingData)
     if (newId) {
-      alert('저축이 저장되었습니다!')
-      router.push(`/saving/${newId}`)
+      Swal.fire({
+        icon: 'success',
+        title: '저축이 저장되었습니다!',
+        timer: 1000,
+        showConfirmButton: false,
+        confirmButtonColor: '#429f50',
+        customClass: {
+          title: 'swal-title',
+          confirmButton: 'swal-confirm',
+        },
+        willClose: () => {
+          router.push(`/saving/${newId}`)
+        },
+      })
     } else {
-      alert('저장에 성공했지만 ID를 받아오지 못했습니다.')
+      Swal.fire({
+        icon: 'warning',
+        title: '저장에 성공했지만 ID를 받아오지 못했습니다.',
+        timer: 1000,
+        showConfirmButton: false,
+        confirmButtonColor: '#429f50',
+        customClass: {
+          title: 'swal-title',
+          confirmButton: 'swal-confirm',
+        },
+      })
     }
   } catch (err) {
-    alert('저장 중 오류가 발생했습니다.')
+    Swal.fire({
+      icon: 'error',
+      title: '저장 중에 오류가 발생했습니다.',
+      timer: 1000,
+      showConfirmButton: false,
+      confirmButtonColor: '#429f50',
+      customClass: {
+        title: 'swal-title',
+        confirmButton: 'swal-confirm',
+      },
+    })
     console.error(err)
   }
 }
 </script>
 
 <template>
-  <div class="container-fluid bg-light-gray min-vh-100 py-3 px-3">
-    <div class="d-flex justify-content-between align-items-center mb-3 px-1 position-relative">
-  <!-- 뒤로가기 버튼 (좌측) -->
-  <img
-    src="@/assets/images/saving/close.png"
-    alt="뒤로가기"
-    class="icon-close"
-    @click="router.push('/saving')"  />
-
-  <!-- 제목 (가운데 정렬을 위해 절대 위치 사용) -->
-  <h4 class="custom-bold text-dark fw-bold m-0 position-absolute start-50 top-50 translate-middle">저축</h4>
-
-  <!-- 저장 버튼 (우측) -->
-  <img
-    src="@/assets/images/saving/check_green.png"
-    alt="저장"
-    class="check-icon"
-    @click="saveData"
-  />
-</div>
-    <div class="card saving-card p-4 ps-4 pe-4">
-      <div class="d-flex align-items-center mb-3">
-        <img src="@/assets/images/saving/saving_coin.png" alt="코인" class="icon me-2" />
-        <input
-          ref="nameInputRef"
-          v-model="name"
-          maxlength="10"
-          placeholder="이름을 추가하세요."
-          class="custom-light form-control form-control-sm name-input"
-        />
+  <div class="fixed-wrapper">
+    <div class="container-fluid bg-light-gray min-vh-100 py-3 px-3">
+      <div class="d-flex justify-content-between align-items-center mb-3 px-1 position-relative">
+        <!-- 뒤로가기 버튼 (좌측) -->
         <img
-          src="@/assets/images/saving/edit.png"
-          alt="수정"
-          class="edit-icon ms-2"
-          @click="() => nameInputRef?.value?.focus()"
+          src="@/assets/images/saving/close.png"
+          alt="뒤로가기"
+          class="icon-close"
+          @click="router.push('/saving')"
+        />
+
+        <!-- 제목 (가운데 정렬을 위해 절대 위치 사용) -->
+        <h4
+          class="custom-bold text-dark fw-bold m-0 position-absolute start-50 top-50 translate-middle"
+        >
+          저축
+        </h4>
+
+        <!-- 저장 버튼 (우측) -->
+        <img
+          src="@/assets/images/saving/check_green.png"
+          alt="저장"
+          class="check-icon"
+          @click="saveData"
         />
       </div>
-
-      <div class="custom-bold row gy-3">
-        <div class="custom-bold col-12 d-flex justify-content-between align-items-center row-item">
-          <span class="label-text">목표 금액</span>
+      <div class="card saving-card p-4 ps-4 pe-4">
+        <div class="d-flex align-items-center mb-3">
+          <img src="@/assets/images/saving/saving_coin.png" alt="코인" class="icon me-2" />
           <input
-            v-model="targetAmount"
-            type="number"
-            placeholder="금액을 입력하십시오."
-            class="custom-light form-control form-control-sm input-amount text-end"
+            ref="nameInputRef"
+            v-model="name"
+            maxlength="10"
+            placeholder="이름을 추가하세요."
+            class="custom-light form-control form-control-sm name-input"
+          />
+          <img
+            src="@/assets/images/saving/edit.png"
+            alt="수정"
+            class="edit-icon ms-2"
+            @click="() => nameInputRef?.value?.focus()"
           />
         </div>
 
-        <div class="col-12 d-flex justify-content-between align-items-center row-item">
-          <span class="label-text">시작 날짜</span>
-          <span class="custom-light text-green">{{ startDate }}</span>
-        </div>
+        <div class="custom-bold row gy-3">
+          <div
+            class="custom-bold col-12 d-flex justify-content-between align-items-center row-item"
+          >
+            <span class="label-text">목표 금액</span>
+            <input
+              v-model="targetAmount"
+              type="number"
+              placeholder="금액을 입력하십시오."
+              class="custom-light form-control form-control-sm input-amount text-end"
+            />
+          </div>
 
-        <div class="col-12 d-flex justify-content-between align-items-center row-item">
-          <span class="label-text">종료 날짜</span>
-          <span class="custom-light text-green">{{ endDate }}</span>
-        </div>
+          <div class="col-12 d-flex justify-content-between align-items-center row-item">
+            <span class="label-text">시작 날짜</span>
+            <span class="custom-light text-green">{{ startDate }}</span>
+          </div>
 
-        <div class="col-12 d-flex justify-content-between align-items-center row-item">
-          <span class="label-text">주기</span>
-          <select v-model="frequency" class="custom-light form-select form-select-sm w-auto text-green border-0">
-            <option value="매일">매일</option>
-            <option value="매주">매주</option>
-            <option value="매달">매달</option>
-          </select>
-        </div>
+          <div class="col-12 d-flex justify-content-between align-items-center row-item">
+            <span class="label-text">종료 날짜</span>
+            <span class="custom-light text-green">{{ endDate }}</span>
+          </div>
 
-        <div class="col-12 d-flex justify-content-between align-items-center row-item">
-          <span class="label-text">반복 횟수</span>
-          <select v-model="repeatCount" class="custom-light form-select form-select-sm w-auto text-green border-0">
-            <option v-for="n in repeatOptions" :key="n" :value="n">
-              {{ n }}번
-            </option>
-          </select>
-        </div>
+          <div class="col-12 d-flex justify-content-between align-items-center row-item">
+            <span class="label-text">주기</span>
+            <select
+              v-model="frequency"
+              class="custom-light form-select form-select-sm w-auto text-green border-0"
+            >
+              <option value="매일">매일</option>
+              <option value="매주">매주</option>
+              <option value="매달">매달</option>
+            </select>
+          </div>
 
-        <div class="col-12 d-flex justify-content-between align-items-center row-item">
-          <span class="label-text">한 번 금액</span>
-          <span class="text-green">{{ perAmount.toLocaleString() }}</span>
+          <div class="col-12 d-flex justify-content-between align-items-center row-item">
+            <span class="label-text">반복 횟수</span>
+            <select
+              v-model="repeatCount"
+              class="custom-light form-select form-select-sm w-auto text-green border-0"
+            >
+              <option v-for="n in repeatOptions" :key="n" :value="n">{{ n }}번</option>
+            </select>
+          </div>
+
+          <div class="col-12 d-flex justify-content-between align-items-center row-item">
+            <span class="label-text">한 번 금액</span>
+            <span class="text-green">{{ perAmount.toLocaleString() }}</span>
+          </div>
         </div>
       </div>
     </div>
@@ -174,11 +230,22 @@ const saveData = async () => {
 </template>
 
 <style scoped>
+.fixed-wrapper {
+  width: 360px;
+  height: 740px;
+  overflow: hidden;
+  background-color: #f0f0f0;
+  margin: 0 auto;
+  position: relative;
+  top: 0;
+  left: 0;
+  transform: none;
+}
 .bg-light-gray {
-  background-color: #F6F6F6;
+  background-color: #f6f6f6;
 }
 .text-green {
-  color: #61905A;
+  color: #61905a;
 }
 .text-dark {
   color: #000;
@@ -201,7 +268,7 @@ const saveData = async () => {
 .input-amount {
   background: transparent;
   border: none;
-  border-bottom: 1px solid #61905A;
+  border-bottom: 1px solid #61905a;
   width: 180px;
   letter-spacing: -0.05em;
 }
@@ -226,11 +293,11 @@ const saveData = async () => {
   width: 20px;
   cursor: pointer;
 }
-.custom-bold{
-font-family: "MYfontBold";
+.custom-bold {
+  font-family: 'MYfontBold';
 }
-.custom-light{
-  font-family: "Myfont"
+.custom-light {
+  font-family: 'Myfont';
 }
 .row-item {
   padding: 4px 0;
