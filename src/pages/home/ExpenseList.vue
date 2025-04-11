@@ -48,9 +48,11 @@ const getCategorykey = (koreanCategory) => {
 
 const getIconPath = (koreanCategory) => {
   const key = getCategorykey(koreanCategory)
-  return key ? `/src/assets/images/all/${key}.png` : `src/assets/images/all/${key}.png`
-  // return `/src/assets/images/all/${key}.png`
+
+  if (!key) return ''
+  return new URL(`../../assets/images/all/${key}.png`, import.meta.url).href
 }
+
 
 const router = useRouter()
 const showModal = ref(false)

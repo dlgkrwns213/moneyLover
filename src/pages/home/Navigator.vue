@@ -1,6 +1,14 @@
 <script setup>
 import { useRoute, useRouter, RouterLink } from 'vue-router'
 import { setEntryFromPath } from '@/utils/navigation'
+import footerChart from '@/assets/images/navigator/footer_chart.png'
+import footerColorChart from '@/assets/images/navigator/footer_color_chart.png'
+import footerHome from '@/assets/images/navigator/footer_home.png'
+import footerColorHome from '@/assets/images/navigator/footer_color_home.png'
+import footerSaving from '@/assets/images/navigator/footer_saving.png'
+import footerColorSaving from '@/assets/images/navigator/footer_color_saving.png'
+import footerSetting from '@/assets/images/navigator/footer_setting.png'
+import footerColorSetting from '@/assets/images/navigator/footer_color_setting.png'
 
 const router = useRouter()
 const route = useRoute()
@@ -12,14 +20,15 @@ function handlePlusClick() {
 
 const isActive = (path) => route.path === path
 
+const iconMap = {
+  chart: { active: footerColorChart, default: footerChart },
+  home: { active: footerColorHome, default: footerHome },
+  saving: { active: footerColorSaving, default: footerSaving },
+  setting: { active: footerColorSetting, default: footerSetting }
+}
+
 const getIconSrc = (path, baseName) => {
-  const basePath = '/src/assets/images/navigator/'
-  return new URL(
-    isActive(path)
-      ? `${basePath}footer_color_${baseName}.png`
-      : `${basePath}footer_${baseName}.png`,
-    import.meta.url
-  ).href
+  return isActive(path) ? iconMap[baseName].active : iconMap[baseName].default
 }
 
 const getTextClass = (path) => (isActive(path) ? 'text-bold' : '')
