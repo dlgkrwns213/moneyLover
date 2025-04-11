@@ -169,7 +169,7 @@ function goBack() {
   border-radius: 16px;
   width: 350px;
   height: 200px;
-  border: 1px solid green;
+  /* border: 1px solid green; */
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   padding: 12px;
 }

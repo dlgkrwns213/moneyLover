@@ -198,7 +198,7 @@ const chartOptions = {
   /* padding: 16px; */
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
-  width: 360px;
+  width: 340px;
   height: 200px;
   box-shadow: 0 0 5px rgba(87, 87, 87, 0.05);
 }
