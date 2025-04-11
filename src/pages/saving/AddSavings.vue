@@ -24,7 +24,7 @@ const endDate = computed(() => calculateEndDate(startDate, frequency.value, repe
 // 1회 금액 계산
 const perAmount = computed(() => {
   const total = parseInt(targetAmount.value || '0')
-  return repeatCount.value > 0 ? Math.floor(total / repeatCount.value) : 0
+  return repeatCount.value > 0 ? Math.ceil(total / repeatCount.value) : 0
 })
 
 // 날짜 계산 함수
