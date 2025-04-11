@@ -16,7 +16,6 @@ import SignIn from '@/pages/login/SignIn.vue'
 import SignUp from '@/pages/login/SignUp.vue'
 import SettingsMain from '@/pages/mypage/SettingsMain.vue'
 import SearchFilter from '@/pages/home/SearchFilter.vue'
-import TransactionDetail from '@/pages/home/TransactionDetail.vue'
 import HomeCalendar from '@/pages/home/HomeCalendar.vue'
 import ChangePassword from '@/pages/login/ChangePassword.vue'
 
@@ -98,11 +97,6 @@ const router = createRouter({
       name: 'searchFilter',
       component: SearchFilter,
       meta: { requiresAuth: true },
-    },
-    {
-      path: '/transaction/:id',
-      name: 'TransactionDetail',
-      component: TransactionDetail,
     },
     {
       path: '/home/calendar',
