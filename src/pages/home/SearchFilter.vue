@@ -148,8 +148,7 @@ const filteredItems = computed(() => {
       (!filters.amount.max || item.amount <= filters.amount.max)
     const matchDate =
       (!filters.date.start || item.date >= filters.date.start) &&
-      (!filters.date.end || item.date <= filters.date.end)
-
+      (!filters.date.end || item.date <= filters.date.end+1)
     const passed = matchText && matchType && matchCategory && matchAmount && matchDate
 
     return passed

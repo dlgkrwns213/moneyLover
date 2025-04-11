@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 import { useSavingStore } from '@/stores/saving'
 import { useUserStore } from '@/stores/user'
 import Navigator from '@/pages/home/Navigator.vue'
+import piggy from '@/assets/images/saving/piggy.png'
+import piggyComplete from '@/assets/images/saving/piggyComplete.png'
 
 const router = useRouter()
 const savingStore = useSavingStore()
@@ -66,7 +68,7 @@ onMounted(() => {
           >
             <div class="d-flex align-items-center mb-2">
               <img
-                src="@/assets/images/saving/piggy.png"
+                :src="saving.percent < 100 ? piggy : piggyComplete"
                 alt="저금통"
                 class="me-2"
                 style="width: 36px"

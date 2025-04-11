@@ -3,10 +3,7 @@
     <div class="item-list-group">
       <div class="item-row">
         <div class="icon">
-          <img
-            :src="`/src/assets/images/income/${getCategoryKeyFromLabel(category)}.png`"
-            style="width: 100%"
-          />
+          <img :src="getImageSrc(category)" style="width: 100%" />
         </div>
         <div class="text-content">
           <div class="left">
@@ -45,6 +42,17 @@ function getCategoryKeyFromLabel(label) {
   }, {})
 
   return reversed[label] || 'etc'
+}
+
+const icons = import.meta.glob('@/assets/images/income/*.png', {
+  eager: true,
+  import: 'default',
+})
+
+const getImageSrc = (category) => {
+  const key = getCategoryKeyFromLabel(category)
+  const path = `/src/assets/images/income/${key}.png`
+  return icons[path] || icons['/src/assets/images/income/etc.png']
 }
 </script>
 <style scoped>

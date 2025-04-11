@@ -3,10 +3,7 @@
     <div class="list-group-item">
       <div class="item-row">
         <div class="icon">
-          <img
-            :src="`/src/assets/images/income/${getCategoryKeyFromLabel(category)}.png`"
-            style="width: 100%"
-          />
+          <img :src="getImageSrc(category)" style="width: 100%" />
         </div>
         <div class="content">
           <div class="dataDetail">
@@ -35,8 +32,7 @@
 import { TRANSLATIONS } from '@/constants/translate'
 
 const bgc = [
-
-'#AEC7E8', // 연파랑
+  '#AEC7E8', // 연파랑
   '#ff9999', //분홍색
   '#feca57', //노란색
   '#1dd1a1', //초록색
@@ -44,7 +40,6 @@ const bgc = [
   '#d395d0', //라벤더색
   '#ff6b6b', //다홍색
 
-  
   '#1F77B4', // 파랑
   '#FF9896', // 연분홍
   '#9EDAE5', // 하늘청록
@@ -57,7 +52,6 @@ const bgc = [
   '#7F7F7F', // 회색
   '#BCBD22', // 연두
   '#17BECF', // 청록
-
 
   '#FFBB78', // 연주황
   '#98DF8A', // 연초록
@@ -94,6 +88,16 @@ function getCategoryKeyFromLabel(label) {
   }, {})
 
   return reversed[label] || 'etc'
+}
+const icons = import.meta.glob('@/assets/images/income/*.png', {
+  eager: true,
+  import: 'default',
+})
+
+const getImageSrc = (category) => {
+  const key = getCategoryKeyFromLabel(category)
+  const path = `/src/assets/images/income/${key}.png`
+  return icons[path] || icons['/src/assets/images/income/etc.png']
 }
 </script>
 <style scoped>

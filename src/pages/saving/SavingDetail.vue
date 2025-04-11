@@ -6,6 +6,8 @@ import { useSavingStore } from '@/stores/saving'
 import checkGreen from '@/assets/images/saving/check_green.png'
 import checkGray from '@/assets/images/saving/check_gray.png'
 import Swal from 'sweetalert2'
+import piggy from '@/assets/images/saving/piggy.png'
+import piggyComplete from '@/assets/images/saving/piggyComplete.png'
 
 const route = useRoute()
 const router = useRouter()
@@ -107,7 +109,7 @@ const deleteSaving = async () => {
       <div class="box shadow-sm mb-3 p-3 d-flex flex-column gap-2">
         <div class="d-flex align-items-center mb-2">
           <img
-            src="@/assets/images/saving/piggy.png"
+            :src="percent < 100 ? piggy : piggyComplete"
             alt="저금통"
             class="me-2"
             style="width: 36px"
@@ -129,7 +131,7 @@ const deleteSaving = async () => {
             ₩{{ saving?.saved?.toLocaleString() }}<br /><small class="opacity-75">적립</small>
           </div>
           <div class="">
-            {{ percent }}%<br /><small class="d-block text-center opacity-75">진행</small>
+            {{ percent }}%<br /><small class="d-block text-center opacity-75">{{ percent < 100 ? "진행" : "완료" }}</small>
           </div>
           <div class="">
             ₩{{ saving?.targetAmount?.toLocaleString() }}<br /><small

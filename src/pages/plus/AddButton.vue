@@ -1,31 +1,31 @@
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, onMounted } from 'vue'
 
 const props = defineProps({
   cardKey: String,
   cardText: String,
   isSelected: Boolean,
-});
+})
 
-const emit = defineEmits(['select']);
+const emit = defineEmits(['select'])
 
-const imageSrc = ref('');
+const imageSrc = ref('')
 
 // 카드 사이즈 지정 (변경 시 여기만 수정)
-const cardSize = 50;
+const cardSize = 50
 
 const handleClick = () => {
-  emit('select', props.cardKey);
-};
+  emit('select', props.cardKey)
+}
 
 onMounted(async () => {
   try {
-    const image = await import(`@/assets/images/all/${props.cardKey}.png`);
-    imageSrc.value = image.default;
+    const image = await import(`@/assets/images/all/${props.cardKey}.png`)
+    imageSrc.value = image.default
   } catch (err) {
-    console.error('이미지를 불러오는 데 실패했습니다:', err);
+    console.error('이미지를 불러오는 데 실패했습니다:', err)
   }
-});
+})
 </script>
 
 <template>
@@ -35,13 +35,7 @@ onMounted(async () => {
       :class="{ selected: props.isSelected }"
       :style="{ width: cardSize + 'px', height: cardSize + 'px' }"
     >
-      <img
-        v-if="imageSrc"
-        :src="imageSrc"
-        :alt="props.cardText"
-        width="30px"
-        height="30px"
-      />
+      <img v-if="imageSrc" :src="imageSrc" :alt="props.cardText" width="30px" height="30px" />
     </div>
     <div class="card-text">
       {{ props.cardText }}
@@ -55,11 +49,10 @@ onMounted(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
 }
 
 .card-picture {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -68,7 +61,7 @@ onMounted(async () => {
 }
 
 .card-picture.selected {
-  border: 2px solid #61905A;
+  border: 2px solid #61905a;
 }
 
 .card-text {

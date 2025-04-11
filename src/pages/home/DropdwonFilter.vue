@@ -8,7 +8,7 @@
       {{ modelValue || label }}
     </button>
 
-    <div class="dropdown-menu p-2" style="width: 360px">
+    <div class="dropdown-menu p-2 custom-dropdown-menu">
       <div class="category-grid">
         <a
           v-for="option in options"
@@ -46,4 +46,13 @@ defineEmits(['update:modelValue'])
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
 }
+
+.custom-dropdown-menu {
+  width: 90vw;
+  left: 5vw;
+  right: 5vw;
+
+}
+
+
 </style>

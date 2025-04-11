@@ -250,6 +250,33 @@
       "cashflowValue": 200000,
       "date": "2025-04-04 FRI",
       "category": "만기",
+      "id": "73e6",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "소주 ",
+      "cashflowValue": 36666,
+      "date": "2025-04-03 THU",
+      "category": "술",
+      "includeInBudget": true
+    },
+    {
+      "id": "d41f",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "ㅓㅓㅓㅓㅓㅓ",
+      "cashflowValue": 22222,
+      "date": "2025-04-10 THU",
+      "category": "대출",
+      "includeInBudget": true
+    },
+    {
+      "id": "26fc",
+      "cashflowType": false,
+      "userId": "1",
+      "cashflowName": "ㅓㅓㅓㅓ",
+      "cashflowValue": 222222,
+      "date": "2025-04-07 MON",
+      "category": "음료",
       "includeInBudget": true
     }
   ],
@@ -272,12 +299,12 @@
         {
           "date": "2025-04-10",
           "amount": 25000,
-          "done": false
+          "done": true
         },
         {
           "date": "2025-04-11",
           "amount": 25000,
-          "done": false
+          "done": true
         },
         {
           "date": "2025-04-12",
@@ -285,8 +312,8 @@
           "done": true
         }
       ],
-      "saved": 25000,
-      "percent": 25,
+      "saved": 75000,
+      "percent": 75,
       "userId": "1"
     },
     {
@@ -422,6 +449,68 @@
       ],
       "saved": 0,
       "percent": 0,
+      "id": "e169",
+      "name": "유럽 여행",
+      "targetAmount": 5000000,
+      "startDate": "2025-04-10",
+      "endDate": "2025-04-19",
+      "frequency": "매일",
+      "repeatCount": 10,
+      "perAmount": 500000,
+      "schedule": [
+        {
+          "date": "2025-04-10",
+          "amount": 500000,
+          "done": true
+        },
+        {
+          "date": "2025-04-11",
+          "amount": 500000,
+          "done": true
+        },
+        {
+          "date": "2025-04-12",
+          "amount": 500000,
+          "done": true
+        },
+        {
+          "date": "2025-04-13",
+          "amount": 500000,
+          "done": false
+        },
+        {
+          "date": "2025-04-14",
+          "amount": 500000,
+          "done": false
+        },
+        {
+          "date": "2025-04-15",
+          "amount": 500000,
+          "done": false
+        },
+        {
+          "date": "2025-04-16",
+          "amount": 500000,
+          "done": false
+        },
+        {
+          "date": "2025-04-17",
+          "amount": 500000,
+          "done": false
+        },
+        {
+          "date": "2025-04-18",
+          "amount": 500000,
+          "done": false
+        },
+        {
+          "date": "2025-04-19",
+          "amount": 500000,
+          "done": false
+        }
+      ],
+      "saved": 1500000,
+      "percent": 30,
       "userId": "c3f6"
     }
   ]
