@@ -46,13 +46,24 @@ const getCategorykey = (koreanCategory) => {
   return entry ? entry[0] : null
 }
 
-const getIconPath = (koreanCategory) => {
-  const key = getCategorykey(koreanCategory)
+function getCategoryKeyFromLabel(label) {
+  const reversed = Object.entries(TRANSLATIONS).reduce((acc, [key, value]) => {
+    acc[value] = key
+    return acc
+  }, {})
 
-  if (!key) return ''
-  return new URL(`../../assets/images/all/${key}.png`, import.meta.url).href
+  return reversed[label] || 'etc'
 }
+const icons = import.meta.glob('@/assets/images/all/*.png', {
+  eager: true,
+  import: 'default',
+})
 
+const getIconPath = (category) => {
+  const key = getCategoryKeyFromLabel(category)
+  const path = `/src/assets/images/all/${key}.png`
+  return icons[path] || icons['/src/assets/images/income/etc.png']
+}
 
 const router = useRouter()
 const showModal = ref(false)

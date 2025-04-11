@@ -217,10 +217,25 @@ const getCategorykey = (koreanCategory) => {
   return entry ? entry[0] : null
 }
 
-const getIconPath = (koreanCategory) => {
-  const key = getCategorykey(koreanCategory)
-  return key ? `/src/assets/images/all/${key}.png` : '/all/bonus.png'
+function getCategoryKeyFromLabel(label) {
+  const reversed = Object.entries(TRANSLATIONS).reduce((acc, [key, value]) => {
+    acc[value] = key
+    return acc
+  }, {})
+
+  return reversed[label] || 'etc'
 }
+const icons = import.meta.glob('@/assets/images/all/*.png', {
+  eager: true,
+  import: 'default',
+})
+
+const getIconPath = (category) => {
+  const key = getCategoryKeyFromLabel(category)
+  const path = `/src/assets/images/all/${key}.png`
+  return icons[path] || icons['/src/assets/images/income/etc.png']
+}
+
 </script>
 
 <style scoped>
