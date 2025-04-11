@@ -56,21 +56,29 @@ npm run build
 ## Stacks ⚒️
 
 
-### Environment
-![Vue3](https://img.shields.io/badge/Vue.js%203-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D)
-![Bootstrap5](https://img.shields.io/badge/Bootstrap%205-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)
-![Github](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=GitHub&logoColor=white)                  
+### Environment  
+![Vue3](https://img.shields.io/badge/Vue.js%203-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![Bootstrap5](https://img.shields.io/badge/Bootstrap%205-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)
 
-### Development
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
-![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white)
-![Pinia](https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=white)
+### Development  
+#### 📦 Frontend Framework  
+![Vue3](https://img.shields.io/badge/Vue.js%203-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D) ![Vue Router](https://img.shields.io/badge/Vue%20Router-4E9CA0?style=for-the-badge&logo=vue.js&logoColor=white) ![Pinia](https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=white)
 
-### Design
-![Figma](https://img.shields.io/badge/figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+#### ⚙️ Core Libraries  
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black) ![Axios](https://img.shields.io/badge/Axios-5A29E4?style=for-the-badge&logo=axios&logoColor=white) ![Day.js](https://img.shields.io/badge/Day.js-EA580C?style=for-the-badge&logo=javascript&logoColor=white) ![SweetAlert2](https://img.shields.io/badge/SweetAlert2-FF5A5F?style=for-the-badge&logo=javascript&logoColor=white)
 
-### Communication
-![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=Notion&logoColor=white)
+#### 📊 Charts & Calendars  
+![Chart.js](https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chartdotjs&logoColor=white) ![v-calendar](https://img.shields.io/badge/V--Calendar-00BFA6?style=for-the-badge&logo=calendar&logoColor=white)
+
+
+### Tools  
+![Prettier](https://img.shields.io/badge/Prettier-F7BA3E?style=for-the-badge&logo=prettier&logoColor=black) ![Font Awesome](https://img.shields.io/badge/Font%20Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white) ![Vite Devtools](https://img.shields.io/badge/Vite%20Devtools-7C3AED?style=for-the-badge&logo=vite&logoColor=white)
+
+### Design  
+![Figma](https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white)
+
+### Communication  
+![Notion](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
+
 
 ---
 ## 화면 구성 📺
@@ -160,7 +168,6 @@ npm run build
     |   |       HomeView.vue
     |   |       Navigator.vue
     |   |       SearchFilter.vue
-    |   |       TransactionDetail.vue
     |   |       TransactionDetailModal.vue
     |   |
     |   +---login
