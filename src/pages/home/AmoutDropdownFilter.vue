@@ -8,7 +8,10 @@
       {{ label }}
     </button>
 
-    <div class="dropdown-menu p-3" style="min-width: 300px">
+    <div
+      class="dropdown-menu custom-dropdown-menu p-3"
+      style="z-index: 1000"
+    >
       <div class="d-flex justify-content-between mb-2">
         <input
           type="number"
@@ -118,6 +121,12 @@ const clearFilter = () => {
 </script>
 
 <style scoped>
+.custom-dropdown-menu {
+  width: 90vw;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .w-45 {
   width: 45%;
 }

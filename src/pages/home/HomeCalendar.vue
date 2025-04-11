@@ -208,6 +208,10 @@ const attributes = computed(() => {
 const getColorClass = (value) => {
   return value > 0 ? 'positive' : value < 0 ? 'negative' : 'zero'
 }
+
+const closeModal = () => {
+  showModal.value = false;
+}
 </script>
 
 <template>
@@ -308,7 +312,7 @@ const getColorClass = (value) => {
 
       <p v-else class="no-event">기록이 없습니다.</p>
 
-      <TransactionDetailModal v-if="showModal" :id="selectedId" @close="showModal = false" />
+      <TransactionDetailModal v-if="showModal" :id="selectedId" @close="closeModal" />
     </div>
   </div>
 </template>
